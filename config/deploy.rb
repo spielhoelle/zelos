@@ -142,7 +142,16 @@ namespace :setup do
 
 end
 
+namespace :nginx do
+  desc "Reload nginx configuration"
+  task :reload do
+    on roles(:app) do
+      run "#{sudo} /etc/init.d/nginx reload"
+    end
+  end
+end
+
 after 'deploy:symlink:release', 'letsencrypt:register_client'
 after 'letsencrypt:register_client', 'letsencrypt:authorize_domain'
 after 'letsencrypt:authorize_domain', 'letsencrypt:obtain_certificate'
-after 'letsencrypt:obtain_certificate', 'nginx:reload'
+after 'letsencrypt:obtain_certificate', 'passenger:restart'
