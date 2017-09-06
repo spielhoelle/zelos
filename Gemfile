@@ -89,3 +89,4 @@ gem 'groupdate'
 gem 'paper_trail'
 gem 'diffy' 
 
+gem 'acme-client', require: false

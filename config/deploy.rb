@@ -1,7 +1,6 @@
 # config valid only for current version of Capistrano
-
 set :application, 'zelos'
-set :repo_url, Rails.application.secrets.deploy_repository
+set :repo_url, YAML.load_file("./config/secrets.yml")["production"]["deploy_repository"]
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 # Default branch is :master
@@ -143,3 +142,7 @@ namespace :setup do
 
 end
 
+after 'deploy:symlink:release', 'letsencrypt:register_client'
+after 'letsencrypt:register_client', 'letsencrypt:authorize_domain'
+after 'letsencrypt:authorize_domain', 'letsencrypt:obtain_certificate'
+after 'letsencrypt:obtain_certificate', 'nginx:reload'

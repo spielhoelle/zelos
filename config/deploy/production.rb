@@ -18,9 +18,9 @@
 # Don't use `:all`, it's a meta role.
 
 # Single server example
-role :app, %w{deploy@#{Rails.application.secrets.deploy_server_ip}}
-role :web, %w{deploy@#{Rails.application.secrets.deploy_server_ip}}
-role :db,  %w{deploy@#{Rails.application.secrets.deploy_server_ip}}
+role :app, "deploy@#{YAML.load_file("./config/secrets.yml")["production"]["deploy_server_ip"]}"
+role :web, "deploy@#{YAML.load_file("./config/secrets.yml")["production"]["deploy_server_ip"]}"
+role :db,  "deploy@#{YAML.load_file("./config/secrets.yml")["production"]["deploy_server_ip"]}"
 
 # Configuration
 # =============
@@ -30,7 +30,7 @@ role :db,  %w{deploy@#{Rails.application.secrets.deploy_server_ip}}
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
-server Rails.application.secrets.deploy_server_ip,
+server YAML.load_file("./config/secrets.yml")["production"]["deploy_server_ip"],
        :user => "deploy",
        :roles => %w(web app db),
        :ssh_options => {
@@ -38,6 +38,12 @@ server Rails.application.secrets.deploy_server_ip,
          :keepalive_interval => 60 #seconds
        }
 
+set :letsencrypt_contact_email, 'tfkuhnert@gmail.com'
+set :letsencrypt_dir, "#{shared_path}/config/letsencrypt"
+set :letsencrypt_endpoint, 'https://acme-v01.api.letsencrypt.org/'
+set :letsencrypt_private_key_path, "#{fetch(:letsencrypt_dir)}/private_key.pem"
+set :letsencrypt_authorize_domains, 'zelos.thomaskuhnert.com www.zelos.thomaskuhnert.com'
+set :letsencrypt_certificate_request_domains, 'zelos.thomaskuhnert.com www.example.com'
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a

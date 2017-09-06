@@ -30,16 +30,22 @@ Otherwise remove groupdate from gemfile and remove the group_by_month function f
 
 `npm start` watch javascript with webpack
 
-## Capistrano deployment
+## Capistrano deployment http://capistranorb.com
+
 run commands with `cap` followed by environment like staging/production
 eg: `cap production deploy`
 
-`cap -T`
-show all capistrano tasks
-
-bundler must be installed globally on server:
-`gem install bundler`
+`cap -T` show all capistrano tasks
 
 `cap production "invoke[console]"` invoke rake command on live server
 
 `cap production rails:console` run remote console
+
+#### Deployment requirements
+
+bundler must be installed globally on server:
+`gem install bundler`
+
+`cap production setup:upload_yml` upload database.yml and secrets.yml to production server
+
+`cap production deploy` for deployment
