@@ -86,7 +86,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.default_options = { from: Rails.application.secrets.deploy_server_ip,
+  config.action_mailer.default_options = { from: Rails.application.secrets.deploy_server_ip}
   config.action_mailer.smtp_settings = {
     address: Rails.application.secrets.mail_server,
     port: 587,
@@ -94,7 +94,7 @@ Rails.application.configure do
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: Rails.application.secrets.mail_smtp_username,
-    password: Rails.application.secrets.mail_password
+    password: Rails.application.secrets.mail_password,
   }
 
   # Do not dump schema after migrations.
