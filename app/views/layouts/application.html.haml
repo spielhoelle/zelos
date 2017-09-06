@@ -1,0 +1,56 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title=@title 
+
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    / = stylesheet_link_tag    'invoice', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    = favicon_link_tag 'favicon.ico'
+    = csrf_meta_tag
+    :css
+      :root {
+        --mdc-theme-primary: #000000;
+      }
+    - if user_signed_in?
+
+      -#= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js', "data-turbolinks-eval" => false
+  %body{class: class_for_controller, "data-spy" => "scroll", "data-target" => "#collapsingNavbarv"}
+
+    %header
+      - if controller.controller_name != "downloads"
+        = render "shared/navigation"
+
+      #flashes
+        = render "shared/flash", flashes: flash
+  %main.grey.darken-4
+    = yield
+
+  %footer.page-footer
+    .footer-copyright.pb-2
+      .container.center
+        %span.white-text Made by
+        = link_to "Thomas Kuhnert", "http://www.thomaskuhnert.com", class: "teal-text"
+
+  #modal1.modal.bottom-sheet.grey.darken-4
+    = form_tag session_path(:user) do
+      .container.modal-content
+        %h3 Login
+        .row.mb-0
+          .col.s12.m4.input-field
+            = label_tag :email
+            = text_field_tag 'user[email]'
+          .col.s12.m4.input-field
+            = label_tag :password
+            = password_field_tag 'user[password]'
+          .col.s12.m4
+            = check_box_tag 'user[remember_me]'
+            = label_tag 'user[remember_me]', 'Remember me'
+            = link_to "Forgot your password?", new_password_path(:user), class: "right"
+            = button_tag( :class => "waves-effect waves-light btn col s12 mt-1") do
+              Log in
+  = javascript_include_tag 'bundle.js', 'data-turbolinks-track': 'false'
+

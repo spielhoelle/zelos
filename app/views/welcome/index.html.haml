@@ -1,0 +1,104 @@
+#index-banner.parallax-container
+  .section.no-pad-bot
+    .container.mt-5
+      %h1.header.center Zelos Invoice
+      .row.center
+        %h5.header.col.s12 Invoices, customer lists and data for freelance software engineers.
+        -#%h5.header.col.s12 All you invoices in one app
+
+      .row.center
+        - if user_signed_in?
+          = link_to admin_entries_path, class: "btn waves-effect waves-light" do
+            = "Edit invoices"
+
+        - else
+          %a.waves-effect.btn.waves-light.btn.modal-trigger{:href => "#modal1", "data-turbolinks": "false"} Login
+
+      %br/
+      %br/
+  -#.parallax
+    -#= image_tag('header.jpg')
+
+
+.center.scrollfire.scrollfire1
+  = image_tag('screen1.jpg', class: "z-depth-5 mb-5 responsive-img")
+.grey.darken-3
+  .container
+    .section
+      %h3.center Benefit from Zelos
+      .row.scrollfire.scrollfire2
+        .col.s12.m4
+          .icon-block
+            %h2.center.brown-text
+              %i.material-icons flash_on
+            %h5.center Invoices super fast
+            %p.light Intuitive usage. You just enter you items, select or create a customer and hit tab and generate a PDF.
+        .col.s12.m4
+          .icon-block
+            %h2.center.brown-text
+              %i.material-icons settings
+            %h5.center Full control
+            %p.light No standard invoice templates, with just a bit knowledge of html/css you have full control.
+        .col.s12.m4
+          .icon-block
+            %h2.center.brown-text
+              %i.material-icons verified_user
+            %h5.center No shit!
+            %p.light With Zelos you use a open-source software. Nobody gets rich and we won't destroy the rainforest.
+
+.parallax-container.valign-wrapper
+  .section.no-pad-bot
+    .container
+      .row.center.mt-4.mb-4
+        %h3.header.col.s12.light 
+          Easy to use and maintain.
+          %br 
+        %h5
+          All important data in one app. Create an account and test the app.
+      .row.center
+        .center.scrollfire.scrollfire3
+          = image_tag('screen2.jpg', class: "z-depth-5 mb-5 responsive-img")
+
+      .row.center.mb-5
+        - if user_signed_in?
+          = link_to admin_entries_path, class: "btn waves-effect waves-light " do
+            = "Edit invoices"
+
+        - else
+          %a.waves-effect.btn.waves-light.btn.modal-trigger{:href => "#modal1", "data-turbolinks": "false"} Login
+.grey.darken-3
+  .container
+    .section
+      .row
+        .col.s12.center
+          %h3
+            %i.mdi-content-send.brown-text
+          %h4 Contact Us
+          %p.light
+            This open-source-software is still in beta and under development.
+          %p.light
+            If you find any bugs or improvements, create and issue on Github. If you want to help improve - clone the project, create a new branch and give me a pull-request.
+
+
+
+
+.parallax-container.valign-wrapper
+  .section.no-pad-bot
+    .container
+      .row.center
+        %h5.header.col.s12.light You are still on the fucking landing page.
+      .row.center
+        - if user_signed_in?
+          = link_to admin_entries_path, class: "btn waves-effect waves-light" do
+            = "Edit invoices"
+
+        - else
+          %a.waves-effect.btn.waves-light.btn.modal-trigger{:href => "#modal1", "data-turbolinks": "false"} Login
+
+  -#.parallax
+    -#= image_tag('bg2.jpg')
+
+
+
+
+

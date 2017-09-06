@@ -1,0 +1,24 @@
+.row
+  .col.s12.m6.offset-m3.z-depth-4.card-panel.mt-5
+    .col.s12
+      %h3= "Login"
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .row.input-field
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true, class: "form-control"
+        .row.input-field
+          = f.label :password
+          %br/
+          = f.password_field :password, autocomplete: "off", class: "form-control"
+        - if devise_mapping.rememberable?
+          .row.input-field
+            = f.check_box :remember_me
+            = f.label :remember_me
+
+        .row.input-field
+          = button_tag( :class => "waves-effect waves-light btn col s12") do
+            Log in
+
+      %p
+        = render "devise/shared/links"

@@ -1,0 +1,12 @@
+%section#one
+  .container.wow.fadeInUp
+    %h2 Entries
+    %p.lead
+      We have beautiful talented entries
+    .card-columns
+      / card
+      -@entries.each do |entry|
+        .card
+          .card-block
+            %h4.card-title= entry.customer_name
+            %p.card-text= entry.customer_address.truncate(150)

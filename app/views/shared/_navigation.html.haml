@@ -1,0 +1,147 @@
+-#- if user_signed_in?
+  -#%ul#nav-mobile.side-nav.fixed{:style => "transform: translateX(0%);"}
+    -#%li.logo
+      -#%a#logo-container.brand-logo{:href => "/"}
+        -#%object#front-page-logo{:data => "res/materialize.svg", :type => "image/svg+xml"} 
+    -#%li.search
+      -#.search-wrapper.card
+        -#%input#search/
+        -#%i.material-icons search
+        -#.search-results
+    -#%li
+      -#= link_to admin_entries_path, class: (controller_name == "entries") ? "teal" : "" do
+        -#= "Invoices"
+    -#%li
+      -#= link_to admin_customers_path, class: current_page?(admin_customers_path) || current_page?(admin_customers_path) ? "teal" : "" do
+        -#= "Customers"
+    -#%li
+      -#= link_to admin_settings_path, class: current_page?(admin_settings_path) || current_page?(admin_settings_path) ? "teal" : "" do
+        -#= "Settings"
+    -#%li
+      -#= link_to admin_versions_path, class: current_page?(admin_versions_path) || current_page?(admin_versions_path) ? "teal" : "", title: "versions" do
+        -#= "Versions"
+    -#%li
+      -#= link_to destroy_user_session_path, :method => :delete, class: 'nav-link', title: t('devise.secondary_nav.sign_out') do
+        -#= "Logout"
+
+    -#%li.bold
+      -#%a.waves-effect.waves-teal{:href => "about.html"} Über
+    -#%li.bold
+      -#%a.waves-effect.waves-teal{:href => "getting-started.html"} Einstieg
+    -#%li.no-padding
+      -#%ul.collapsible.collapsible-accordion
+        -#%li.bold
+          -#%a.collapsible-header.waves-effect.waves-teal CSS
+          -#.collapsible-body
+            -#%ul
+              -#%li
+                -#%a{:href => "color.html"} Farbe
+        -#%li.bold
+          -#%a.collapsible-header.waves-effect.waves-teal Components
+          -#.collapsible-body
+            -#%ul
+              -#%li
+                -#%a{:href => "badges.html"} Badges
+        -#%li.bold.active
+          -#%a.collapsible-header.active.waves-effect.waves-teal JavaScript
+          -#.collapsible-body{:style => "display: block;"}
+            -#%ul
+              -#%li
+                -#%a{:href => "carousel.html"} Carousel
+              -#%li
+                -#%a{:href => "waves.html"} Waves
+    -#%li.bold
+      -#%a.waves-effect.waves-teal{:href => "mobile.html"} Mobile
+    -#%li.bold
+      -#%a.waves-effect.waves-teal{:href => "showcase.html"} Showcase
+    -#%li.bold
+      -#%a.waves-effect.waves-teal{:href => "themes.html"}
+        -#Themes
+        -#%span.new.badge
+.navbar-fixed
+  %nav.z-depth-3.nav-extended.row.mb-0{:role => "navigation"}
+    .nav-wrapper.col.s12
+      %h2.m-0
+        .brand-logo.left.ml-md-3.truncate
+          - if controller_name == "entries" && action_name == "edit"
+            =link_to admin_entries_path do
+              %i.material-icons.white-text chevron_left
+            = @entry.title
+          - elsif controller_name == "customers" && action_name == "edit"
+            =link_to admin_customers_path do
+              %i.material-icons.white-text chevron_left
+            = @customer.name
+          - else
+            = link_to root_path, class: "" do
+              = controller_name.capitalize
+
+      %ul.right.hide-on-med-and-down
+        - if user_signed_in?
+          %li
+            = link_to root_path, class: "teal-text" do
+              Zelos
+          %li 
+            = link_to admin_entries_path, class: (controller_name == "entries") ? "grey darken-4" : "" do
+              = "Invoices"
+          %li 
+            = link_to admin_customers_path, class: current_page?(admin_customers_path) || current_page?(admin_customers_path) ? "grey darken-4" : "" do
+              = "Customers"
+          %li
+            = link_to admin_settings_path, class: current_page?(admin_settings_path) || current_page?(admin_settings_path) ? "grey darken-4" : "" do
+              = "Settings"
+          %li
+            = link_to admin_versions_path, class: current_page?(admin_versions_path) || current_page?(admin_versions_path) ? "grey darken-4" : "", title: "versions" do
+              = "Versions"
+          %li
+            = link_to destroy_user_session_path, :method => :delete, class: 'nav-link', title: t('devise.secondary_nav.sign_out') do
+              = "Logout"
+        - else
+          %li
+            = link_to root_path, class: "teal-text" do
+              Zelos
+          %li
+            %a.modal-trigger{:href => "#modal1", "data-turbolinks": "false"} Login
+
+      %a.button-collapse.m-0{"data-activates" => "nav-mobile", :href => "#", "data-turbolinks": "false"}
+        %i.material-icons.white-text menu
+%ul#nav-mobile.side-nav.grey.darken-4
+  %li.user-details.grey.darken-4
+    .container
+      .row.text-primary
+        .col.col.s4.m4.l4
+          %i.material-icons.large.text-primary account_circle
+        .col.col.s8.m8.l8.mt-1
+          %span.text-primary Zelos Invoice
+
+  - if user_signed_in?
+    %li
+      = link_to root_path, class: "teal-text" do
+        Zelos
+    
+    .divider
+
+    %li
+      = link_to admin_entries_path, class: (controller_name == "entries") ? "teal" : "" do
+        = "Invoices"
+    %li 
+      = link_to admin_customers_path, class: (controller_name == "customers") ? "teal" : "" do
+        = "Customers"
+    %li
+      = link_to admin_settings_path, class: (controller_name == "settings") ? "teal" : "" do
+        = "Settings"
+    
+    %li
+      = link_to admin_versions_path, class: '', title: "versions" do
+        = "Versions"
+    .divider
+      
+    %li
+      = link_to destroy_user_session_path, :method => :delete, class: 'nav-link', title: t('devise.secondary_nav.sign_out') do
+        = "Logout"
+  - else
+    %li
+      = link_to "Login", new_user_session_path
+
+    -#- if controller_name == "entries" && action_name != "index"
+      -#= link_to new_admin_entry_path, class: "btn-floating btn-large halfway-fab waves-effect waves-light tooltipped", "data-delay": 10, "data-position":"left", "data-tooltip": "New Invoice" do
+        -#%i.material-icons add

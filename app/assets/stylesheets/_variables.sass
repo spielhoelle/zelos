@@ -1,0 +1,72 @@
+$green: #27ae60
+$green2: #207542
+.teal
+  background-color: $green !important
+.teal-text
+  color: $green !important
+
+$screen-xs:                  480px
+$screen-xs-min:              $screen-xs
+$screen-sm:                  690px
+$screen-sm-min:              $screen-sm
+$screen-md:                  992px
+$screen-md-min:              $screen-md
+$screen-lg:                  1200px
+$screen-lg-min:              $screen-lg
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm-min - 1)
+$screen-sm-max:              ($screen-md-min - 1)
+$screen-md-max:              ($screen-lg-min - 1)
+
+
+=fixed-ratio__inner
+  @include absolute-cover
+  display: block
+  width: 100%
+  height: auto
+  min-height: 100%
+
+
+=fixed-ratio($ratio: 56.25%)
+  position: relative
+  display: block
+  width: 100%
+  overflow: hidden
+
+  &::before
+    display: block
+    padding-top: $ratio
+    content: ''
+
+=absolute-cover($distance: 0)
+  background: center (center / cover) no-repeat
+  position: absolute
+  top: $distance
+  right: $distance
+  bottom: $distance
+  left: $distance
+
+.fixed-ratio
+  @include fixed-ratio
+
+.fixed-ratio__inner
+  @include fixed-ratio__inner
+
+.fixed-ratio--1-to-1
+  @include fixed-ratio(100%)
+
+
+$padding-base-vertical: 30px
+$padding-base-horizontal: 30px
+
+$padding-large-vertical: 60px
+$padding-large-horizontal: 60px
+
+$padding-small-vertical: 15px
+$padding-small-horizontal: 15px
+
+$padding-x-small-vertical: 10px
+$padding-x-small-horizontal: 7px
+
+$padding-xx-small-vertical: 5px

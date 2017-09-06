@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %title=@title 
+    :css
+      #{Rails.application.assets.find_asset('application.sass').to_s}
+      #{Rails.application.assets.find_asset('invoice.sass').to_s}
+  %body
+    = yield

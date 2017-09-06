@@ -1,0 +1,42 @@
+- if @customers.any?
+  %nav
+    .nav-wrapper
+      = form_tag admin_customers_path, :method => "get", id: "search-form" do
+        .input-field
+          = text_field_tag :search, params[:search], class: "autocomplete", placeholder: "Search customer name", :type => "search", :autofocus => true
+          %label.label-icon{:for => "search"}
+            %i.material-icons search
+
+  %table.striped.highlight
+    %thead
+      %tr
+        %th Name
+        %th.hide-on-med-and-down Address
+        %th.hide-on-med-and-down Company
+        %th.hide-on-med-and-down Invoices
+
+    %tbody
+      - @customers.each do |customer|
+        %tr
+          %td
+            = link_to edit_admin_customer_path(customer), class: "truncate" do
+              = customer.name
+          %td.hide-on-med-and-down
+            = customer.address
+          %td.hide-on-med-and-down
+            = customer.company
+          %td.hide-on-med-and-down
+            = customer.entries.count
+          %td
+            = link_to admin_customer_path(customer), :method=> :delete, class: "btn btn-floating red right ", data: {confirm: "You sure to delete this entry?"} do
+              %i.material-icons="delete"
+
+- else
+  %h2.grey-text.text-lighten-1.center-align.mt-5
+    %div
+      %i.material-icons.large.grey-text.text-lighten-1 child_care
+    =t('all_good')
+
+.fixed-action-btn
+  = link_to new_admin_customer_path, class: "btn-floating waves-effect waves-light green btn-large" do
+    %i.material-icons.large add

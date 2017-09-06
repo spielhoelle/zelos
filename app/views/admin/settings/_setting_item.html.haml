@@ -1,0 +1,13 @@
+%li.collection-item.m-0.no-border.p-0
+  = form_for "setting", url: admin_setting_path(setting[0]), method: 'patch', :html => {:class => ""}, remote: true do |f|
+    .row.mb-0
+      .col.s11
+        - if setting[0] != "address"
+          = f.label setting[0], class: "active"
+          = f.text_field :value, value: setting[1], class: ""
+        - else
+          = f.label setting[0], class: "active"
+          = f.text_area :value, value: setting[1].gsub("\n", '').squeeze(' '), class: "materialize-textarea"
+      .col.s1.text-right
+        = button_tag type: 'submit', :class => "btn-floating material-icons circle waves-effect waves-light mt-2" do
+          %span.white-text="done"

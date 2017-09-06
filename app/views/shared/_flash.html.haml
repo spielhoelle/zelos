@@ -1,0 +1,10 @@
+- flash.each do |name, msg|
+  - if name == "success"
+    :javascript
+      $(function(){Materialize.toast("#{msg}", 2000, 'rounded');});
+  - elsif name == "toast"
+    :javascript
+      $(function() {Materialize.toast("#{msg}", 2000, 'rounded');});
+  - else
+    :javascript
+      $(function(){Materialize.toast("#{msg}", 2000, 'rounded');});

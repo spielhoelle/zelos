@@ -1,0 +1,2 @@
+var item = $("#{escape_javascript(render(partial: "admin/settings/setting_item", locals: {setting: @setting_update}))}")
+$('.setting.#{@setting_update[0]}').replaceWith(item);

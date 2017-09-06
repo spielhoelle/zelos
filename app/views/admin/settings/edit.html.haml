@@ -1,0 +1,9 @@
+.container.container-fluid
+  .row
+    .col-md-4
+      = form_for(@setting, url: admin_setting_path(@setting.var), method: 'patch') do |f|
+        %label= @setting.var
+        .form-group
+          = f.text_field :value, class: "form-control"
+        .form-group
+          = f.submit "Update", class: "btn btn-primary", disabled: false

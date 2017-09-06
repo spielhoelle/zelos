@@ -1,0 +1,34 @@
+- if @entries.any?
+  .row
+    .s12.mb-5
+      - if !params[:search]
+        .row
+          .col.s12
+            %h3
+              ="Invoices"
+              %small= "#{@this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(2)} € this year"
+      #entries_tree
+        - if params[:search].blank?
+          .row.hide-on-med-and-down
+            .col.s4
+              = line_chart @this_year.group_by_month(:delivery_date).count
+            .col.s4
+              = column_chart @data, stacked: true, legend: false
+            .col.s4
+              = pie_chart @this_year.collect { |x| [x.customer.company, get_items_total(x)] }
+
+        = render "entries_tree"
+- else
+  %h2.grey-text.text-lighten-1.center-align.mt-5
+    %div
+      %i.material-icons.large.grey-text.text-lighten-1 child_care
+    =t('all_good')
+
+
+.fixed-action-btn
+  = link_to new_admin_entry_path, class: "btn-floating waves-effect waves-light green btn-large" do
+    %i.material-icons.large add
+  %ul
+    %li
+      = link_to new_admin_entry_path(:is_offer => true), class: "btn-floating waves-effect waves-light red" do
+        %i.material-icons question_answer

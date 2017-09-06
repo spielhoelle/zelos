@@ -1,0 +1,18 @@
+# config/app.yml for rails-settings-cached
+defaults: &defaults
+  mail: ""
+  facebook: ""
+  instagram: ""
+  twitter: ""
+  soundcloud: ""
+  linkedin: ""
+  pinterest: ""
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

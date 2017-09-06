@@ -1,0 +1,105 @@
+%main.container.full-width
+
+  .row
+
+    .col.s12
+      %h2.mt-0
+        = invoice.is_offer? ? "Angebot" : "Rechnung"
+        -#- if @request == 'html'
+          -#= image_tag('logo.png', id: "logo", class: "full-width")
+        -#-else
+          -#%img{src: "file://#{Rails.root}/app/assets/images/logo.png", id: "logo", class: "full-width"}
+
+      .row
+        .col.s7
+          %h5.m-0="An #{invoice.customer.name}"
+          %ul.m-0
+            %li.collection-item.condensed_simple_format
+              = simple_format(invoice.customer.company)
+              = simple_format(invoice.customer.address)
+
+        .col.s5
+          %h5.m-0= Setting["name"]
+          %ul.m-0
+            %li.collection-item
+              = Setting["job"]
+            %li.collection-item
+              = Setting["address"]
+            %li.collection-item
+              = link_to Setting["website"], Setting["website"], class: ""
+            %li.collection-item
+              = mail_to Setting["mail"], Setting["mail"], subject: "Rückfragen zur Rechnung: #{invoice.invoice_number}", class: ""
+            -#%li.collection-item
+              -#= "Steuernummer: #{Setting["tax_id"]}"
+            %li.collection-item
+              = "Rechnungsnummer: #{invoice.invoice_number}"
+            %li.collection-item
+              = "Rechnungsdatum: #{invoice.invoice_date.strftime("%d.%m.%Y")}"
+            %li.collection-item
+              = "Lieferdatum: #{invoice.delivery_date.strftime("%d.%m.%Y")}"
+
+
+
+      .row
+        .col.s12
+          %table.striped.flex-grow.condensed
+            %thead
+              %tr
+                %th #
+                %th= t('item')
+                %th.text-right= t('count')
+                %th.text-right= t('price')
+                %th.text-right= t('sum') 
+            %tbody
+              - invoice.items.each_with_index do |item, index|
+                -# - if invoice.discount != 0
+                -#   - item.price = item.price*(invoice.discount/100.00)
+                %tr
+                  %td= index + 1
+                  %td= item.name
+                  %td.text-right= item.count
+                  %td.no-wrap.text-right= number_to_currency(item.price, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
+                  %td.text-right= number_to_currency(item.count * item.price, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")             
+              - if invoice.discount != 0
+                %tr
+                  %td.text-right{colspan: 4}=t('vat') 
+                  %td.text-right= number_to_currency(total.to_i/(invoice.discount+100.00)*invoice.discount, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
+
+              / - if invoice.items.count > 1 || invoice.discount != 0
+              %tr.total
+                %td
+                %td
+                %td
+                %td.text-right
+                  %h5=t('total')
+                %td.text-right
+
+                  %h5.no-wrap= number_to_currency(total, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
+
+      - if invoice.notes !=  ""
+        .notes
+          %h5= t('note')
+          = simple_format(invoice.notes)
+      -#- elsif !invoice.is_offer?
+        -#.notes
+          -#%p
+            -#Ich bin nach §19 UStG als Kleinunternehmer von der Umsatzsteuer befreit.
+%footer
+  .row
+    .col.s7.no-padding
+      - if invoice.is_offer?
+        = t('questions')
+        %br
+        = t('thanks_for_interest')
+      - else
+
+        = t('please_transfer')
+        %br
+        = Setting["name"]
+        %br
+        = Setting["iban"].gsub(/\s+/, "")
+        %br
+        = Setting["bic"]
+
+    .col.s5.text-right.no-padding
+      %h4=t('thanks')

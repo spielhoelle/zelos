@@ -1,0 +1,191 @@
+//header, main, footer 
+  //padding-left: 300px
+//@media only screen and (max-width: 992px) 
+  //header,main,footer 
+    //padding-left: 0
+
+  //h5>span 
+    //display: block
+    //margin: 0 0 15px 0
+  
+
+body 
+  display: flex
+  min-height: 100vh
+  flex-direction: column
+main 
+  flex: 1 0 auto
+
+.no-border
+  border: 0 !important
+
+.m-0
+  margin: 0 !important
+
+.full-width
+  width: 100%
+
+.text-right
+  text-align: right
+
+.absolute-bottom
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+li.user-details 
+  background-size: cover
+  margin-bottom: 15px
+  padding: 15px 0px 0px 15px
+
+.profile-btn
+  margin: 0 !important
+  text-transform: capitalize !important
+  padding: 0 !important
+  text-shadow: 1px 1px 1px #444 !important
+  font-size: 15px !important
+
+.profile-toggle
+  line-height: inherit
+  width: 2rem
+  font-size: 1.6rem
+  display: block
+  float: left
+  text-align: center
+  margin-right: 1rem
+
+.box-shadow-0
+  box-shadow: none !important
+  border: 0 !important
+
+.p-0
+  padding-left: 0 !important
+  padding-right: 0 !important
+
+.no-wrap
+  white-space: nowrap
+
+.mb-5
+  margin-bottom: 5em
+
+// Margins and Padding
+// -------------------------
+$i: 0
+@while $i <= 5
+  .m-#{$i}
+    margin: 1rem * $i !important
+  .mt-#{$i}
+    margin-top: 1rem * $i !important
+  .mb-#{$i}
+    margin-bottom: 1rem * $i !important
+  .ml-#{$i}
+    margin-left: 1rem * $i !important
+  .mr-#{$i}
+    margin-right: 1rem * $i !important
+
+  .p-#{$i}
+    padding: 1rem * $i !important
+  .pt-#{$i}
+    padding-top: 1rem * $i !important
+  .pb-#{$i}
+    padding-bottom: 1rem * $i !important
+  .py-#{$i}
+    padding-top: 1rem * $i !important
+    padding-bottom: 1rem * $i !important
+  .px-#{$i}
+    padding-left: 1rem * $i !important
+    padding-right: 1rem * $i !important
+  .pl-#{$i}
+    padding-left: 1rem * $i !important
+  .pr-#{$i}
+    padding-right: 1rem * $i !important
+  $i: $i + 1
+
+.ml-md-3
+  @media (max-width: 991px)
+    margin-left: 3rem
+//$grid-breakpoints: (
+  //xs: 0,
+  //sm: 576px,
+  //md: 768px,
+  //lg: 992px,
+  //xl: 1200px
+//)
+
+//@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) 
+  //$min: breakpoint-min($name, $breakpoints)
+  //@if $min 
+    //@media (min-width: $min) 
+      //@content
+
+  //@else 
+    //@content
+  
+
+//@each $breakpoint in map-keys($grid-breakpoints) 
+  //@include media-breakpoint-up($breakpoint) 
+    //$infix: breakpoint-infix($breakpoint, $grid-breakpoints)
+
+    //@each $prop, $abbrev in (margin: m, padding: p) 
+      //@each $size, $length in $spacers 
+
+        //.#{$abbrev}#{$infix}-#{$size}   #{$prop}:        $length !important 
+        //.#{$abbrev}t#{$infix}-#{$size}  #{$prop}-top:    $length !important 
+        //.#{$abbrev}r#{$infix}-#{$size}  #{$prop}-right:  $length !important 
+        //.#{$abbrev}b#{$infix}-#{$size}  #{$prop}-bottom: $length !important 
+        //.#{$abbrev}l#{$infix}-#{$size}  #{$prop}-left:   $length !important 
+        //.#{$abbrev}x#{$infix}-#{$size} 
+          //#{$prop}-right: $length !important
+          //#{$prop}-left:  $length !important
+        
+        //.#{$abbrev}y#{$infix}-#{$size} 
+          //#{$prop}-top:    $length !important
+          //#{$prop}-bottom: $length !important
+        
+      
+    
+
+    //// Some special margin utils
+    //.m#{$infix}-auto   margin:        auto !important 
+    //.mt#{$infix}-auto  margin-top:    auto !important 
+    //.mr#{$infix}-auto  margin-right:  auto !important 
+    //.mb#{$infix}-auto  margin-bottom: auto !important 
+    //.ml#{$infix}-auto  margin-left:   auto !important 
+    //.mx#{$infix}-auto 
+      //margin-right: auto !important
+      //margin-left:  auto !important
+    
+    //.my#{$infix}-auto 
+      //margin-top:    auto !important
+      //margin-bottom: auto !important
+    
+  
+
+
+.material-tooltip span
+  color: white
+.no-max-width
+  max-width: none
+
+.condensed_simple_format
+  p
+    margin: 0
+    line-height: inherit
+.z-index-1000
+  z-index: 1000
+.diff *
+  color: inherit
+.scrollfire
+  > *
+    opacity: 0
+    transform: translateY(50px)
+  .visible
+    opacity: 1
+    transform: translateY(0)
+    $time: 0s
+    $i: 0
+    @for $i from 0 through 20
+      &:nth-child(#{$i})
+        transition: opacity .5s ease $time, transform .5s ease $time
+      $time: $time + 0.3
+

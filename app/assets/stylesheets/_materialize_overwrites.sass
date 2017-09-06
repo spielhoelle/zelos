@@ -1,0 +1,69 @@
+$black: #333
+$black2: lighten($black, 5)
+html
+a
+  color: $green
+p
+  line-height: 2rem
+
+.button-collapse
+  color: #26a69a
+
+.parallax-container
+  min-height: 380px
+  line-height: 0
+  height: auto
+  color: rgba(255, 255, 255, 0.9)
+  .section
+    width: 100%
+
+@media only screen and (max-width: 992px)
+  .parallax-container .section
+    position: absolute
+    top: 40%
+  #index-banner .section
+    top: 10%
+
+@media only screen and (max-width: 600px)
+  #index-banner .section
+    top: 0
+
+.icon-block
+  padding: 0 15px
+  .material-icons
+    font-size: inherit
+
+footer.page-footer
+  margin: 0
+
+table.striped > tbody > tr:nth-child(odd) 
+  background-color: $black
+
+table.highlight > tbody > tr:hover
+  background-color: $black2
+.collection.with-header .collection-header
+  background-color: $black
+  border-bottom: $black2
+.collection
+  border: 1px solid $black2
+  .collection-item
+    background-color: $black
+
+.input-field input[type=search] 
+
+  background-color: $black
+  &:focus 
+    background-color: $black2
+    color: white
+
+    & + label i,
+    & ~ .mdi-navigation-close,
+    & ~ .material-icons 
+      color: white
+    
+  
+
+.card-panel
+  background-color: $black
+.side-nav li > a 
+  color: white

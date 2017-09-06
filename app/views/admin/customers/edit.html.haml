@@ -1,0 +1,59 @@
+- if ["new"].include?(action_name)
+  - path = admin_customers_path
+- elsif action_name == "edit"
+  - path = admin_customer_path(@customer)
+.section.container.row.full-width.no-max-width
+  .row
+    .col.s12
+      .col.m6.s12
+        = form_for(@customer, url: path) do |f|
+          .row
+            .col.s12.full-width
+              .input-field
+                = f.label :name, class: action_name == "edit" ? "active" : ""
+                = f.text_field :name, class: "validate", required: true
+              .input-field
+                = f.label :company, class: action_name == "edit" ? "active" : ""
+                = f.text_field :company, class: "validate", required: true
+              .input-field
+                = f.label :address, class: action_name == "edit" ? "active" : ""
+                = f.text_area :address, class: "materialize-textarea validate", required: true
+                
+            .col.s12.full-width.text-right.pt-3
+              .row
+                = link_to admin_customers_path, class: "btn btn-floating" do
+                  %i.material-icons view_list
+                = f.button :submit, class: "btn btn-floating" do
+                  %i.material-icons done
+
+
+      .col.m6.s12
+        %ul.collection.with-header
+          %li.collection-header
+            %h5
+              ="Invoices"
+              %strong.right= "#{@total_last_year} € total"
+          - @customer.entries.each do |entry|
+            %li.collection-item
+              %span
+                = link_to edit_admin_entry_path(entry), class: "" do
+                  = entry.title
+              %span.right
+                = "#{entry.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+)} €"
+          -#%li.collection-footer
+            -#= "#{@total_last_year} € total"
+        -#%h4 Invoices from this customer
+        -#%table.striped.highlight
+          -#%tbody
+            -#- @customer.entries.each do |entry|
+              -#%tr
+                -#%td
+                  -#= link_to edit_admin_entry_path(entry), class: "truncate" do
+                    -#= entry.title
+                -#%td.text-right
+                  -#= "#{entry.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+)} €"
+            -#%tr.grey.darken-2
+              -#%td
+              -#%td.text-right.white-text
+                -#= "#{@total_last_year} € total"
+
