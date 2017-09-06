@@ -43,7 +43,7 @@ set :letsencrypt_dir, "#{shared_path}/config/letsencrypt"
 set :letsencrypt_endpoint, 'https://acme-v01.api.letsencrypt.org/'
 set :letsencrypt_private_key_path, "#{fetch(:letsencrypt_dir)}/private_key.pem"
 set :letsencrypt_authorize_domains, 'zelos.thomaskuhnert.com www.zelos.thomaskuhnert.com'
-set :letsencrypt_certificate_request_domains, 'zelos.thomaskuhnert.com www.example.com'
+set :letsencrypt_certificate_request_domains, 'zelos.thomaskuhnert.com www.zelos.thomaskuhnert.com'
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a

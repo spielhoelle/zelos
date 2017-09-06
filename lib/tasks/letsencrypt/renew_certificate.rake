@@ -2,7 +2,7 @@ namespace :letsencrypt do
   task :renew_certificate do
     if Rails.env.production?
       endpoint = 'https://acme-v01.api.letsencrypt.org/'
-      certificate_request_domains = 'example.com www.example.com'
+      certificate_request_domains = 'zelos.thomaskuhnert.com www.zelos.thomaskuhnert.com'
       app_dir = "/home/deploy/apps/rails_app_example_production"
       certificate_dir = "#{app_dir}/shared/config/letsencrypt/certificate"
       private_key_path = "#{app_dir}/shared/config/letsencrypt/private_key.pem"
