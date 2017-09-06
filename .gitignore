@@ -57,8 +57,6 @@ uploads
 node_modules
 npm-debug.log
 public
-config/environments/production.rb
-config/app.yml
 .keep
 config/database.yml
 config/secrets.yml

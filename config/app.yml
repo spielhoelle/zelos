@@ -1,12 +1,14 @@
 # config/app.yml for rails-settings-cached
 defaults: &defaults
   mail: ""
-  facebook: ""
-  instagram: ""
-  twitter: ""
-  soundcloud: ""
-  linkedin: ""
-  pinterest: ""
+  mail: ""
+  website: ""
+  tax: ""
+  bic: ""
+  iban: ""
+  address: ""
+  job: ""
+  name: ""
 
 development:
   <<: *defaults
