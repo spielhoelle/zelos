@@ -35,6 +35,7 @@ server YAML.load_file("./config/secrets.yml")["production"]["deploy_server_ip"],
        :roles => %w(web app db),
        :ssh_options => {
          :keepalive => true,
+         forward_agent: false,
          :keepalive_interval => 60 #seconds
        }
 
