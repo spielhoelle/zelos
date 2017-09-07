@@ -61,7 +61,7 @@
 .navbar-fixed
   %nav.z-depth-3.nav-extended.row.mb-0{:role => "navigation"}
     .nav-wrapper.col.s12
-      %h2.m-0
+      .m-0
         .brand-logo.left.ml-md-3.truncate
           - if controller_name == "entries" && action_name == "edit"
             =link_to admin_entries_path do
@@ -75,6 +75,11 @@
             = link_to root_path, class: "" do
               = controller_name.capitalize
 
+            - if controller_name == "entries" && action_name == "index"
+              %small
+                - this_year_amount = @this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)
+                = "#{this_year_amount} €/y"
+                = "~#{(this_year_amount/Time.now.month).to_s.to_f.round(0)} €/m"
       %ul.right.hide-on-med-and-down
         - if user_signed_in?
           %li

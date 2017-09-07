@@ -1,21 +1,15 @@
 - if @entries.any?
   .row
-    .s12.mb-5
-      - if !params[:search]
-        .row
-          .col.s12
-            %h3
-              ="Invoices"
-              %small= "#{@this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(2)} € this year"
+    .s12.mb-5.mt-2
       #entries_tree
         - if params[:search].blank?
           .row.hide-on-med-and-down
             .col.s4
-              = line_chart @this_year.group_by_month(:delivery_date).count
+              = line_chart Entry.where.not("is_offer", true).group_by_month(:delivery_date).count, colors: ["#27ae60"]
             .col.s4
-              = column_chart @data, stacked: true, legend: false
+              = column_chart @data, stacked: true, legend: false, label: "value"
             .col.s4
-              = pie_chart @this_year.collect { |x| [x.customer.company, get_items_total(x)] }
+              = pie_chart @chart_lastyear, legend: true, donut: true
 
         = render "entries_tree"
 - else
