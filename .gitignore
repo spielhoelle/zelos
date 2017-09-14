@@ -62,3 +62,4 @@ config/database.yml
 config/secrets.yml
 *.map
 tags
+config/app.yml

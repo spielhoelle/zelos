@@ -1,17 +1,19 @@
 - if @entries.any?
   .row
-    .s12.mb-5.mt-2
-      #entries_tree
-        - if params[:search].blank?
-          .row.hide-on-med-and-down
-            .col.s4
-              = line_chart Entry.where.not("is_offer", true).group_by_month(:delivery_date).count, colors: ["#27ae60"]
-            .col.s4
-              = column_chart @data, stacked: true, legend: false, label: "value"
-            .col.s4
-              = pie_chart @chart_lastyear, legend: true, donut: true
+    #entries_tree
+      - if params[:search].blank?
+        .row.hide-on-med-and-down.mt-2
+          .col.s4
+            %h5 Invoices per month 
+            = line_chart @this_year.group_by_month(:delivery_date).count
+          .col.s4
+            %h5 Amount recieved per customer
+            = column_chart @data, stacked: true, legend: false
+          .col.s4
+            %h5 Customers 
+            = pie_chart @this_year.collect { |x| [x.customer.company, get_items_total(x)] }, legend: true, donut: true
 
-        = render "entries_tree"
+      = render "entries_tree"
 - else
   %h2.grey-text.text-lighten-1.center-align.mt-5
     %div
