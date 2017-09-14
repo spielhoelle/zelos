@@ -5,13 +5,15 @@
         .row.hide-on-med-and-down.mt-2
           .col.s4
             %h5 Invoices per month 
-            = line_chart @this_year.group_by_month(:delivery_date).count
+            = column_chart Entry.visible.where("delivery_date >= ?", Time.zone.now - 1.year).group_by_month(:delivery_date).count, colors: ["#27ae60"]
+
           .col.s4
             %h5 Amount recieved per customer
             = column_chart @data, stacked: true, legend: false
           .col.s4
-            %h5 Customers 
-            = pie_chart @this_year.collect { |x| [x.customer.company, get_items_total(x)] }, legend: true, donut: true
+            %h5 Items
+            -#= pie_chart @this_year.collect { |x| [x.customer.company, get_items_total(x)] }, legend: true, donut: true
+            = pie_chart Item.all.collect { |x| [x.name, x.price.to_i] }.group_by(&:first).map { |k, v| [k, v.map(&:last).inject(0,&:+)] }, legend: true, donut: true
 
       = render "entries_tree"
 - else

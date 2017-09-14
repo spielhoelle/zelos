@@ -10,6 +10,9 @@ class Entry < ActiveRecord::Base
   before_save :default_values
   after_initialize :init
 
+  scope :visible, -> { 
+    where.not("is_offer", true).where("status" => "paid")
+  }
   def init
     self.invoice_date ||= Date.today
     self.delivery_date ||= Date.today

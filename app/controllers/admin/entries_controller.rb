@@ -10,7 +10,7 @@ module Admin
       end
       @entries = ordered_entries.group_by { |u| u.delivery_date.beginning_of_year }
 
-      @this_year =  Entry.where.not("is_offer", true).where("delivery_date >= ?", Time.zone.now.beginning_of_year)
+      @this_year =  Entry.visible.where("delivery_date >= ?", Time.zone.now.beginning_of_year)
       @title = "#{@this_year.collect { |x| x.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+)}.reduce(0, :+).to_s.to_f.round(2)} € this year"
       @chart_lastyear = @this_year.collect{ |e| [e.customer.company, e.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+)] }.sort {|a,b| a[1] <=> b[1]}.reverse
       @data = @this_year.order("delivery_date desc").map do |value|

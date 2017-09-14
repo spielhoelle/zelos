@@ -40,10 +40,14 @@
             .fixed-action-btn.horizontal{:style => "position: absolute; right: 10px; top: 7.5px"}
               = link_to edit_admin_entry_path(entry), class: "btn-floating" , "tabindex": "-1" do                
                 %i.material-icons.large more_vert
-              %ul
+              %ul{style: "right: 40px"}
                 %li.mt-0
                   = link_to admin_entry_path(entry), :method=> :delete, class: "btn btn-floating red ", data: {confirm: "You sure to delete this entry?"} do
                     %i.material-icons="delete"
+                %li.mt-0
+                  = link_to admin_entry_download_path(entry), target: "_blank", class: "btn btn-floating orange" do
+                    %i.material-icons="open_in_browser"
+
                 %li.mt-0
                   = link_to admin_entry_download_path(entry, format: "pdf"), target: "_blank", class: "btn btn-floating" do
                     %i.material-icons="play_for_work"
