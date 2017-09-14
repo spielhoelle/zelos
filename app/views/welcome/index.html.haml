@@ -1,4 +1,4 @@
-#index-banner.parallax-container
+#index-banner
   .section.no-pad-bot
     .container.mt-5
       %h1.header.center Zelos Invoice
@@ -46,8 +46,8 @@
             %h5.center No shit!
             %p.light With Zelos you use a open-source software. Nobody gets rich and we won't destroy the rainforest.
 
-.parallax-container.valign-wrapper
-  .section.no-pad-bot
+
+  .section.no-pad-bot.grey.darken-4
     .container
       .row.center.mt-4.mb-4
         %h3.header.col.s12.light 
@@ -82,21 +82,21 @@
 
 
 
-.parallax-container.valign-wrapper
-  .section.no-pad-bot
-    .container
-      .row.center
-        %h5.header.col.s12.light You are still on the fucking landing page.
-      .row.center
-        - if user_signed_in?
-          = link_to admin_entries_path, class: "btn waves-effect waves-light" do
-            = "Edit invoices"
 
-        - else
-          %a.waves-effect.btn.waves-light.btn.modal-trigger{:href => "#modal1", "data-turbolinks": "false"} Login
+.section.no-pad-bot
+  .container
+    .row.center
+      %h5.header.col.s12.light You are still on the fucking landing page.
+    .row.center
+      - if user_signed_in?
+        = link_to admin_entries_path, class: "btn waves-effect waves-light" do
+          = "Edit invoices"
 
-  -#.parallax
-    -#= image_tag('bg2.jpg')
+      - else
+        %a.waves-effect.btn.waves-light.btn.modal-trigger{:href => "#modal1", "data-turbolinks": "false"} Login
+
+-#.parallax
+  -#= image_tag('bg2.jpg')
 
 
 

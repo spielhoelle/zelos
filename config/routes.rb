@@ -10,10 +10,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :entries do
       get 'clone', on: :member
-
-      get :diff, to: 'versions#diff'
-      patch :rollback, to: 'versions#rollback'
-
       resources :items
       resource :download, only: [:show]
     end
