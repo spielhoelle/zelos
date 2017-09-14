@@ -24,7 +24,7 @@
   = image_tag('screen1.jpg', class: "z-depth-5 mb-5 responsive-img")
 .grey.darken-3
   .container
-    .section
+    .section.pt-4.mb-3
       %h3.center Benefit from Zelos
       .row.scrollfire.scrollfire2
         .col.s12.m4
@@ -50,7 +50,7 @@
   .section.no-pad-bot.grey.darken-4
     .container
       .row.center.mt-4.mb-4
-        %h3.header.col.s12.light 
+        %h3
           Easy to use and maintain.
           %br 
         %h5
@@ -70,14 +70,12 @@
   .container
     .section
       .row
+        .col.s12.center.mt-4.mb-4
+          %h3 Keep your stuff together
+          %h5 Automatic generated invoice number and optimized pdf filenames to keep the overview who ows you money and how much.
         .col.s12.center
-          %h3
-            %i.mdi-content-send.brown-text
-          %h4 Contact Us
-          %p.light
-            This open-source-software is still in beta and under development.
-          %p.light
-            If you find any bugs or improvements, create and issue on Github. If you want to help improve - clone the project, create a new branch and give me a pull-request.
+          .center.scrollfire.scrollfire4
+            = image_tag('screen3.jpg', class: "z-depth-5 mb-5 responsive-img")
 
 
 
@@ -85,9 +83,14 @@
 
 .section.no-pad-bot
   .container
-    .row.center
-      %h5.header.col.s12.light You are still on the fucking landing page.
-    .row.center
+    .row.center.mt-4.mb-4
+      %h3 You are still on the fucking landing page.
+      %h5.light
+        This open-source-software is still in beta and under development.
+        If you find any bugs or improvements, create and issue on 
+        = link_to "Github.", "https://github.com/spielhoelle/zelos", target: "_blank"
+        If you want to help improve - clone the project, create a new branch and give me a pull-request.
+    .row.center.mt-4
       - if user_signed_in?
         = link_to admin_entries_path, class: "btn waves-effect waves-light" do
           = "Edit invoices"

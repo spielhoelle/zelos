@@ -1,13 +1,14 @@
 # config/app.yml for rails-settings-cached
 defaults: &defaults
-  mail: ""
-  website: ""
-  tax: ""
-  bic: ""
-  iban: ""
-  address: ""
-  job: ""
-  name: ""
+  mail: "mail@example.com"
+  website: "www.example.com"
+  tax: "012345667"
+  bic: "ABCDEFG"
+  iban: "IBAN12345678990123456"
+  address: "Example Street, 10000 Example City"
+  job: "Freelance Software Engineer"
+  name: "My Name"
+  language: "en"
 
 development:
   <<: *defaults

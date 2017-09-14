@@ -21,7 +21,9 @@
 
 en:
   hello: "Hello world"
-  item: "Work"
+  invoice: "Invoice"
+  offer: "Offer"
+  item: "Description"
   count: "Count"
   sum: "Sum"
   total: "Total"
@@ -29,7 +31,11 @@ en:
   vat: "VAT"
   note: "Note"
   thanks: "Thanks"
-  questions: "If you have any questions regarding this document, do not hesitate contacting me."
+  to: "To "
+  nr: "Invoice number: "
+  date: "Invoice date: "
+  del_date: "Delivery date: "
+  questions: "If you have any questions regarding this invoice, do not hesitate contacting me."
   thanks_for_interest: "Thank you for your interrest."
   please_transfer: "Please transfer the amount to the following account:"
   all_good: "All good - no entries yet =)"

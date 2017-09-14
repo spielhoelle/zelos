@@ -3,15 +3,22 @@ Zelos is a **open-source** invoice app for **software engineers** who want contr
 
 ![Zelos invoice dashboard](/app/assets/images/screen1.jpg?raw=true "Zelos invoice dashboard")
 
-### Installation
+## Installation
 1. Install gems `bundle install`
 2. Copy `config/database.yml.default` to `config/database.yml` and setup environment database variables
 3. Copy `config/secrets.yml.default` to `config/secrets.yml` and define app secrets for mail server, repository and capistrano deployment options
 4. Prepare rails database and seed example data `bundle exec rake db:migrate db:seed`
 5. Install npm dependencies `npm install`
+6. Provide all settings at `admin/settings` required for the generated invoice
 
+## Development
+`bundle exec rails server`
 
-### time-zone support
+`gulp bs` start browsersync and watch sass and html
+
+`npm start` watch javascript with webpack
+
+### Time-zone support
 Chartkick together with groupdate requires time-zone support
 Run this statements in SQL console
 https://gist.githubusercontent.com/ankane/1d6b0022173186accbf0/raw/time_zone_support.sql
@@ -22,13 +29,6 @@ should return the time instead of NULL
 https://github.com/ankane/groupdate#for-mysql
 
 Otherwise remove groupdate from gemfile and remove the group_by_month function from entries/index
-
-### start server with
-`bundle exec rails server`
-
-`gulp bs` start browsersync and watch sass and html
-
-`npm start` watch javascript with webpack
 
 ## Capistrano deployment http://capistranorb.com
 
@@ -41,7 +41,7 @@ eg: `cap production deploy`
 
 `cap production rails:console` run remote console
 
-#### Deployment requirements
+## Deployment requirements
 
 bundler must be installed globally on server:
 `gem install bundler`
@@ -49,3 +49,6 @@ bundler must be installed globally on server:
 `cap production setup:upload_yml` upload database.yml and secrets.yml to production server
 
 `cap production deploy` for deployment
+
+## l18n
+currently there are two languages availble, english and german. Copy one of them to your corresponding language file under `config/locales/yourlang.yml` and set the language key in the settings eg: `en` or `de`

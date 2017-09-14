@@ -2,6 +2,7 @@ module Admin
   class DownloadsController < ApplicationController
     before_action :authenticate_user!
     def show
+      I18n.locale = Setting.language
       respond_to do |format|
         @invoice = Entry.find(params[:entry_id])
         @total = @invoice.items.collect{|i| i.price * i.count}.map{|i| i.to_s.to_f.round(2)}.inject(0, :+)

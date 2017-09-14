@@ -1,10 +1,8 @@
 %main.container.full-width
-
   .row
-
     .col.s12
       %h2.mt-0
-        = invoice.is_offer? ? "Angebot" : "Rechnung"
+        = invoice.is_offer? ? t("offer") : t("invoice")
         -#- if @request == 'html'
           -#= image_tag('logo.png', id: "logo", class: "full-width")
         -#-else
@@ -12,7 +10,7 @@
 
       .row
         .col.s7
-          %h5.m-0="An #{invoice.customer.name}"
+          %h5.m-0="#{t("to")} #{invoice.customer.name}"
           %ul.m-0
             %li.collection-item.condensed_simple_format
               = simple_format(invoice.customer.company)
@@ -32,11 +30,11 @@
             -#%li.collection-item
               -#= "Steuernummer: #{Setting["tax_id"]}"
             %li.collection-item
-              = "Rechnungsnummer: #{invoice.invoice_number}"
+              = "#{t('nr')} #{invoice.invoice_number}"
             %li.collection-item
-              = "Rechnungsdatum: #{invoice.invoice_date.strftime("%d.%m.%Y")}"
+              = "#{t('date')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
             %li.collection-item
-              = "Lieferdatum: #{invoice.delivery_date.strftime("%d.%m.%Y")}"
+              = "#{t('del_date')} #{invoice.delivery_date.strftime("%d.%m.%Y")}"
 
 
 
@@ -71,10 +69,10 @@
                 %td
                 %td
                 %td.text-right
-                  %h5=t('total')
+                  %h5.m-0=t('total')
                 %td.text-right
 
-                  %h5.no-wrap= number_to_currency(total, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
+                  %h5.m-0.no-wrap= number_to_currency(total, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
 
       - if invoice.notes !=  ""
         .notes

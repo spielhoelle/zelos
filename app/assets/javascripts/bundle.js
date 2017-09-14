@@ -140,6 +140,8 @@ var options = [{ selector: ".scrollfire1", offset: 100, callback: function callb
     fadeIn($(el));
   } }, { selector: ".scrollfire3", offset: 300, callback: function callback(el) {
     fadeIn($(el));
+  } }, { selector: ".scrollfire4", offset: 300, callback: function callback(el) {
+    fadeIn($(el));
   } }];
 $(function () {
   Materialize.scrollFire(options);
