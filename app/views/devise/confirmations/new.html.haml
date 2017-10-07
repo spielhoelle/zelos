@@ -1,12 +1,14 @@
-.container
-  .col.s6.offset-md-3
-    %h1="Resend confirmation instructions"
-    = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-      = devise_error_messages!
-      .field
-        = f.label :email
-        %br/
-        = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control"
-      .actions
-        = f.submit "Resend confirmation instructions", class: "form-control"
-    = render "devise/shared/links"
+.row
+  .col.s12.m6.offset-m3.z-depth-4.card-panel.mt-5
+    .col.s12
+      %h3="Resend confirmation instructions"
+      = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+        = devise_error_messages!
+        .field
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control"
+        .actions
+          = f.submit "Resend confirmation instructions", class: ""
+      %p
+        = render "devise/shared/links"
