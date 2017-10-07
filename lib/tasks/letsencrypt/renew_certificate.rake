@@ -3,7 +3,7 @@ namespace :letsencrypt do
     if Rails.env.production?
       endpoint = 'https://acme-v01.api.letsencrypt.org/'
       certificate_request_domains = YAML.load_file("./config/secrets.yml")["production"]["domain"]
-      app_dir = "/home/deploy/apps/rails_app_example_production"
+      app_dir = YAML.load_file("./config/secrets.yml")["production"]["deploy_path"]
       certificate_dir = "#{app_dir}/shared/config/letsencrypt/certificate"
       private_key_path = "#{app_dir}/shared/config/letsencrypt/private_key.pem"
     else
@@ -11,7 +11,7 @@ namespace :letsencrypt do
       # Your browser will detect it as unknown certificate.
       endpoint = 'https://acme-staging.api.letsencrypt.org/'
       certificate_request_domains = 'staging.example.com'
-      app_dir = "/home/deploy/apps/rails_app_example_staging"
+      app_dir = YAML.load_file("./config/secrets.yml")["production"]["deploy_path"]
       certificate_dir = "#{app_dir}/shared/config/letsencrypt/certificate"
       private_key_path = "#{app_dir}/shared/config/letsencrypt/private_key.pem"
     end

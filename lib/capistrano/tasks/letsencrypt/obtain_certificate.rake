@@ -47,8 +47,8 @@ namespace :letsencrypt do
 
       info "Creating symlinks for existing certificate."
       # #{shared_path}/ssl_private_key.key is a path where nginx is looking for ssl certificate
-      "ln -nfs #{cert_privkey_path} #{shared_path}/ssl_private_key.key"
-      "ln -nfs #{cert_fullchain_path} #{shared_path}/ssl_cert.crt"
+      sudo "ln -nfs #{cert_privkey_path} #{shared_path}/ssl_private_key.key"
+      sudo "ln -nfs #{cert_fullchain_path} #{shared_path}/ssl_cert.crt"
     end
   end
 end

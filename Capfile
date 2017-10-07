@@ -1,5 +1,4 @@
 # encoding: utf-8
-Dir.glob('lib/capistrano/tasks/**/*.rake').each { |r| import r }
 
 require 'capistrano/deploy'
 require 'capistrano/setup'
@@ -19,3 +18,4 @@ require "whenever/capistrano"
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 set :ssh_options, {:forward_agent => true}
 
+Dir.glob('lib/capistrano/tasks/**/*.rake').each { |r| import r }
