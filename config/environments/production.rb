@@ -82,7 +82,7 @@ Rails.application.configure do
   end
 
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host =>  Rails.application.secrets.mail_host,}
+  config.action_mailer.default_url_options = { :host =>  Rails.application.secrets.mail_host}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default :charset => "utf-8"
@@ -93,7 +93,7 @@ Rails.application.configure do
     domain: "gmail.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: Rails.application.secrets.mail_smtp_username,
+    user_name: Rails.application.secrets.mail_username,
     password: Rails.application.secrets.mail_password,
   }
 
