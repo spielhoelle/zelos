@@ -1,5 +1,6 @@
 # config valid only for current version of Capistrano
 set :application, 'zelos'
+set :pty, true
 set :repo_url, YAML.load_file("./config/secrets.yml")["production"]["deploy_repository"]
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
