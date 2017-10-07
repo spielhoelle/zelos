@@ -14,6 +14,7 @@ require 'capistrano/rails'
 
 require 'capistrano/rvm'
 require 'capistrano/npm'
+require "whenever/capistrano"
 #require "capistrano/webpacked"
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 set :ssh_options, {:forward_agent => true}
