@@ -6,18 +6,14 @@
 
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    / = stylesheet_link_tag    'invoice', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     = favicon_link_tag 'favicon.ico'
     = csrf_meta_tag
     :css
       :root {
         --mdc-theme-primary: #000000;
       }
-    - if user_signed_in?
-
-      -#= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js', "data-turbolinks-eval" => false
+    %meta{:content => "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi", :name => "viewport"}/
   %body{class: class_for_controller, "data-spy" => "scroll", "data-target" => "#collapsingNavbarv"}
 
     %header
