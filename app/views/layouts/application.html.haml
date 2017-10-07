@@ -33,12 +33,11 @@
 
   #modal1.modal.bottom-sheet.grey.darken-4
     = form_tag session_path(:user) do
-      .container.modal-content
-        %h3 Login
-        .row.mb-0
+      .container.modal-content.p-0.pt-1
+        .row.mb-1
           .col.s12.m4.input-field
             = label_tag :email
-            = text_field_tag 'user[email]'
+            = text_field_tag 'user[email]', '', autofocus: true
           .col.s12.m4.input-field
             = label_tag :password
             = password_field_tag 'user[password]'

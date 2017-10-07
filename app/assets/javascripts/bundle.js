@@ -258,12 +258,9 @@ $(document).ready(function () {
     endingTop: '10%', // Ending top style attribute
     ready: function ready(modal, trigger) {
       // Callback for Modal open. Modal and trigger parameters available.
-      console.log("Ready");
-      console.log(modal, trigger);
+      $('#user_email').focus().click();
     },
-    complete: function complete() {
-      console.log('Closed');
-    } // Callback for Modal close
+    complete: function complete() {} // Callback for Modal close
   });
 });
 $(document).on('turbolinks:load', function () {
