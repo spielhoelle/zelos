@@ -8,6 +8,18 @@
 
       .section.row
         .col.m6.s12
+          .row.mb-3
+            .col.m6.switch
+              %label
+                Paid?
+                = f.check_box(:status, { class: '' }, "paid", "open")
+                %span.lever
+            .col.m6.switch
+              %label
+                Offer?
+                = f.check_box :is_offer, checked: params[:is_offer] == "true" ||  @entry.is_offer?
+                %span.lever
+
           .input-field
             %h5
               = f.label :title, class: action_name == "edit" ? "active" : ""
@@ -16,7 +28,7 @@
           = f.fields_for :customer, @customer do |builder|
 
             = builder.hidden_field :id
-            .input-field
+            .input-field.pb-1
               - if ["new", "clone"].exclude?(action_name)
                 %i.material-icons.prefix 
                   = link_to edit_admin_customer_path(@customer) do
@@ -32,21 +44,10 @@
 
 
         .col.m6.s12
-          .row
-            .col.m6.s12.switch.row
-              %label
-                Paid?
-                = f.check_box(:status, { class: '' }, "paid", "open")
-                %span.lever
-            .col.m6.s12.switch.row
-              %label
-                Offer?
-                = f.check_box :is_offer, checked: params[:is_offer] == "true" ||  @entry.is_offer?
-                %span.lever
           .input-field
             = f.label :invoice_number, class: "active" 
             = f.number_field :invoice_number, class: "validate"
-          .input-field.row.mt-0
+          .input-field.row.mt-0.pb-1
             .col.s6.input-field
               = f.label :invoice_date, class: "active"
               = f.date_field :invoice_date, class: "validate datepicker mb-0"
@@ -69,11 +70,11 @@
                 = f.text_area :notes, class: "materialize-textarea validate", value: (action_name == "edit" ? @entry.notes.gsub("\n", '').squeeze(' ') : "")
               .col.s2
                 .row.mb-0
-                  .col
+                  .col.p-0
                     %a.right.btn-floating.tooltipped.mb-1.note-part.waves-effect.waves-light.btn{"data-delay": 10, "data-position":"left", "data-tooltip": "Ich bin nach §19 UStG als Kleinunternehmer von der Umsatzsteuer befreit.", "data-value": "Ich bin nach §19 UStG als Kleinunternehmer von der Umsatzsteuer befreit."}
                       %i.material-icons child_care
                 .row.mb-0
-                  .col
+                  .col.p-0
                     %a.right.btn-floating.tooltipped.mb-1.note-part.waves-effect.waves-light.btn{"data-delay": 10, "data-position":"left", "data-tooltip": "Diese Tätigkeit ist nach §4 Nr. 21 UstG von der Umsatzsteuer für Bildungsleistungen befreit.", "data-value": "Diese Tätigkeit ist nach §4 Nr. 21 UstG von der Umsatzsteuer für Bildungsleistungen befreit."}
                       %i.material-icons change_history
 

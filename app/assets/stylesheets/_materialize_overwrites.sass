@@ -50,7 +50,6 @@ table.highlight > tbody > tr:hover
     background-color: $black
 
 .input-field input[type=search] 
-
   background-color: $black
   &:focus 
     background-color: $black2
@@ -67,3 +66,52 @@ table.highlight > tbody > tr:hover
   background-color: $black
 .side-nav li > a 
   color: white
+.border-bottom
+  border-bottom: 1px solid $green
+.material-tooltip span
+  color: white
+.no-max-width
+  max-width: none
+
+.condensed_simple_format
+  p
+    margin: 0
+    line-height: inherit
+.z-index-1000
+  z-index: 1000
+.diff *
+  color: inherit
+.scrollfire
+  > *
+    opacity: 0
+    transform: translateY(50px)
+  .visible
+    opacity: 1
+    transform: translateY(0)
+    $time: 0s
+    $i: 0
+    @for $i from 0 through 20
+      &:nth-child(#{$i})
+        transition: opacity .5s ease $time, transform .5s ease $time
+      $time: $time + 0.3
+
+textarea
+  -webkit-appearance: none
+  border-radius: 0 !important
+
+input
+  &[type="text"], &[type="button"], &[type="submit"], &[type="search"]
+    -webkit-appearance: none
+    border-radius: 0 !important
+    -webkit-border-radius: 0
+
+.input-field input[type=search] + label
+  transform: translateY(0)
+nav .nav-wrapper form, nav .nav-wrapper form .input-field
+  height: 100%
+body.entries-index table tbody th 
+  padding: 5px
+  background-color: #111
+
+.width-auto
+  width: auto !important

@@ -23,7 +23,6 @@
     "build": "NODE_ENV=production webpack -p --progress --colors",
     "lint": "eslint app/assets/javascripts/",
     "lintsass": "stylelint 'app/assets/stylesheets/**/*.sass' --syntax sass",
-    "svgicons": "gulp svgicons",
     "test": "echo \"Warning: no test specified\" || exit 0"
   },
   "author": "Thomas Kuhnert",
@@ -33,7 +32,6 @@
     "fontfaceobserver": "^1.7.1",
     "picturefill": "^3.0.2",
     "smoothscroll": "^0.2.2",
-    "svg4everybody": "^2.1.0"
   },
   "engines": {
     "node": ">=4.0"

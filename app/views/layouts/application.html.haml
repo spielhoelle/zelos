@@ -25,27 +25,30 @@
   %main.grey.darken-4
     = yield
 
-  %footer.page-footer
-    .footer-copyright.pb-2
-      .container.center
-        %span.white-text Made by
-        = link_to "Thomas Kuhnert", "http://www.thomaskuhnert.com", class: "teal-text"
+  - if controller.env["REQUEST_PATH"].exclude?("admin")
+    %footer.page-footer
+      .footer-copyright.pb-2
+        .container.center
+          %span.white-text Made by
+          = link_to "Thomas Kuhnert", "http://www.thomaskuhnert.com", class: "teal-text"
 
-  #modal1.modal.bottom-sheet.grey.darken-4
-    = form_tag session_path(:user) do
-      .container.modal-content.p-0.pt-1
-        .row.mb-1
-          .col.s12.m4.input-field
-            = label_tag :email
-            = text_field_tag 'user[email]', '', autofocus: true
-          .col.s12.m4.input-field
-            = label_tag :password
-            = password_field_tag 'user[password]'
-          .col.s12.m4
-            = check_box_tag 'user[remember_me]'
-            = label_tag 'user[remember_me]', 'Remember me'
-            = link_to "Forgot your password?", new_password_path(:user), class: "right"
-            = button_tag( :class => "waves-effect waves-light btn col s12 mt-1") do
-              Log in
+  - unless user_signed_in?
+    #modal1.modal.bottom-sheet.grey.darken-4
+      = form_tag session_path(:user) do
+        .container.modal-content.p-0.pt-1
+          .row.mb-1
+            .col.s12.m4.input-field
+              = label_tag :email
+              = text_field_tag 'user[email]', '', autofocus: true
+            .col.s12.m4.input-field
+              = label_tag :password
+              = password_field_tag 'user[password]'
+            .col.s12.m4
+              = check_box_tag 'user[remember_me]'
+              = label_tag 'user[remember_me]', 'Remember me'
+              = link_to "Forgot your password?", new_password_path(:user), class: "right"
+              = button_tag( :class => "waves-effect waves-light btn col s12 mt-1") do
+                Log in
+
   = javascript_include_tag 'bundle.js', 'data-turbolinks-track': 'false'
 

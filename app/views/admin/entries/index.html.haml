@@ -13,7 +13,7 @@
           .col.s4
             %h5 Items
             -#= pie_chart @this_year.collect { |x| [x.customer.company, get_items_total(x)] }, legend: true, donut: true
-            = pie_chart Item.all.collect { |x| [x.name, x.price.to_i] }.group_by(&:first).map { |k, v| [k, v.map(&:last).inject(0,&:+)] }, legend: true, donut: true
+            = pie_chart Item.all.collect { |x| [x.name, x.price.to_i] }.group_by(&:first).map { |k, v| [k, v.map(&:last).inject(0,&:+)] }, legend: false, donut: true
 
       = render "entries_tree"
 - else

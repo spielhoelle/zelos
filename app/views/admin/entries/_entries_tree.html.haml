@@ -1,11 +1,13 @@
-%nav
+%nav.border-bottom
   .nav-wrapper
     = form_tag admin_entries_path , :method => "get", id: "search-form" do
       .input-field
-        = text_field_tag :search, params[:search], class: "autocomplete", placeholder: "Search invoice name", :type => "search", :autofocus => true
-        %label.label-icon{:for => "search"}
+        = search_field_tag :search, params[:search], class: "autocomplete validate",  :required => true
+
+        %label.width-auto.label-icon{:for => "search"}
           %i.material-icons search
-%table.striped.highlight
+
+%table.highlight
   %thead.no-border
     %tr
       %th.hide-on-med-and-down Type
