@@ -25,14 +25,13 @@
   %main.grey.darken-4
     = yield
 
-  - if controller.env["REQUEST_PATH"].exclude?("admin")
+  - unless user_signed_in?
     %footer.page-footer
       .footer-copyright.pb-2
         .container.center
           %span.white-text Made by
           = link_to "Thomas Kuhnert", "http://www.thomaskuhnert.com", class: "teal-text"
 
-  - unless user_signed_in?
     #modal1.modal.bottom-sheet.grey.darken-4
       = form_tag session_path(:user) do
         .container.modal-content.p-0.pt-1
