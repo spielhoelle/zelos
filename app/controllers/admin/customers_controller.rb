@@ -1,12 +1,14 @@
 module Admin
   class CustomersController < ApplicationController
+
     before_action :authenticate_user!
+
     def index
-      @customers = Customer.all
+      @customers = Customer.all.order('name asc')
+      @grouped_customers = @customers.group_by{|x| x.name[0,1]}
       @title = "Customers"
-      puts params[:search]
       unless params[:search].blank?
-        @customers = Customer.where(:name => params[:search])
+        @customers = Customer.where(:name => params[:search]).order('name asc')
       end
       respond_to do |format|
         format.html {
@@ -22,12 +24,13 @@ module Admin
       @customer = Customer.new
       render 'edit'
     end
-    def edit
 
+    def edit
       @customer = Customer.find(params[:id])
       @title = "edit #{@customer.name} | Zelos"
       @total_last_year = @customer.entries.where.not("is_offer", true).collect{ |x|  x.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+) }.inject(0, :+)
     end
+    
     def create
       @customer = Customer.create(customer_params)
       if @customer.save
@@ -45,6 +48,7 @@ module Admin
       else
         flash[:error] = @customer.errors.full_messages.first.to_s
       end
+
       redirect_to edit_admin_customer_path(@customer)
     end
 
