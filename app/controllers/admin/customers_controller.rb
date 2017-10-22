@@ -6,6 +6,7 @@ module Admin
     def index
       @customers = Customer.all.order('name asc')
       @grouped_customers = @customers.group_by{|x| x.name[0,1]}
+      @customer_count = Customer.all.map{|e| e.entries.count}.max
       @title = "Customers"
       unless params[:search].blank?
         @customers = Customer.where(:name => params[:search]).order('name asc')

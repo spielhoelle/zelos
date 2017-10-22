@@ -1,6 +1,6 @@
 class Customer < ApplicationRecord
   has_paper_trail :ignore => [:created_at, :updated_at]
-  has_many :entries
+  has_many :entries, :dependent => :nullify
   validates :name, presence: true
   before_validation :strip_whitespace
 
