@@ -22,6 +22,8 @@
         - elsif action_name == "index"
           Customers
 
+      - elsif current_page?(root_path)
+        Zelos
       - else
         = controller_name.capitalize
 
