@@ -13,7 +13,6 @@
       %th.hide-on-med-and-down Type
       %th.hide-on-med-and-down Title
       %th.hide-on-med-and-down Customer
-      %th.hide-on-med-and-down Invoice Number
       %th.hide-on-med-and-down Delivery date
       %th.hide-on-med-and-down Total
 
@@ -33,8 +32,9 @@
             - if entry.customer.present?
               = link_to edit_admin_entry_path(entry), class: "truncate", "tabindex": "-1" do
                 = entry.customer.name
+            - else
+              %span.red-text no customer set
 
-          %td.hide-on-med-and-down= entry.invoice_number
           %td.hide-on-med-and-down= entry.delivery_date.strftime("%d.%m.%Y")
           %td{:style => "position: relative; padding-right: 80px"}
             - if !entry.is_offer?

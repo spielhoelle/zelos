@@ -1,26 +1,30 @@
 .navbar-fixed
   %nav.z-depth-3.nav-extended.row.mb-0{:role => "navigation"}
-    .nav-wrapper.col.s12
-      .m-0
-        .brand-logo.left.ml-md-3.truncate
-          - if controller_name == "entries" && action_name == "edit"
-            =link_to admin_entries_path do
-              %i.material-icons.white-text chevron_left
-            = @entry.title
-          - elsif controller_name == "customers" && action_name == "edit"
-            =link_to admin_customers_path do
-              %i.material-icons.white-text chevron_left
-            = @customer.name
-          - else
-            = link_to root_path, class: "" do
-              = controller_name.capitalize
+    .nav-wrapper.col.s12.d-flex.justify-content-start.justify-content-space-between-md
+      - if controller_name == "entries"
+        - if action_name == "edit"
+          =link_to admin_entries_path do
+            %i.material-icons.white-text chevron_left
+          %h6.d-flex.align-items-center.truncate.mr-1
+            %span.truncate= @entry.title
+        - if action_name == "index"
+          - this_year_amount = @this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)
+          = "#{this_year_amount}€/y"
+          = "~#{(this_year_amount/Time.now.month).to_s.to_f.round(0)}€/m"
 
-            - if controller_name == "entries" && action_name == "index"
-              %small
-                - this_year_amount = @this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)
-                = "#{this_year_amount} €/y"
-                = "~#{(this_year_amount/Time.now.month).to_s.to_f.round(0)} €/m"
-      %ul.right.hide-on-med-and-down
+
+      - elsif controller_name == "customers"
+        - if action_name == "edit"
+          = link_to admin_customers_path do
+            %i.material-icons.white-text chevron_left
+          = @customer.name
+        - elsif action_name == "index"
+          Customers
+
+      - else
+        = controller_name.capitalize
+
+      %ul.right.hide-on-med-and-down.d-flex.justify-content-end.flex-grow
         - if user_signed_in?
           %li
             = link_to root_path, class: "teal-text" do
@@ -49,21 +53,20 @@
 
       %a.button-collapse.m-0{"data-activates" => "nav-mobile", :href => "#", "data-turbolinks": "false"}
         %i.material-icons.white-text menu
-%ul#nav-mobile.side-nav.grey.darken-4
+%ul#nav-mobile.side-nav.grey.darken-4.z-depth-5
   %li.user-details.grey.darken-4
-    .container
-      .row.text-primary
-        .col.col.s4.m4.l4
-          %i.material-icons.large.text-primary account_circle
-        .col.col.s8.m8.l8.mt-1
-          %span.text-primary Zelos Invoice
+    .m-0.text-primary.d-flex.align-items-center
+      .col
+        %i.left.material-icons.medium.text-primary account_circle
+      .col
+        %span.text-primary=Setting[:name]
 
+  .divider
   - if user_signed_in?
     %li
       = link_to root_path, class: "teal-text" do
         Zelos
     
-    .divider
 
     %li
       = link_to admin_entries_path, class: (controller_name == "entries") ? "teal" : "" do

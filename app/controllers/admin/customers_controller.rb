@@ -10,6 +10,7 @@ module Admin
       @title = "Customers"
       unless params[:search].blank?
         @customers = Customer.where(:name => params[:search]).order('name asc')
+        @grouped_customers = @customers.group_by{|x| x.name[0,1]}
       end
       respond_to do |format|
         format.html {

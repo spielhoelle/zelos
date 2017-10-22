@@ -8,32 +8,25 @@
           %label.label-icon{:for => "search"}
             %i.material-icons search
 
-  %table.highlight
-    %thead
-      %tr
-        %th.hide-on-med-and-down Name
-        %th.hide-on-med-and-down Address
-        %th.hide-on-med-and-down Company
-        %th.hide-on-med-and-down Invoices
 
-    %tbody
-      - @grouped_customers.each do |customer|
-        %tr
-          %td.z-depth-1-half.z-index-2.sticky.grey.darken-3{colspan: 5}= customer.first
-        - customer.last.each do |customer|
-          %tr.grey.darken-4
-            %td
-              = link_to edit_admin_customer_path(customer), class: "truncate" do
-                = customer.name
-            %td.hide-on-med-and-down
-              = customer.address
-            %td.hide-on-med-and-down
-              = customer.company
-            %td.hide-on-med-and-down
-              = customer.entries.count
-            %td
-              = link_to admin_customer_path(customer), :method=> :delete, class: "btn btn-floating red right ", data: {confirm: "You sure to delete this entry?"} do
+  .mb-5
+    - @grouped_customers.each do |group|
+      %ul.collection.position-relative.overflow-visible.m-0.no-border
+        %li.collection-item.sticky.z-index-2.my-1= group.first
+        - group.last.each do |customer|
+          %li.collection-item.d-flex.justify-content-space-between.align-items-center.grey.darken-4
+            = link_to edit_admin_customer_path(customer), class: "truncate" do
+              = customer.name
+
+            .actions.d-flex.align-items-center
+              %a.dropdown-button{"data-alignment": "right", "data-remote": "true", href: "#", "data-activates": "invoice_list_#{customer.id}", "data-constrainWidth": "false", "data-hover": "true"} 
+                %span.white-text.badge.m-0{ class: (customer.entries.count * 1.00 / @customer_count < 0.3) ? "" : ( customer.entries.count * 1.00 /  @customer_count < 0.6) ? "orange" : "red"}= customer.entries.count
+              = link_to admin_customer_path(customer), :method=> :delete, class: "btn btn-floating red right ml-2", data: {confirm: "You sure to delete this entry?"} do
                 %i.material-icons="delete"
+          %ul.width-auto.dropdown-content.mt-3.mr-1{id: "invoice_list_#{customer.id}"}
+            - customer.entries.each_with_index do |entry, index|
+              %li{class: customer.entries.count-1 > index ? "border-bottom" : ""}
+                = link_to entry.title, admin_entry_path(entry), class: "p-1"
 
 - else
   %h2.grey-text.text-lighten-1.center-align.mt-5

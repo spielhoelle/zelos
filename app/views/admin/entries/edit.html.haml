@@ -30,16 +30,17 @@
             = builder.hidden_field :id
             .input-field.pb-1
               - if ["new", "clone"].exclude?(action_name)
-                %i.material-icons.prefix 
-                  = link_to edit_admin_customer_path(@customer) do
-                    account_circle
-              = builder.label :name, "Customer Name", class: action_name == "edit" ? "active" : ""
-              = builder.text_field :name, class: "validate autocomplete", :required => true
+                %i.material-icons{class: @entry.customer.present? ? "prefix" : ""} 
+                  - if @entry.customer.present?
+                    = link_to edit_admin_customer_path(@customer) do
+                      account_circle
+              = builder.label :name, "Customer Name", class: @entry.customer.present? ? "active" : ""
+              = builder.text_field :name, class: "validate autocomplete", value: @entry.customer.present? ? @entry.customer.name : nil
             .input-field
-              = builder.label :address, "Customer Address", class: action_name == "edit" ? "active" : ""
+              = builder.label :address, "Customer Address", class: @entry.customer.present? ? "active" : ""
               = builder.text_area :address, class: "validate materialize-textarea"
             .input-field
-              = builder.label :company, "Company", class: action_name == "edit" ? "active" : ""
+              = builder.label :company, "Company", class: @entry.customer.present? ? "active" : ""
               = builder.text_field :company, class: "validate"
 
 
