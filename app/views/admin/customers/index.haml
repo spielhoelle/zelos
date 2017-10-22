@@ -19,11 +19,11 @@
               = customer.name
 
             .actions.d-flex.align-items-center
-              %a.dropdown-button{"data-alignment": "right", "data-remote": "true", href: "#", "data-activates": "invoice_list_#{customer.id}", "data-constrainWidth": "false", "data-hover": "true"} 
+              %a.dropdown-button{"data-alignment": "right", "data-remote": "true", href: "#", "data-activates": "invoice_list_#{customer.id}", "data-constrainWidth": "false"} 
                 %span.white-text.badge.m-0{ class: (customer.entries.count * 1.00 / @customer_count < 0.3) ? "" : ( customer.entries.count * 1.00 /  @customer_count < 0.6) ? "orange" : "red"}= customer.entries.count
               = link_to admin_customer_path(customer), :method=> :delete, class: "btn btn-floating red right ml-2", data: {confirm: "You sure to delete this entry?"} do
                 %i.material-icons="delete"
-          %ul.width-auto.dropdown-content.mt-3.mr-1{id: "invoice_list_#{customer.id}"}
+          %ul.width-auto.dropdown-content.mr-1{id: "invoice_list_#{customer.id}"}
             - customer.entries.each_with_index do |entry, index|
               %li{class: customer.entries.count-1 > index ? "border-bottom" : ""}
                 = link_to entry.title, admin_entry_path(entry), class: "p-1"
