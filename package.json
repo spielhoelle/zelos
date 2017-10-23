@@ -31,7 +31,7 @@
     "eslint-plugin-react": "^7.2.0",
     "fontfaceobserver": "^1.7.1",
     "picturefill": "^3.0.2",
-    "smoothscroll": "^0.2.2",
+    "smoothscroll": "^0.2.2"
   },
   "engines": {
     "node": ">=4.0"

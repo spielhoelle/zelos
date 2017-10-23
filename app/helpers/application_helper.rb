@@ -23,4 +23,8 @@ module ApplicationHelper
     Message.all.count
   end
 
+  def money_helper(number)
+    number_to_currency(number, locale: :de,  unit: "€", separator: ",", delimiter: ".", format: "%n %u")
+  end
+
 end

@@ -18,8 +18,9 @@ module Admin
         respond_to do |format|
           if @setting.save
             @setting_update = [@setting.var, @setting.value]
-            # flash[:notice] = 'Setting has been created successfully.'
-            format.html { redirect_to categories_url }
+            #flash[:notice] = 'Setting has been created successfully.'
+            flash.now[:notice] = 'Setting has been created successfully.'
+            format.html 
             format.js
           else
             render 'edit'

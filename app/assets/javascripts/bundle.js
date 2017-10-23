@@ -282,7 +282,6 @@ $(document).on('turbolinks:load', function () {
             limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
             onAutocomplete: function onAutocomplete(val) {
               if ($('body').hasClass('customers-index')) {
-                console.log("fsdf");
                 $('form#search-form').submit();
               }
               var id = $('#entry_customer_attributes_id');
