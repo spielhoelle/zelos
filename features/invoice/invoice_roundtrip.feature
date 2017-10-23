@@ -19,8 +19,6 @@ Feature: When I search for a Invoice I should see a autocomplete list
       And there is a customer with the name "Weirdboy1" and the address "Teufelsstr. 1" and the company "Paloma, Pinky & the Brain"
       And there is a entry with the title "Weirdstufff1" and the delivery_date "2016-02-03 08:00:00 +0200"
 
-
-
     When I go to the admin invoice page
     Then I should see the element "input#search"
     When I fill in "search" with "Invoice"
@@ -37,15 +35,14 @@ Feature: When I search for a Invoice I should see a autocomplete list
     And the "entry[customer_attributes][name]" field should contain "Customer2"
     And the "entry[customer_attributes][address]" field should contain "Kunzestr. 1"
     And the "entry[customer_attributes][company]" field should contain "Kilback, Pacocha and Dicki"
-    And I wait for the page to load
+
     When I hit on the "account_circle" in the ".material-icons.prefix"
     Then I should be on the edit admin customer page for the customer with the name "Customer2"
     And the "customer[name]" field should contain "Customer2"
     And the "customer[address]" field should contain "Kunzestr. 1"
     And the "customer[company]" field should contain "Kilback, Pacocha and Dicki"
 
-    Then show me the page
-    Then I should see "1234.56 €" in the HTML
-    Then I should see "3202.39 €" in the HTML
-    Then I should see "4436.95 € total" in the HTML
+    Then I should see "1.234,56 €" in the HTML
+    Then I should see "3.202,39 €" in the HTML
+    Then I should see "4.436,95 € total" in the HTML
   
