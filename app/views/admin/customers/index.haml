@@ -14,19 +14,25 @@
       %ul.collection.position-relative.overflow-visible.m-0.no-border
         %li.collection-item.sticky.z-index-2.my-1= group.first
         - group.last.each do |customer|
-          %li.collection-item.d-flex.justify-content-space-between.align-items-center.grey.darken-4
-            = link_to edit_admin_customer_path(customer), class: "truncate" do
-              = customer.name
+          %li.collection-item.avatar.grey.darken-4
 
-            .actions.d-flex.align-items-center
-              %a.dropdown-button{"data-alignment": "right", "data-remote": "true", href: "#", "data-activates": "invoice_list_#{customer.id}", "data-constrainWidth": "false"} 
-                %span.white-text.badge.m-0{ class: (customer.entries.count * 1.00 / @customer_count < 0.3) ? "" : ( customer.entries.count * 1.00 /  @customer_count < 0.6) ? "orange" : "red"}= customer.entries.count
+            %a.dropdown-button.white-text{"data-alignment": "right", "data-remote": "true", href: "#", "data-activates": "invoice_list_#{customer.id}", "data-constrainWidth": "false"} 
+              .btn-floating.circle.btn{ class: (customer.entries.count * 1.00 / @customer_count < 0.3) ? "" : ( customer.entries.count * 1.00 /  @customer_count < 0.6) ? "orange" : "red"}
+                = customer.entries.count
+
+            = link_to edit_admin_customer_path(customer), class: "truncate title" do
+              = customer.name
+            =money_helper(customer.entries.collect{ |x|  x.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+) }.inject(0, :+))
+            .secondary-content.actions.d-flex.align-items-center
               = link_to admin_customer_path(customer), :method=> :delete, class: "btn btn-floating red right ml-2", data: {confirm: "You sure to delete this entry?"} do
                 %i.material-icons="delete"
-          %ul.width-auto.dropdown-content.mr-1{id: "invoice_list_#{customer.id}"}
-            - customer.entries.each_with_index do |entry, index|
-              %li{class: customer.entries.count-1 > index ? "border-bottom" : ""}
-                = link_to entry.title, admin_entry_path(entry), class: "p-1"
+
+              %ul.dropdown-content{id: "invoice_list_#{customer.id}"}
+                - customer.entries.each_with_index do |entry, index|
+                  %li{class: customer.entries.count-1 > index ? "border-bottom" : ""}
+                    = link_to admin_entry_path(entry), class: "" do
+                      = entry.title
+                      %small=money_helper( entry.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+) )
 
 - else
   %h2.grey-text.text-lighten-1.center-align.mt-5
