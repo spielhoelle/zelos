@@ -1,6 +1,7 @@
 language: ruby
 cache: bundler
-
+addons:
+  firefox: "latest"
 rvm:
  - 2.2
 env:
