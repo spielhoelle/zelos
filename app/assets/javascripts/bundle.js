@@ -146,22 +146,9 @@ var options = [{ selector: ".scrollfire1", offset: 100, callback: function callb
 $(function () {
   Materialize.scrollFire(options);
 });
-//var options = [{ selector:".scrollfire2", offset: 100, callback: function(e){
-//console.log(e)
-//$(".scrollfire2 > *").addClass('visible')
-//}}];
-//$(function(){Materialize.scrollFire(options)})
 function fadeIn(el) {
-  console.log(el);
   el.children().addClass('visible');
 }
-
-//var options = [
-//{selector: '#staggered-test', offset: 50, callback: function(el) { Materialize.toast("This is our ScrollFire Demo!", 1500 ); } },
-//{selector: '#staggered-test', offset: 205, callback: function(el) { Materialize.toast("Please continue scrolling!", 1500 ); } },
-//{selector: '#staggered-test', offset: 400, callback: function(el) { Materialize.showStaggeredList($(el)); } },
-//{selector: '#image-test', offset: 500, callback: function(el) { Materialize.fadeInImage($(el)); } } ];
-//Materialize.scrollFire(options);
 
 /***/ }),
 /* 4 */
@@ -320,7 +307,6 @@ $(document).on('turbolinks:load', function () {
             result[e.title] = null;
             address_result[e.title] = [e.title, e.id];
           });
-          console.log(result);
           $('.autocomplete').autocomplete({
             data: result,
             limit: 20, // The max amount of results that can be shown at once. Default: Infinity.

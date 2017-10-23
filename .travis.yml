@@ -1,0 +1,17 @@
+language: ruby
+cache: bundler
+
+rvm:
+ - 2.2
+env:
+  - DB=mysql
+services:
+  - mysql
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - cp config/secrets.travis.yml config/secrets.yml
+  - mysql -e 'create database strano_test'
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - RAILS_ENV=test bundle exec rake cucumber
