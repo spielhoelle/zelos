@@ -7,6 +7,9 @@
             %i.material-icons.white-text chevron_left
           %h6.d-flex.align-items-center.truncate.ml-1
             %span.truncate= @entry.title
+        -elsif action_name == "new"
+          %h6.d-flex.align-items-center.truncate.ml-1
+            New Invoice
         - if action_name == "index"
           - this_year_amount = @this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)
           = "#{this_year_amount}€/y"
@@ -19,6 +22,9 @@
             %i.material-icons.white-text chevron_left
           %h6.d-flex.align-items-center.truncate.ml-1
             %span.truncate= @customer.name
+        -elsif action_name == "new"
+          %h6.d-flex.align-items-center.truncate.ml-1
+            New Customer
         - elsif action_name == "index"
           Customers
 
@@ -29,14 +35,15 @@
 
       %ul.right.hide-on-med-and-down.d-flex.justify-content-end.flex-grow
         - if user_signed_in?
-          %li
-            = link_to root_path, class: "teal-text" do
-              Zelos
+          - if !current_page?(root_path)
+            %li
+              = link_to root_path, class: "teal-text" do
+                Zelos
           %li 
             = link_to admin_entries_path, class: (controller_name == "entries") ? "grey darken-4" : "" do
               = "Invoices"
           %li 
-            = link_to admin_customers_path, class: current_page?(admin_customers_path) || current_page?(admin_customers_path) ? "grey darken-4" : "" do
+            = link_to admin_customers_path, class: (controller_name == "customers") ? "grey darken-4" : "" do
               = "Customers"
           %li
             = link_to admin_settings_path, class: current_page?(admin_settings_path) || current_page?(admin_settings_path) ? "grey darken-4" : "" do

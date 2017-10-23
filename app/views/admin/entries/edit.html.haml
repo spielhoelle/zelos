@@ -116,7 +116,7 @@
                   = f.number_field :discount, class: "validate"
               .col.s6.m3.push-m7.text-right
                 %h4 
-                  %small= "Total: #{@entry.items.collect{|i| (i.price * i.count)}.reduce(0, :+) }€"
+                  %small= "Total: #{money_helper(@entry.items.collect{|i| (i.price * i.count)}.reduce(0, :+))}"
           .col.s6
             = f.add_nested_fields_link :items, class: "btn-floating waves-effect waves-light" do
               %i.material-icons add
