@@ -17,7 +17,7 @@
           %li.collection-item.avatar.grey.darken-4
 
             %a.dropdown-button.white-text{"data-alignment": "right", "data-remote": "true", href: "#", "data-activates": "invoice_list_#{customer.id}", "data-constrainWidth": "false"} 
-              .btn-floating.circle.btn{ class: (customer.entries.count * 1.00 / @customer_count < 0.3) ? "" : ( customer.entries.count * 1.00 /  @customer_count < 0.6) ? "orange" : "red"}
+              .btn-floating.circle.btn{ style: "background-color: rgba(39,174,94, #{( customer.entries.count * 1.00 / @customer_count  ).round(2)})"}
                 = customer.entries.count
 
             = link_to edit_admin_customer_path(customer), class: "truncate title" do
@@ -30,7 +30,7 @@
               %ul.dropdown-content{id: "invoice_list_#{customer.id}"}
                 - customer.entries.each_with_index do |entry, index|
                   %li{class: customer.entries.count-1 > index ? "border-bottom" : ""}
-                    = link_to admin_entry_path(entry), class: "" do
+                    = link_to edit_admin_entry_path(entry), class: "" do
                       = entry.title
                       %small=money_helper( entry.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+) )
 

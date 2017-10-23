@@ -2,7 +2,7 @@
   .nav-wrapper
     = form_tag admin_entries_path , :method => "get", id: "search-form" do
       .input-field
-        = search_field_tag :search, params[:search], class: "autocomplete validate",  :required => true
+        = text_field_tag :search, params[:search], class: "autocomplete", placeholder: "Search invoice name", :type => "search", :autofocus => true
 
         %label.width-auto.label-icon{:for => "search"}
           %i.material-icons search
@@ -30,7 +30,7 @@
               = entry.title
           %td.hide-on-med-and-down
             - if entry.customer.present?
-              = link_to edit_admin_entry_path(entry), class: "customer--name truncate", "tabindex": "-1" do
+              = link_to edit_admin_customer_path(entry.customer), class: "customer--name truncate", "tabindex": "-1" do
                 = entry.customer.name
             - else
               %span.red-text no customer set

@@ -33,13 +33,20 @@
             %h5
               ="Invoices"
               %strong.right= "#{money_helper(@total_last_year)} total"
-          - @customer.entries.each do |entry|
-            %li.collection-item
-              %span
-                = link_to edit_admin_entry_path(entry), class: "" do
-                  = entry.title
-              %span.right
-                = money_helper(entry.items.map{|i| (i.price * i.count).to_s.to_f}.inject(0, :+))
+          - if @customer.entries.any?
+
+            - @customer.entries.each do |entry|
+              %li.collection-item
+                %span
+                  = link_to edit_admin_entry_path(entry), class: "" do
+                    = entry.title
+                %span.right
+                  = money_helper(entry.items.map{|i| (i.price * i.count).to_s.to_f}.inject(0, :+))
+          - else
+            %h2.grey-text.text-lighten-1.center-align.my-5
+              %div
+                %i.material-icons.large.grey-text.text-lighten-1 child_care
+              Nothing here
           -#%li.collection-footer
             -#= "#{@total_last_year} € total"
         -#%h4 Invoices from this customer
