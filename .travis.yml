@@ -2,6 +2,11 @@ language: ruby
 cache: bundler
 addons:
   firefox: "latest"
+  apt:
+  sources:
+    - google-chrome
+  packages:
+    - google-chrome-stable
 rvm:
  - 2.2
 env:
@@ -9,9 +14,17 @@ env:
 services:
   - mysql
 before_script:
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - sudo apt-get update
+  - sudo apt-get install -y libappindicator1 fonts-liberation
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome*.deb
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
   - cp config/database.travis.yml config/database.yml
   - cp config/secrets.travis.yml config/secrets.yml
-  - mysql -e 'create database strano_test'
+  - mysql -e 'create database test'
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
