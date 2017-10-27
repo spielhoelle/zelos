@@ -26,7 +26,10 @@ before_script:
   - cp config/database.travis.yml config/database.yml
   - cp config/secrets.travis.yml config/secrets.yml
   - mysql -e 'create database test'
-script:
+before_install:
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
+script: 
+  - phantomjs testrunner.js
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
   - RAILS_ENV=test bundle exec rake cucumber
