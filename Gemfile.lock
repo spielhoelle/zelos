@@ -461,7 +461,7 @@ DEPENDENCIES
   rspec_junit_formatter
   sass-rails (~> 5.0)
   seed_dump
-  selenium-webdriver (>= 3.3)
+  selenium-webdriver
   shoulda-matchers (~> 3.1)
   simplecov
   spreewald (~> 1.5.2)

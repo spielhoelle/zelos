@@ -34,6 +34,9 @@
               ="Invoices"
               %strong.right= "#{money_helper(@total_last_year)} total"
           - if @customer.entries.any?
+            .py-1
+              = pie_chart @customer.entries.collect { |x| [x.title, get_items_total(x)] }, legend: false, donut: true
+
 
             - @customer.entries.each do |entry|
               %li.collection-item
