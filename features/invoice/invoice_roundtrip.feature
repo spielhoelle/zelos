@@ -1,5 +1,4 @@
 Feature: When I search for a Invoice I should see a autocomplete list
-  @javascript
   Scenario: Type in search field and list matches
     Given I am signed in
       And there is a setting_name
@@ -20,29 +19,28 @@ Feature: When I search for a Invoice I should see a autocomplete list
       And there is a entry with the title "Weirdstufff1" and the delivery_date "2016-02-03 08:00:00 +0200"
 
     When I go to the admin invoice page
-    Then I should see the element "input#search"
+      Then I should see the element "input#search"
+
     When I fill in "search" with "Invoice"
-    Then I should see in this order:
-      | Invoice3 |
-      | Invoice2 |
-      | Invoice1 |
-    Then I should not see "Weirdstufff1" within ".dropdown-content"
+      Then I should see in this order:
+        | Invoice3 |
+        | Invoice2 |
+        | Invoice1 |
+      And I should not see "Weirdstufff1" within ".dropdown-content"
 
     When I hit on the "Invoice2" in the ".dropdown-content li"
-    And I wait for the page to load
- 
-    Then I should be on the edit admin entry page for the entry with the title "Invoice2"
-    And the "entry[customer_attributes][name]" field should contain "Customer2"
-    And the "entry[customer_attributes][address]" field should contain "Kunzestr. 1"
-    And the "entry[customer_attributes][company]" field should contain "Kilback, Pacocha and Dicki"
+      Then I should be on the edit admin entry page for the entry with the title "Invoice2"
+      And the "entry[customer_attributes][name]" field should contain "Customer2"
+      And the "entry[customer_attributes][address]" field should contain "Kunzestr. 1"
+      And the "entry[customer_attributes][company]" field should contain "Kilback, Pacocha and Dicki"
 
     When I hit on the "account_circle" in the ".material-icons.prefix"
-    Then I should be on the edit admin customer page for the customer with the name "Customer2"
-    And the "customer[name]" field should contain "Customer2"
-    And the "customer[address]" field should contain "Kunzestr. 1"
-    And the "customer[company]" field should contain "Kilback, Pacocha and Dicki"
+      Then I should be on the edit admin customer page for the customer with the name "Customer2"
+      And the "customer[name]" field should contain "Customer2"
+      And the "customer[address]" field should contain "Kunzestr. 1"
+      And the "customer[company]" field should contain "Kilback, Pacocha and Dicki"
 
-    Then I should see "1.234,56 €" in the HTML
-    Then I should see "3.202,39 €" in the HTML
-    Then I should see "4.436,95 € total" in the HTML
+      And I should see "1.234,56 €" in the HTML
+      And I should see "3.202,39 €" in the HTML
+      And I should see "4.436,95 € total" in the HTML
   

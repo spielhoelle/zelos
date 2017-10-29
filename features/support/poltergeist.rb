@@ -1,9 +1,9 @@
-# Contents of this file under shared license
 require 'capybara/poltergeist'
 
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app,
+    timeout: 15,
     inspector: true,
     js_errors: false,
     port: 44678 + ENV['TEST_ENV_NUMBER'].to_i,

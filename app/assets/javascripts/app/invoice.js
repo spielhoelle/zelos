@@ -106,7 +106,6 @@ $(document).on('turbolinks:load', function () {
             result[e.title] = null
             address_result[e.title] = [e.title, e.id]
           })
-          console.log(result)
           $('.autocomplete').autocomplete({
             data: result,
             limit: 20, // The max amount of results that can be shown at once. Default: Infinity.

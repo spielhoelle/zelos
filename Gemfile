@@ -12,14 +12,15 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'mysql2'
+
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.4'
   gem 'rspec-mocks'
   gem "factory_girl_rails", "~> 4.0"
   gem 'rspec-collection_matchers'
   gem 'ffaker'  
+  gem 'selenium-webdriver'
   gem 'pry'
   gem 'pry-nav'
   gem 'pry-rails'
@@ -38,7 +39,6 @@ group :test do
   gem 'timecop'
   gem 'capybara'
   gem 'poltergeist'
-  gem 'selenium-webdriver',' >= 3.3'
   gem 'nokogiri'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'rspec_candy'
