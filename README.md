@@ -1,5 +1,8 @@
 # Zelos invoice - die Personifikation des eifrigen Strebens
 [![Build Status](https://travis-ci.org/spielhoelle/zelos.svg?branch=feature%2Ftravis)](https://travis-ci.org/spielhoelle/zelos)
+[![Maintainability](https://api.codeclimate.com/v1/badges/48c588790d6b50346443/maintainability)](https://codeclimate.com/github/spielhoelle/zelos/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/48c588790d6b50346443/test_coverage)](https://codeclimate.com/github/spielhoelle/zelos/test_coverage)
+
 Zelos is a **open-source** invoice app for **software engineers** who want control over their generated PDFs, have a nice overview and see beautiful **graphical charts**. It shows the  yearly income, keeps track of **customers** and don't mix things up like I did before when using proprietary software. Experienced developers can continue on the project and customize it to their own needs.
 
 ![Zelos invoice dashboard](/app/assets/images/screen1.jpg?raw=true "Zelos invoice dashboard")
