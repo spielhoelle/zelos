@@ -96,9 +96,16 @@
               .input-field.col.m7.s12
                 = ff.label "Activity", class: "active"
                 = ff.text_field :name, :required => true, class: "validate"
-              .input-field.col.s5.m2
-                = ff.label "Count", class: "active" 
-                = ff.number_field :count, step: 1
+              .col.s5.m2.inline
+                = ff.object.count
+                .row
+                  .col.s6.input-field
+                    = ff.label "Hour", class: "active" 
+                    = ff.number_field :count_hours
+                    = ff.number_field :count_mins
+                  .col.s6.input-field
+                    = ff.label "Min", class: "active" 
+                    = ff.select :count_mins, options_for_select((0..60), ff.object.count_mins)
               .input-field.col.s5.m2
                 = ff.label "Price",class: "active" 
                 = ff.number_field :price, step: 0.01, :required => true, class: "validate"
@@ -116,7 +123,7 @@
                   = f.number_field :discount, class: "validate"
               .col.s6.m3.push-m7.text-right
                 %h4 
-                  %small= "Total: #{money_helper(@entry.items.collect{|i| (i.price * i.count)}.reduce(0, :+))}"
+                  %small= "Total: #{money_helper(@entry.items.collect{|i| (i.price * ( i.count / 60.00))}.reduce(0, :+))}"
           .col.s6
             = f.add_nested_fields_link :items, class: "btn-floating waves-effect waves-light" do
               %i.material-icons add

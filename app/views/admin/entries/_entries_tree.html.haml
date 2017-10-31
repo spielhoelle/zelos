@@ -38,7 +38,7 @@
           %td.hide-on-med-and-down= entry.delivery_date.strftime("%d.%m.%Y")
           %td.no-wrap{:style => "position: relative; padding-right: 60px"}
             - if !entry.is_offer?
-              = money_helper(entry.items.collect{|i| i.price * i.count}.map{|i| i.to_s.to_f}.inject(0, :+))
+              = money_helper(entry.items.collect{|i| i.price * ( i.count / 60)}.map{|i| i.to_s.to_f}.inject(0, :+))
             .fixed-action-btn.horizontal{:style => "position: absolute; right: 10px; top: 7.5px"}
               = link_to edit_admin_entry_path(entry), class: "btn-floating" , "tabindex": "-1" do                
                 %i.material-icons.large more_vert
