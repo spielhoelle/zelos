@@ -1,22 +1,29 @@
 %main.container.full-width
   .row
     .col.s12
-      %h2.mt-0
-        = invoice.is_offer? ? t("offer") : t("invoice")
-        -#- if @request == 'html'
-          -#= image_tag('logo.png', id: "logo", class: "full-width")
-        -#-else
-          -#%img{src: "file://#{Rails.root}/app/assets/images/logo.png", id: "logo", class: "full-width"}
+      .d-flex
+        .flex-grow
+          %h2.mt-0
+            = invoice.is_offer? ? t("offer") : t("invoice")
+        %div
+
+        
+      -#- if @request == 'html'
+        -#= image_tag('logo.png', id: "logo", class: "full-width")
+      -#-else
+        -#%img{src: "file://#{Rails.root}/app/assets/images/logo.png", id: "logo", class: "full-width"}
 
       .row
-        .col.s7
+        .col.s5
           %h5.m-0="#{t("to")} #{invoice.customer.name}"
           %ul.m-0
             %li.collection-item.condensed_simple_format
               = simple_format(invoice.customer.company)
               = simple_format(invoice.customer.address)
 
-        .col.s5
+        .col.s7
+          .left.pr-1
+
           %h5.m-0= Setting["name"]
           %ul.m-0
             %li.collection-item
@@ -31,8 +38,9 @@
               -#= "Steuernummer: #{Setting["tax_id"]}"
             %li.collection-item
               = "#{t('nr')} #{invoice.invoice_number}"
-            %li.collection-item
-              = "#{t('date')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
+            - if invoice.invoice_date.strftime("%d.%m.%Y") != invoice.delivery_date.strftime("%d.%m.%Y")
+              %li.collection-item
+                = "#{t('date')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
             %li.collection-item
               = "#{t('del_date')} #{invoice.delivery_date.strftime("%d.%m.%Y")}"
 
@@ -84,7 +92,9 @@
             -#Ich bin nach §19 UStG als Kleinunternehmer von der Umsatzsteuer befreit.
 %footer
   .row
-    .col.s7.no-padding
+    .col.s8.no-padding
+      .left.mr-2
+        = raw( qrcode )
       - if invoice.is_offer?
         = t('questions')
         %br
@@ -98,6 +108,5 @@
         = Setting["iban"].gsub(/\s+/, "")
         %br
         = Setting["bic"]
-
-    .col.s5.text-right.no-padding
+    .col.s4.text-right.no-padding
       %h4=t('thanks')
