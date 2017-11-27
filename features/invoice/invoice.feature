@@ -4,9 +4,12 @@ Feature: There should be invoices visible in the admin entries page
     Given I am signed in
       And there is a setting_name
       And there is a setting_website
+
+      And there is a entry with the title "Invoice0" and the delivery_date "2016-01-03 08:00:00 +0200"
       
       And there is a customer with the name "Customer1"
-      And there is a entry with the title "Invoice1" and the delivery_date "2016-01-03 08:00:00 +0200"
+      And there is a entry with the title "Invoice1" and the status "paid" and the delivery_date "2017-01-03 08:00:00 +0200" and the customer above
+      And there is a item with the price "343.56" and with the count "40" with the entry above
 
       And there is a customer with the name "Customer2"
       And there is a entry with the title "Invoice2" and the status "paid" and the delivery_date "2017-01-02 08:00:00 +0200" and the customer above
@@ -31,13 +34,15 @@ Feature: There should be invoices visible in the admin entries page
       """
       | Type         | Title                 | Delivery date | Total        |
       | 2017 |
+      | * Invoice1 * | * Customer1 *         | 03.01.2017    | 229,04 € *   |
       | * Invoice2 * | * Customer2 *         | 02.01.2017    | 1.234,56 € * |
       | 2016 |
-      | * Invoice4 * | * Customer4 *         | 23.06.2016    | 2.554,55 € * |
-      | * Invoice1 * | * no customer set *   | 03.01.2016    | 0,00 € *     |
+      | * Invoice4 * | * Customer4 *         | 23.06.2016    | 3.804,03 € * |
+      | * Invoice0 * | * no customer set *   | 03.01.2016    | 0,00 € *     |
       | 2013 |
-      | * Invoice3 * | * Customer3 *         | 08.12.2013    | 321,03 € *   |
+      | * Invoice3 * | * Customer3 *         | 08.12.2013    | 561,26  € *  |
       """
-      And I should see "74074€/y ~7407€/m" within ".navbar-fixed"
+
+      And I should see "1464€/y ~133€/m" within ".navbar-fixed"
 
 
