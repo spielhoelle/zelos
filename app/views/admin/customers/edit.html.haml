@@ -44,7 +44,7 @@
                   = link_to edit_admin_entry_path(entry), class: "" do
                     = entry.title
                 %span.right
-                  = money_helper(entry.items.map{|i| (i.price * i.count).to_s.to_f}.inject(0, :+))
+                  = money_helper(get_items_total(entry))
           - else
             %h2.grey-text.text-lighten-1.center-align.my-5
               %div
