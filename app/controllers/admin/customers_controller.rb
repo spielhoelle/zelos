@@ -1,5 +1,6 @@
 module Admin
   class CustomersController < ApplicationController
+    include EntriesHelper
 
     before_action :authenticate_user!
 
@@ -30,7 +31,7 @@ module Admin
     def edit
       @customer = Customer.find(params[:id])
       @title = "edit #{@customer.name} | Zelos"
-      @total_last_year = @customer.entries.where.not("is_offer", true).collect{ |x|  x.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+) }.inject(0, :+)
+      @total_last_year = @customer.entries.where.not("is_offer", true).collect{ |x|  get_items_total(x)}.inject(0, :+)
     end
     
     def create

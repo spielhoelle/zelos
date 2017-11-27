@@ -88,6 +88,7 @@ __webpack_require__(5);
 $(document).on('turbolinks:load', function () {
   Waves.displayEffect(); // Initialize buttons wave effects
   $(".button-collapse").sideNav(); // Initialize collapse button
+  $('select').material_select();
 });
 
 /***/ }),
