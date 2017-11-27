@@ -12,7 +12,6 @@ Feature: I change the values of the invoice and see the expected result
 
     When I go to the edit admin entry page for that entry
 
-    Then show me the page
       Then the "entry[items_attributes][0][name]" field should contain "Modern IT slavery"
       And the "entry[items_attributes][0][count_hours]" field should contain "1"
       #And the "entry[items_attributes][0][count_mins]" field should contain "0"

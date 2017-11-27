@@ -15,8 +15,6 @@ Feature: When I search for a Invoice I should see a autocomplete list
 
       When I go to the edit admin customer page for that customer
 
-      Then show me the page
-
       And the "customer[name]" field should contain "Weirdboy1"
       And the "customer[company]" field should contain "Paloma, Pinky & the Brain"
       And the "customer[address]" field should contain "Teufelsstr. 1"
