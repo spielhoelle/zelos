@@ -18,9 +18,7 @@ Zelos is a **open-source** invoice app for **software engineers** who want contr
 ## Development
 `bundle exec rails server`
 
-`gulp bs` start browsersync and watch sass and html
-
-`npm start` watch javascript with webpack
+`npm start` start gulp browsersync on `localhost:8000` watch javascript with webpack
 
 ### Time-zone support
 Chartkick together with groupdate requires time-zone support

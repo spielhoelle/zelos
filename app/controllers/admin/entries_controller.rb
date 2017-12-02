@@ -1,5 +1,6 @@
 module Admin
   class EntriesController < ApplicationController
+    include EntriesHelper
     before_action :authenticate_user!
 
     def index
@@ -11,7 +12,7 @@ module Admin
       @entries = ordered_entries.group_by { |u| u.delivery_date.beginning_of_year }
 
       @this_year =  Entry.visible.where("delivery_date >= ?", Time.zone.now.beginning_of_year)
-      @title = "#{@this_year.collect { |x| x.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+)}.reduce(0, :+).to_s.to_f.round(2)} € this year"
+      @title = "#{@this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)} € this year"
       @chart_lastyear = @this_year.where("customer_id IS NOT NULL").collect{ |e| [e.customer.company, e.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+)] }.sort {|a,b| a[1] <=> b[1]}.reverse
       @data = @this_year.where("customer_id IS NOT NULL").order("delivery_date desc").map do |value|
         {name: value.customer.name, 

@@ -43,6 +43,6 @@ Feature: There should be invoices visible in the admin entries page
       | * Invoice3 * | * Customer3 *         | 08.12.2013    | 561,26  € *  |
       """
 
-      And I should see "1464€/y ~133€/m" within ".navbar-fixed"
+      And I should see "1464€/y ~122€/m" within ".navbar-fixed"
 
 
