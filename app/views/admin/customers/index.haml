@@ -22,7 +22,7 @@
 
             = link_to edit_admin_customer_path(customer), class: "truncate title" do
               = customer.name
-            =money_helper(customer.entries.collect{ |x|  x.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+) }.inject(0, :+))
+            =money_helper(customer.entries.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0))
             .secondary-content.actions.d-flex.align-items-center
               = link_to admin_customer_path(customer), :method=> :delete, class: "btn btn-floating red right ml-2", data: {confirm: "You sure to delete this entry?"} do
                 %i.material-icons="delete"
