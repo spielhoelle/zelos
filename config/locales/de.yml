@@ -23,7 +23,7 @@ de:
   hello: "Hello world"
   invoice: "Rechnung"
   offer: "Angebot"
-  item: "Tätigkeit"
+  item: "Leistung"
   count: "Stunden"
   sum: "Summe"
   total: "Gesamt"
