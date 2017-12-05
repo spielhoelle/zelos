@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904131306) do
+ActiveRecord::Schema.define(version: 20171205112703) do
 
   create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "name",       limit: 65535
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170904131306) do
     t.decimal  "price",                    precision: 10, scale: 2
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
-    t.integer  "count",                                             default: 1
+    t.integer  "count",                                             default: 0
     t.integer  "sort"
     t.index ["entry_id"], name: "index_items_on_entry_id", using: :btree
   end

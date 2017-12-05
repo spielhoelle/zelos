@@ -30,6 +30,11 @@ $(document).on('click', '.note-part', function(){
 $(document).on("fields_added.nested_form_fields", function(event, param) {
   $('.nested_entry_items').last().find('input:first').focus()
 });
+
+$(document).on("fields_added.nested_form_fields", function(event, param) {
+  $('.nested_entry_items').last().find('input:first').focus()
+});
+
 $(document).ready(function(){
   // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
   $('.modal').modal({

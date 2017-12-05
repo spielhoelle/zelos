@@ -103,7 +103,8 @@
                     = ff.number_field :count_hours
                   .col.s6.input-field
                     = ff.label "Min", class: "active" 
-                    = ff.select :count_mins, options_for_select((0..60), ff.object.count_mins)
+                    = ff.number_field :count_mins, max: 60, min: 0, placeholder: 0
+                    -#= ff.select :count_mins, options_for_select((0..60), ff.object.count_mins || 0, )
               .input-field.col.s5.m2
                 = ff.label "Price",class: "active" 
                 = ff.number_field :price, step: 0.01, :required => true, class: "validate"
@@ -115,30 +116,29 @@
 
           .col.s12
             .row.mb-0
-              .col.s6.m2.push-m7
+              .col.m7
+                = f.add_nested_fields_link :items, class: "tooltipped btn-floating waves-effect waves-light", "data-delay": 10, "data-position":"right", "data-tooltip": "Add Item" do
+                  %i.material-icons add
+              .col.s6.m2
                 .input-field
                   = f.label "discount",class: action_name == "edit" ? "active" : ""
                   = f.number_field :discount, class: "validate"
-              .col.s6.m3.push-m7.text-right
+              .col.s6.m3.text-right
                 %h4 
                   %small= "Total: #{money_helper(get_items_total( @entry ))}"
-          .col.s6
-            = f.add_nested_fields_link :items, class: "btn-floating waves-effect waves-light" do
-              %i.material-icons add
               
-          .col.s6.full-width.text-right
-            = link_to admin_entries_path, class: "btn btn-floating grey darken-3" do
-              %i.material-icons chevron_left
-            = f.button :submit, class: "pulse btn btn-floating" do
-              %i.material-icons done
+            
+      - if action_name == "edit"
 
+        .fixed-action-btn
+          = f.button :submit, class: "pulse tooltipped btn btn-floating btn-large ", "data-delay": 10, "data-position":"left", "data-tooltip": "Save" do
+            %i.material-icons done
 
-- if action_name == "edit"
-  .fixed-action-btn
-    = link_to admin_entry_download_path(@entry), target: "_blank", class: "tooltipped btn btn-floating btn-large ", "data-delay": 10, "data-position":"left", "data-tooltip": "Preview" do
-      %i.material-icons="open_in_browser"
-    %ul
-      %li
-        = link_to admin_entry_download_path(@entry, format: "pdf"), target: "_blank", class: "tooltipped btn btn-floating yellow darken-2", "data-delay": 10, "data-position":"left", "data-tooltip": "Download", "data-value": "Ich bin nach §19 UStG als Kleinunternehmer von der Umsatzsteuer befreit." do
-          %i.material-icons="play_for_work"
+          %ul
+            %li
+              = link_to admin_entry_download_path(@entry), target: "_blank", class: "tooltipped btn btn-floating", "data-delay": 10, "data-position":"left", "data-tooltip": "Preview" do
+                %i.material-icons="open_in_browser"
+            %li
+              = link_to admin_entry_download_path(@entry, format: "pdf"), target: "_blank", class: "tooltipped btn btn-floating yellow darken-2", "data-delay": 10, "data-position":"left", "data-tooltip": "Download", "data-value": "Ich bin nach §19 UStG als Kleinunternehmer von der Umsatzsteuer befreit." do
+                %i.material-icons="play_for_work"
 
