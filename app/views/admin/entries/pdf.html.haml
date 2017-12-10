@@ -38,12 +38,12 @@
               -#= "Steuernummer: #{Setting["tax_id"]}"
             %li.collection-item
               = "#{t('nr')} #{invoice.invoice_number}"
+            %li.collection-item
+              = "#{t('date')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
+
             - if invoice.invoice_date.strftime("%d.%m.%Y") != invoice.delivery_date.strftime("%d.%m.%Y")
               %li.collection-item
-                = "#{t('date')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
-            %li.collection-item
-              = "#{t('del_date')} #{invoice.delivery_date.strftime("%d.%m.%Y")}"
-
+                = "#{t('del_date')} #{invoice.delivery_date.strftime("%d.%m.%Y")}"
 
 
       .row
@@ -52,7 +52,10 @@
             %thead
               %tr
                 %th #
-                %th= t('item')
+                - if invoice.is_consultant?
+                  %th= t('consultation')
+                - else
+                  %th= t('item')
                 %th.text-right= t('count')
                 %th.text-right= t('price')
                 %th.text-right= t('sum') 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171205112703) do
+ActiveRecord::Schema.define(version: 20171210134532) do
 
   create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "name",       limit: 65535
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20171205112703) do
     t.string   "title"
     t.integer  "customer_id"
     t.text     "private_note",   limit: 65535
+    t.boolean  "is_consultant"
   end
 
   create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
