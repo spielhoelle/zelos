@@ -25,7 +25,8 @@ Feature: I change the values of the invoice and see the expected result
       #And the "entry[items_attributes][2][count_mins]" field should contain "30"
 
 
-    Then I should see "Total: 906,37 €" in the HTML
+    Then I should see "5:0 H" in the HTML
+    Then I should see "906,37 €" in the HTML
     #When I hit on the "open_in_browser" in the ".tooltipped.btn"
 
     #Then I should see "Modern" in the HTML
