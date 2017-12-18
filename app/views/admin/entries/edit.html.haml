@@ -128,9 +128,10 @@
                 .input-field
                   = f.label "discount",class: action_name == "edit" ? "active" : ""
                   = f.number_field :discount, class: "validate"
-              .col.s6.m3.text-right
-                %h4 
-                  %small= "Total: #{money_helper(get_items_total( @entry ))}"
+              .col.s6.m3.teal-text
+                Total:
+                %div= @time
+                %div= "#{money_helper(get_items_total( @entry ))}"
               
             
       - if action_name == "edit"
