@@ -17,7 +17,7 @@ module Admin
       @data = @this_year.where("customer_id IS NOT NULL").order("delivery_date desc").map do |value|
         {name: value.customer.name, 
          data: value.items.map do |i| 
-          [value.customer.name, value.items.map{|v| (v.price * v.count).to_s.to_f.round(2)}.inject(0, :+)]
+          [value.customer.name, value.items.map{|v| (v.price * v.count/60).to_s.to_f.round(2)}.inject(0, :+)]
         end
         }
       end
@@ -46,7 +46,7 @@ module Admin
       @item = Item.new
       @customer = @entry.customer || Customer.new
       @title = "edit #{@entry.title} | Zelos"
-
+      @time = "#{ @entry.items.collect{|x| x.count}.reduce(0, :+) / 60 }:#{@entry.items.collect{|x| x.count}.reduce(0, :+) % 60} H"
     end
 
     def clone
