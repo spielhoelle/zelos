@@ -1,4 +1,6 @@
 # Zelos invoice - die Personifikation des eifrigen Strebens
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/spielhoelle/zelos.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/spielhoelle/zelos.svg?branch=feature%2Ftravis)](https://travis-ci.org/spielhoelle/zelos)
 [![Maintainability](https://api.codeclimate.com/v1/badges/48c588790d6b50346443/maintainability)](https://codeclimate.com/github/spielhoelle/zelos/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/48c588790d6b50346443/test_coverage)](https://codeclimate.com/github/spielhoelle/zelos/test_coverage)
