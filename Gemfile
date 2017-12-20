@@ -93,4 +93,4 @@ gem 'whenever', :require => false
 gem 'acme-client', require: false
 
 gem 'rqrcode' 
-
+gem 'rollbar'
