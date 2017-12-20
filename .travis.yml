@@ -1,40 +1,24 @@
 language: ruby
 cache: bundler
-
 addons:
   firefox: "latest"
-
 rvm:
  - 2.2
-
 env:
-  global:
-    - CC_TEST_REPORTER_ID=c145b0c004d2066dfa14c48fd216e12accd1cb5eb1f7de40476097cc47359d3a
   - DB=mysql
-
 services:
   - mysql
-
 before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
   - cp config/database.travis.yml config/database.yml
   - cp config/secrets.travis.yml config/secrets.yml
   - mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
   - mysql -e 'create database test'
-
 before_install:
   - wget https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-linux64.tar.gz
   - mkdir geckodriver
   - tar -xzf geckodriver-v0.11.1-linux64.tar.gz -C geckodriver
   - export PATH=$PATH:$PWD/geckodriver
-
 script: 
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
   - RAILS_ENV=test bundle exec rake cucumber
-
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
