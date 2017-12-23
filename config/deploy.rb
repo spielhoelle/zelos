@@ -151,6 +151,32 @@ namespace :nginx do
   end
 end
 
+# Path of tests to be run, use array with empty string to run all tests
+set :tests, ['']
+
+namespace :deploy do
+  desc "Runs test before deploying, can't deploy unless they pass"
+  task :run_tests do
+    test_log = "log/capistrano.test.log"
+    tests = fetch(:tests)
+    tests.each do |test|
+      puts "--> Running cucumber tests, please wait ..."
+      unless system "bundle exec cucumber #{test} > #{test_log} 2>&1"
+        puts "--> Aborting deployment! One or more tests in '#{test}' failed. Results in: #{test_log}, but here are the last 100 lines"
+        #system "tail -n 100 #{test_log}"
+        exit;
+      end
+      puts "--> '#{test}' passed"
+    end
+    puts "--> All tests passed, continuing deployment"
+    system "rm #{test_log}"
+  end
+
+  # Only allow a deploy with passing tests to be deployed
+  before :deploy, "deploy:run_tests"
+
+end
+
 after 'deploy:symlink:release', 'letsencrypt:register_client'
 after 'letsencrypt:register_client', 'letsencrypt:authorize_domain'
 after 'letsencrypt:authorize_domain', 'letsencrypt:obtain_certificate'
