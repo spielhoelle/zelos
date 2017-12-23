@@ -100,19 +100,18 @@
 
               .input-field.col.m7.s12
                 = ff.label "Activity", class: "active"
-                = ff.text_field :name, :required => true, class: "validate"
+                = ff.text_field :name, :required => true, class: "validate mb-0"
               .col.s5.m2.inline
                 .row
                   .col.s6.input-field
                     = ff.label "Hour", class: "active" 
-                    = ff.number_field :count_hours
+                    = ff.number_field :count_hours, class: "validate mb-0"
                   .col.s6.input-field
                     = ff.label "Min", class: "active" 
-                    = ff.number_field :count_mins, max: 60, min: 0, placeholder: 0
-                    -#= ff.select :count_mins, options_for_select((0..60), ff.object.count_mins || 0, )
+                    = ff.number_field :count_mins, max: 60, min: 0, placeholder: 0, class: "validate mb-0"
               .input-field.col.s5.m2
                 = ff.label "Price",class: "active" 
-                = ff.number_field :price, step: 0.01, :required => true, class: "validate"
+                = ff.number_field :price, step: 0.01, :required => true, class: "validate mb-0"
               .col.s2.m1.text-right
                 .right
                   = ff.remove_nested_fields_link do
