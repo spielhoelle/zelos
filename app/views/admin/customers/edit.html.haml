@@ -39,31 +39,15 @@
 
 
             - @customer.entries.each do |entry|
-              %li.collection-item
-                %span
-                  = link_to edit_admin_entry_path(entry), class: "" do
-                    = entry.title
-                %span.right
+              %li.pl-1.pr-1.collection-item.justify-content-start.d-flex
+                %i.material-icons.mr-1{class: entry.status == "paid" ? "green-text" : "red-text"}= entry.is_offer? ? "info_outline" : "done"
+                = link_to edit_admin_entry_path(entry), class: "" do
+                  = entry.title
+                .ml-auto.no-wrap.pl-2
                   = money_helper(get_items_total(entry))
           - else
             %h2.grey-text.text-lighten-1.center-align.my-5
               %div
                 %i.material-icons.large.grey-text.text-lighten-1 child_care
               Nothing here
-          -#%li.collection-footer
-            -#= "#{@total_last_year} € total"
-        -#%h4 Invoices from this customer
-        -#%table.striped.highlight
-          -#%tbody
-            -#- @customer.entries.each do |entry|
-              -#%tr
-                -#%td
-                  -#= link_to edit_admin_entry_path(entry), class: "truncate" do
-                    -#= entry.title
-                -#%td.text-right
-                  -#= "#{entry.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+)} €"
-            -#%tr.grey.darken-2
-              -#%td
-              -#%td.text-right.white-text
-                -#= "#{@total_last_year} € total"
 
