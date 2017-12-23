@@ -1,5 +1,4 @@
 Feature: When I search for a Invoice I should see a autocomplete list
-  @javascript
   Scenario: Type in search field and list matches
     Given I am signed in
       And there is a setting_name
@@ -37,8 +36,8 @@ Feature: When I search for a Invoice I should see a autocomplete list
 
     When I hit on the "account_circle" in the ".material-icons.prefix"
       Then I should be on the edit admin customer page for the customer with the name "Customer2"
-    When I follow "Invoices" inside any ".entries_link"
+    #When I follow "Invoices" inside any ".entries_link"
 
-    When I hit on the "Invoices" in the ".entries_link"
+    #When I hit on the "Invoices" in the ".entries_link"
 
-    Then I should be on the admin invoice page
+    #Then I should be on the admin invoice page
