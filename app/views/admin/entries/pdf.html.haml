@@ -7,6 +7,28 @@
             = invoice.is_offer? ? t("offer") : t("invoice")
         %div
 
+          .left.pr-1
+
+          %h5.m-0= Setting["name"]
+          %ul.m-0
+            %li.collection-item
+              = Setting["job"]
+            %li.collection-item
+              = Setting["address"]
+            %li.collection-item
+              = link_to Setting["website"], "http://#{ Setting["website"] }", target: "_blank", class: ""
+              = " - "
+              = mail_to Setting["mail"], Setting["mail"], subject: "Rückfragen zur Rechnung: #{invoice.invoice_number}", target: "_blank", class: ""
+            -#%li.collection-item
+              -#= "Steuernummer: #{Setting["tax_id"]}"
+            %li.collection-item
+              = "#{t('nr')} #{invoice.invoice_number}"
+            %li.collection-item
+              = "#{t('date')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
+
+            - if invoice.invoice_date.strftime("%d.%m.%Y") != invoice.delivery_date.strftime("%d.%m.%Y")
+              %li.collection-item
+                = "#{t('del_date')} #{invoice.delivery_date.strftime("%d.%m.%Y")}"
         
       -#- if @request == 'html'
         -#= image_tag('logo.png', id: "logo", class: "full-width")
@@ -22,28 +44,6 @@
               = simple_format(invoice.customer.address)
 
         .col.s7
-          .left.pr-1
-
-          %h5.m-0= Setting["name"]
-          %ul.m-0
-            %li.collection-item
-              = Setting["job"]
-            %li.collection-item
-              = Setting["address"]
-            %li.collection-item
-              = link_to Setting["website"], Setting["website"], class: ""
-            %li.collection-item
-              = mail_to Setting["mail"], Setting["mail"], subject: "Rückfragen zur Rechnung: #{invoice.invoice_number}", class: ""
-            -#%li.collection-item
-              -#= "Steuernummer: #{Setting["tax_id"]}"
-            %li.collection-item
-              = "#{t('nr')} #{invoice.invoice_number}"
-            %li.collection-item
-              = "#{t('date')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
-
-            - if invoice.invoice_date.strftime("%d.%m.%Y") != invoice.delivery_date.strftime("%d.%m.%Y")
-              %li.collection-item
-                = "#{t('del_date')} #{invoice.delivery_date.strftime("%d.%m.%Y")}"
 
 
       .row
@@ -85,7 +85,7 @@
                   %h5.m-0=t('total')
                 %td.text-right
 
-                  %h5.m-0.no-wrap= number_to_currency(total/60, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
+                  %h5.m-0.no-wrap= number_to_currency(total, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
 
       - if invoice.notes !=  ""
         .notes

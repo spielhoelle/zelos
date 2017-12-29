@@ -3,6 +3,7 @@ require 'rqrcode'
 
 class InvoicePdf
   include RenderAnywhere
+  include EntriesHelper
 
   def initialize(invoice)
     @invoice = invoice
@@ -29,7 +30,7 @@ class InvoicePdf
 
   def as_html
     # for the PDF not for the preview
-    total = invoice.items.collect{|i| i.price * i.count}.map{|i| i.to_s.to_f.round(2)}.inject(0, :+)
+    total = get_items_total( invoice )
     qrcode = RQRCode::QRCode.new("bank://singlepaymentsepa?name=#{URI.escape( Setting['name'] )}&reason=Rechnung#{invoice.invoice_number}&iban=#{Setting['iban'].gsub(/\s+/, "")}&bic=#{Setting['bic'].gsub(/\s+/, "")}&amount=#{total.to_f}")
 
     qrcode = qrcode.as_svg(offset: 0, color: '000', shape_rendering: 'crispEdges', module_size: 2)
