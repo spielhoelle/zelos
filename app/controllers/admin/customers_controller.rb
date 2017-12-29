@@ -31,7 +31,7 @@ module Admin
     def edit
       @customer = Customer.find(params[:id])
       @title = "edit #{@customer.name} | Zelos"
-      @total_last_year = @customer.entries.where.not("is_offer", true).collect{ |x|  get_items_total(x)}.inject(0, :+)
+      @total_last_year = @customer.entries.visible.collect{ |x|  get_items_total(x)}.inject(0, :+)
     end
     
     def create
