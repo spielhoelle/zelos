@@ -66,8 +66,7 @@
                 %tr
                   %td= index + 1
                   %td= item.name
-                  %td.text-right= '%.2f' % ( item.count/60.00 )
-                  
+                  %td.text-right= '%.02f' % ( item.count / 60 + item.count % 60.00 / 100.00)
 
                   %td.no-wrap.text-right= number_to_currency(item.price, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
                   %td.text-right= number_to_currency(item.count/60.00 * item.price, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")             
