@@ -1,11 +1,13 @@
 module Admin
   class DownloadsController < ApplicationController
+    include EntriesHelper
     before_action :authenticate_user!
+    layout 'invoice_pdf'
     def show
       I18n.locale = Setting.language
       respond_to do |format|
         @invoice = Entry.find(params[:entry_id])
-        @total = @invoice.items.collect{|i| i.price * i.count}.map{|i| i.to_s.to_f.round(2)}.inject(0, :+)
+        @total = get_items_total( @invoice )
         @title = "#{@invoice.delivery_date.strftime("%Y%m%d")}_#{@invoice.title.gsub(" ", "_")}.pdf"
         @request = 'html'
         # for the preview not the PDF itself
