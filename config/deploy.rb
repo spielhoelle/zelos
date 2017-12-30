@@ -163,7 +163,7 @@ namespace :deploy do
       puts "--> Running cucumber tests, please wait ..."
       unless system "bundle exec cucumber #{test} > #{test_log} 2>&1"
         puts "--> Aborting deployment! One or more tests in '#{test}' failed. Results in: #{test_log}, but here are the last 100 lines"
-        #system "tail -n 100 #{test_log}"
+        system "tail -n 100 #{test_log}"
         exit;
       end
       puts "--> '#{test}' passed"
