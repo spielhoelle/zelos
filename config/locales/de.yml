@@ -36,6 +36,8 @@ de:
   to: "An "
   nr: "Rechnungsnummer: "
   date: "Rechnungsdatum: "
+  onr: "Angebotsnummer: "
+  odate: "Angebotsdatum: "
   del_date: "Lieferdatum: "
   questions: "Sollten Sie Fragen zu diesem Angebot haben, zögern Sie nicht, uns zu kontaktieren."
   thanks_for_interest: "Vielen Dank für Ihr Interesse!"

@@ -22,9 +22,15 @@
             -#%li.collection-item
               -#= "Steuernummer: #{Setting["tax_id"]}"
             %li.collection-item
-              = "#{t('nr')} #{invoice.invoice_number}"
+              -if invoice.is_offer?
+                = "#{t('onr')} #{invoice.invoice_number}"
+              -else
+                = "#{t('nr')} #{invoice.invoice_number}"
             %li.collection-item
-              = "#{t('date')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
+              -if invoice.is_offer?
+                = "#{t('odate')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
+              -else
+                = "#{t('date')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
 
             - if invoice.invoice_date.strftime("%d.%m.%Y") != invoice.delivery_date.strftime("%d.%m.%Y")
               %li.collection-item
@@ -102,7 +108,7 @@
                   %td.text-right
                     %h5.m-0.no-wrap= number_to_currency(total, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
 
-      - if invoice.is_offer? && invoice.valid_until >= Time.now
+      - if invoice.is_offer? && invoice.valid_until.present? && invoice.valid_until >= Time.now
         %div
           = t('valid_until', valid_until: invoice.valid_until.strftime("%d.%m.%Y"))
       - if invoice.notes !=  ""

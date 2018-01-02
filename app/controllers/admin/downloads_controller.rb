@@ -3,12 +3,14 @@ module Admin
     include EntriesHelper
     before_action :authenticate_user!
     layout 'invoice_pdf'
+
     def show
       I18n.locale = Setting.language
       respond_to do |format|
         @invoice = Entry.find(params[:entry_id])
         @total = get_items_total( @invoice )
-        @title = "#{@invoice.delivery_date.strftime("%Y%m%d")}_#{@invoice.title.gsub(" ", "_")}.pdf"
+        @title = title
+
         @request = 'html'
         # for the preview not the PDF itself
         code = RQRCode::QRCode.new("bank://singlepaymentsepa?name=#{URI.escape( Setting['name'] )}&reason=Rechnung#{@invoice.invoice_number}&iban=#{Setting['iban'].gsub(/\s+/, "")}&bic=#{Setting['bic'].gsub(/\s+/, "")}&amount=#{@total.to_f}")
@@ -38,11 +40,17 @@ module Admin
     end
 
     def send_invoice_pdf
-      @title = "#{@invoice.delivery_date.strftime("%Y%m%d")}_#{@invoice.title.gsub(" ", "_")}.pdf"
+      
       send_file invoice_pdf.to_pdf,
-        filename: @title,
+        filename: title,
         type: "application/pdf",
         disposition: "inline"
+    end
+
+    private
+
+    def title
+      "#{@invoice.delivery_date.strftime("%Y%m%d")}_#{@invoice.is_offer? ? t('offer') : t('invoice')}_#{@invoice.title.gsub(" ", "_")}.pdf"
     end
   end
 end
