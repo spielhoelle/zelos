@@ -29,6 +29,8 @@ en:
   sum: "Sum"
   total: "Total"
   price: "Price"
+  netto: "without taxes"
+  brutto: "with taxes"
   vat: "VAT"
   note: "Note"
   thanks: "Thanks"
