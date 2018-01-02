@@ -32,7 +32,6 @@ en:
   netto: "without taxes"
   brutto: "with taxes"
   vat: "VAT"
-  note: "Note"
   thanks: "Thanks"
   to: "To "
   nr: "Invoice number: "
@@ -45,4 +44,4 @@ en:
   delete_history: "Delete the history"
   history_warning: "This will clear the history of changes for all invoices, are you sure?"
   customer_created: "Customer has been created successfully!"
-
+  valid_until: "This offer is valid until %{valid_until}."

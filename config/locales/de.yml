@@ -32,7 +32,6 @@ de:
   vat: "Ust."
   netto: "Netto"
   brutto: "Brutto"
-  note: "Notiz"
   thanks: "Danke"
   to: "An "
   nr: "Rechnungsnummer: "
@@ -47,3 +46,4 @@ de:
   customer_created: "Customer has been created successfully!"
   customer_updated: "Customer has been updated successfully!"
   customer_destroyed: "Customer has been destroyed successfully!"
+  valid_until: "Dieses Angebot gilt bis zum %{valid_until}."

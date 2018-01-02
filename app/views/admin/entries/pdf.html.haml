@@ -102,9 +102,11 @@
                   %td.text-right
                     %h5.m-0.no-wrap= number_to_currency(total, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
 
+      - if invoice.is_offer? && invoice.valid_until >= Time.now
+        %div
+          = t('valid_until', valid_until: invoice.valid_until.strftime("%d.%m.%Y"))
       - if invoice.notes !=  ""
         .notes
-          %h5= t('note')
           = simple_format(invoice.notes)
       -#- elsif !invoice.is_offer?
         -#.notes
