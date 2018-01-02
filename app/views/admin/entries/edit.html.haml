@@ -137,13 +137,13 @@
         = f.button :submit, class: "pulse tooltipped btn btn-floating btn-large ", "data-delay": 10, "data-position":"left", "data-tooltip": "Save" do
           %i.material-icons done
 
-      - if action_name == "edit"
+        - if action_name == "edit"
 
-        %ul
-          %li
-            = link_to admin_entry_download_path(@entry), target: "_blank", class: "tooltipped btn btn-floating", "data-delay": 10, "data-position":"left", "data-tooltip": "Preview" do
-              %i.material-icons="open_in_browser"
-          %li
-            = link_to admin_entry_download_path(@entry, format: "pdf"), target: "_blank", class: "tooltipped btn btn-floating yellow darken-2", "data-delay": 10, "data-position":"left", "data-tooltip": "Download", "data-value": "Ich bin nach §19 UStG als Kleinunternehmer von der Umsatzsteuer befreit." do
-              %i.material-icons="play_for_work"
+          %ul
+            %li
+              = link_to admin_entry_download_path(@entry), target: "_blank", class: "tooltipped btn btn-floating", "data-delay": 10, "data-position":"left", "data-tooltip": "Preview" do
+                %i.material-icons="open_in_browser"
+            %li
+              = link_to admin_entry_download_path(@entry, format: "pdf"), target: "_blank", class: "tooltipped btn btn-floating yellow darken-2", "data-delay": 10, "data-position":"left", "data-tooltip": "Download", "data-value": "Ich bin nach §19 UStG als Kleinunternehmer von der Umsatzsteuer befreit." do
+                %i.material-icons="play_for_work"
 

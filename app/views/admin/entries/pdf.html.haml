@@ -97,14 +97,13 @@
 %footer
   .row
     .col.s8.no-padding
-      .left.mr-2
-        = raw( qrcode )
       - if invoice.is_offer?
         = t('questions')
         %br
         = t('thanks_for_interest')
       - else
-
+        .left.mr-2
+          = raw( qrcode )
         = t('please_transfer')
         %br
         = Setting["name"]
