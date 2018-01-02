@@ -2,6 +2,7 @@ Feature: There should be invoices visible in the admin entries page
 
   Scenario: Check invoice index view
     Given I am signed in
+      And the date is 2017-06-01 12:00
       And there is a setting_name
       And there is a setting_website
 
@@ -43,6 +44,17 @@ Feature: There should be invoices visible in the admin entries page
       | * Invoice3 * | * Customer3 *         | 08.12.2013    | 561,26  € *  |
       """
 
-      And I should see "1464€/y ~122€/m" within ".navbar-fixed"
+      Then show me the page
+      And I should see "1464€/y ~244€/m" within ".navbar-fixed"
 
 
+
+
+    # Time travel does not work?
+    
+    #When it is 1 months later
+      #Then show me the page
+      #And I should see "1464€/y ~209€/m" within ".navbar-fixed"
+
+    #When it is 6 months later
+      #Then show me the page
