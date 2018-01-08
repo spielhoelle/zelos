@@ -1,10 +1,14 @@
 - flash.each do |name, msg|
+  = puts name
   - if name == "success"
     :javascript
-      $(function(){Materialize.toast("#{msg}", 2000, 'rounded');});
-  - elsif name == "toast"
+      $(function(){Materialize.toast("#{msg}", 2000, 'rounded teal white-text');});
+  - elsif name == "error"
     :javascript
-      $(function() {Materialize.toast("#{msg}", 2000, 'rounded');});
+      $(function() {Materialize.toast("#{msg}", 2000, 'rounded red white-text');});
+  - elsif name == "alert"
+    :javascript
+      $(function() {Materialize.toast("#{msg}", 2000, 'rounded orange white-text');});
   - else
     :javascript
       $(function(){Materialize.toast("#{msg}", 2000, 'rounded');});

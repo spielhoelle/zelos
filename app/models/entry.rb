@@ -30,8 +30,8 @@ class Entry < ActiveRecord::Base
   end
 
   def sanitize
-    self.notes = self[:notes].gsub("\n", '').squeeze(' ')
-    self.private_note = self[:private_note].gsub("\n", '').squeeze(' ')
+    self.notes = self[:notes].gsub("\n", '').squeeze(' ') if self[:notes].present?
+    self.private_note = self[:private_note].gsub("\n", '').squeeze(' ') if self[:private_note].present?
   end
 
   def self.total
