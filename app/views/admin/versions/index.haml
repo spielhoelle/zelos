@@ -17,7 +17,9 @@
               - elsif version.item_type == "Customer"
                 = link_to "Customer", edit_admin_customer_path(version.item_id), target: "_blank"
               - elsif version.item_type == "Item"
-                = link_to "Item", edit_admin_entry_path(Item.find(version.item_id).entry), target: "_blank"
+                - if Item.find_by_id(version.item_id)
+                  = link_to "Item", edit_admin_entry_path(Item.find_by_id(version.item_id).entry), target: "_blank"
+
               - else
                 = version.item_type
                 = version.item_id

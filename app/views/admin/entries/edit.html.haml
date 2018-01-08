@@ -73,7 +73,7 @@
             .row.mb-0
               .col.s10
                 = f.label :notes, class: (action_name == "edit" && @entry.notes.present?) ? "active" : ""
-                = f.text_area :notes, class: "materialize-textarea validate", value: (action_name == "edit" ? @entry.notes.gsub("\n", '').squeeze(' ') : "")
+                = f.text_area :notes, class: "materialize-textarea validate", value: (( action_name == "edit" && @entry.notes.present?) ? @entry.notes.gsub("\n", '').squeeze(' ') : "")
               .col.s2
                 .row.mb-0
                   .col.p-0

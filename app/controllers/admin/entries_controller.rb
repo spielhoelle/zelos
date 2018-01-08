@@ -63,6 +63,10 @@ module Admin
       redirect_to edit_admin_entry_path(@entry)
     end
 
+    def show
+      redirect_to action: "edit"
+    end
+
     def update
       @entry = Entry.find(params[:id])
       if entry_params["customer_attributes"]["id"].present?
@@ -73,11 +77,9 @@ module Admin
         @entry.save
       end
 
-      if @entry.update_attributes(entry_params)
-        flash[:notice] = 'Entry has been saved successfully!'
-      else
-        flash[:error] = @entry.errors.full_messages.first.to_s
-      end
+      # update attribute bangs but we dont cate
+      @entry.update_attributes!(entry_params)
+      #flash[:error] = @entry.errors.full_messages.first.to_s
 
       redirect_to edit_admin_entry_path(@entry)
     end
@@ -90,7 +92,7 @@ module Admin
           @entry.customer = @customer
         end
         @entry.update_attributes(entry_params)
-        flash.now[:notice] = 'Entry has been created successfully!'
+        flash.now[:success] = 'Entry has been created successfully!'
         @entries = Entry.all
         redirect_to edit_admin_entry_path(@entry)
       else

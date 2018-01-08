@@ -1,4 +1,4 @@
-User.create email: "admin@example.com", password: "example123", password_confirmation: "example123"
+User.create email: "admin@example.com", password: "password123", password_confirmation: "password123"
 
 Customer.create!([
   {name: "Example customer", company: "Corporate", address: "Example street 91"},
