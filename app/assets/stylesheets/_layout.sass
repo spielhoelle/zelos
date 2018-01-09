@@ -146,3 +146,8 @@ $space-list: .5, 1, 2, 3, 5
 
 .ml-auto
   margin-left: auto
+.big-when-focus
+  transition: transform .1s ease
+  &:hover,
+  &:focus
+    transform: scale(1.1)
