@@ -37,6 +37,7 @@ module Admin
 
     def new
       @entry = Entry.new
+      @items = @entry.items.build
       @customer = @entry.customer || Customer.new
       render 'edit'
     end
@@ -72,14 +73,13 @@ module Admin
       if entry_params["customer_attributes"]["id"].present?
         @customer = Customer.find(entry_params["customer_attributes"]["id"])
         @entry.customer = @customer
-      else
-        @entry.customer = nil
-        @entry.save
       end
 
-      # update attribute bangs but we dont cate
-      @entry.update_attributes!(entry_params)
-      #flash[:error] = @entry.errors.full_messages.first.to_s
+      if @entry.update_attributes(entry_params)
+        flash[:notice] = 'Entry has been saved successfully!'
+      else
+        flash[:error] = @entry.errors.full_messages.first.to_s
+      end
 
       redirect_to edit_admin_entry_path(@entry)
     end

@@ -28,7 +28,7 @@
           .input-field
             %h5
               = f.label :title, class: action_name == "edit" ? "active" : ""
-            = f.text_field :title, class: "validate", :autofocus => true
+            = f.text_field :title, class: "validate", :autofocus => true, :required => true
 
           = f.fields_for :customer, @customer do |builder|
 
@@ -39,7 +39,7 @@
                   - if @entry.customer.present?
                     = link_to edit_admin_customer_path(@customer) do
                       account_circle
-              = builder.label :name, "Customer Name", class: @entry.customer.present? ? "active" : ""
+              = builder.label :name, "Customer Name", class: @entry.customer.present? ? "active" : "", :required => true
               = builder.text_field :name, class: "validate autocomplete", value: @entry.customer.present? ? @entry.customer.name : nil
             .input-field
               = builder.label :address, "Customer Address", class: @entry.customer.present? ? "active" : ""
@@ -95,7 +95,7 @@
         %h4 Items
         .row.mb-5
           .sortable
-            = f.nested_fields_for :items, wrapper_options: { class: 'm-0 no-border no-padding' } do |ff|
+            = f.nested_fields_for :items, @items, wrapper_options: { class: 'm-0 no-border no-padding' } do |ff|
               %span.hiddendiv.nested_index= ff.object.id
 
               .input-field.col.m7.s12
@@ -121,7 +121,7 @@
           .col.s12
             .row.mb-0
               .col.m7
-                = f.add_nested_fields_link :items, class: "tooltipped btn-floating waves-effect waves-light", "data-delay": 10, "data-position":"right", "data-tooltip": "Add Item" do
+                = f.add_nested_fields_link :items, class: "tooltipped btn-floating waves-effect waves-light big-when-focus", "data-delay": 10, "data-position":"right", "data-tooltip": "Add Item" do
                   %i.material-icons add
               .col.s6.m2
                 .input-field
