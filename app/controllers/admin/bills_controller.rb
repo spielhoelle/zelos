@@ -4,7 +4,8 @@ module Admin
     before_action :authenticate_user!
 
     def index
-      @bills = Bill.all
+      @bills = Bill.all.group_by { |b| b.bill_date.beginning_of_year }
+
     end
 
     def new

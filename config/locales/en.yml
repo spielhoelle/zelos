@@ -46,4 +46,8 @@ en:
   delete_history: "Delete the history"
   history_warning: "This will clear the history of changes for all invoices, are you sure?"
   customer_created: "Customer has been created successfully!"
+  customer_updated: "Customer has been updated successfully!"
+  bill_created: "created successfully!"
+  bill_updated: "updated successfully!"
+  bill_destroyed: "destroyed successfully!"
   valid_until: "This offer is valid until %{valid_until}."

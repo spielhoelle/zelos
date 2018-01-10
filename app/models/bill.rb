@@ -1,4 +1,5 @@
 class Bill < ActiveRecord::Base
+  validates :title, :price, presence: true
   has_paper_trail :ignore => [:created_at, :updated_at]
 
   has_attached_file :image,

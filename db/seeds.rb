@@ -30,5 +30,10 @@ Item.create!([
   {entry_id: Entry.last.id, name: "Plugin development", price: 800},
   {entry_id: Entry.last.id, name: "Website development", price: 500},
   {entry_id: Entry.last.id, name: "Frontend design", price: 700},
-  {entry_id: Entry.last.id, name: "Plugin development", price: 800},
+  {entry_id: Entry.last.id, name: "Plugin development", price: 800.21},
+])
+Bill.create!([
+  {title: "Buisness lunch with Michael", price: 123.45, bill_date: (Time.now - 1.month), image: open("http://placecage.com/#{rand(200..400)}/#{rand(250..300)}"),},
+  {title: "New Laptop", price: 1999.99, bill_date: (Time.now - 1.month), image: open("http://placecage.com/#{rand(200..400)}/#{rand(250..300)}"),},
+  {title: "Testdevise", price: 299.99, bill_date: (Time.now - 1.month - 1.year), image: open("http://placecage.com/#{rand(200..400)}/#{rand(250..300)}"),},
 ])

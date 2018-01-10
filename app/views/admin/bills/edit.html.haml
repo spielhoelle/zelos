@@ -9,28 +9,30 @@
       .section.row
         .col.m6.s12
 
-          .input-field
-            %h5
-              = f.label :title, class: action_name == "edit" ? "active" : ""
-            = f.text_field :title, class: "validate", :autofocus => true, :required => true
+          .row
+            .input-field.col.s12
+              = f.label :price, class: "active" 
+              = f.number_field :price, class: "validate", step: 0.01, :required => true, class: "validate mb-0"
+
+          .row
+            .input-field.col.s12.pb-1
+              = f.label :bill_date, class: "active"
+              = f.date_field :bill_date, class: "validate datepicker mb-0"
+          .row
+            .input-field.col.s12
+              %h5
+                = f.label :title, class: action_name == "edit" ? "active" : ""
+              = f.text_field :title, class: "validate", :autofocus => true, :required => true
 
 
 
         .col.m6.s12
-          .input-field
-            = f.label :price, class: "active" 
-            = f.number_field :price, class: "validate"
-          .input-field.row.mt-0.pb-1
-            .col.s6.input-field
-              = f.label :bill_date, class: "active"
-              = f.date_field :bill_date, class: "validate datepicker mb-0"
-            .col.s6.input-field
-              .form-group
-                - unless action_name == "new"
-                  = image_tag(@bill.image, class: "img-fluid")
-                %label{:for => "image"}
-                = f.file_field :image
 
+          .form-group
+            - unless action_name == "new"
+              = image_tag(@bill.image, class: "materialboxed w-100")
+            %label{:for => "image"}
+            = f.file_field :image
             
       .fixed-action-btn
         = f.button :submit, class: "pulse tooltipped btn btn-floating btn-large ", "data-delay": 10, "data-position":"left", "data-tooltip": "Save" do
