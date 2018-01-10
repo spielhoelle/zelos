@@ -1,0 +1,18 @@
+- if @bills.any?
+  .row
+    #bills_tree
+      = render "tree"
+- else
+  %h2.grey-text.text-lighten-1.center-align.mt-5
+    %div
+      %i.material-icons.large.grey-text.text-lighten-1 child_care
+    =t('all_good')
+
+
+.fixed-action-btn
+  = link_to new_admin_bill_path, class: "btn-floating waves-effect waves-light green btn-large" do
+    %i.new_button.material-icons.large add
+  %ul
+    %li
+      = link_to new_admin_bill_path(:is_offer => true), class: "btn-floating waves-effect waves-light red" do
+        %i.material-icons question_answer

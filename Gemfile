@@ -92,3 +92,4 @@ gem 'acme-client', require: false
 
 gem 'rqrcode' 
 gem 'rollbar'
+gem "paperclip", "~> 5.0.0"

@@ -45,6 +45,12 @@
           %li 
             = link_to admin_customers_path, class: "customers_link #{(controller_name == "customers") ? "grey darken-4" : "" }" do
               = "Customers"
+          %li 
+            = link_to admin_bills_path, class: "bills_link #{(controller_name == "bills") ? "grey darken-4" : "" }" do
+              = "Bills"
+          %li 
+            = link_to admin_summaries_path, class: "summaries_link #{(controller_name == "summaries") ? "grey darken-4" : "" }" do
+              = "Summaries"
           %li
             = link_to admin_settings_path, class: current_page?(admin_settings_path) || current_page?(admin_settings_path) ? "grey darken-4" : "" do
               = "Settings"
@@ -84,6 +90,12 @@
     %li 
       = link_to admin_customers_path, class: (controller_name == "customers") ? "teal" : "" do
         = "Customers"
+    %li 
+      = link_to admin_bills_path, class: "bills_link #{(controller_name == "bills") ? "grey darken-4" : "" }" do
+        = "Bills"
+    %li 
+      = link_to admin_summaries_path, class: "summaries_link #{(controller_name == "summaries") ? "grey darken-4" : "" }" do
+        = "Summaries"
     %li
       = link_to admin_settings_path, class: (controller_name == "settings") ? "teal" : "" do
         = "Settings"

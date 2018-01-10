@@ -1,0 +1,59 @@
+%nav.border-bottom
+  .nav-wrapper
+    = form_tag admin_entries_path , :method => "get", id: "search-form" do
+      .input-field
+        = text_field_tag :search, params[:search], class: "autocomplete", placeholder: "Search invoice name", :type => "search", :autofocus => true
+
+        %label.width-auto.label-icon{:for => "search"}
+          %i.material-icons search
+
+%table.highlight
+  %thead.no-border
+    %tr
+      %th.hide-on-med-and-down Type
+      %th.hide-on-med-and-down Title
+      %th.hide-on-med-and-down Customer
+      %th.hide-on-med-and-down Delivery date
+      %th.hide-on-med-and-down Total
+
+  %tbody
+    -@entries.each_with_index do |year, index|
+      %tr
+        %th.white-text.center{colspan: 7}= year[0].year
+      - year[1].each_with_index do |entry, index|
+
+        %tr.entry
+          %td
+            %i.material-icons{class: entry.status == "paid" ? "green-text" : "red-text"}= entry.is_offer? ? "info_outline" : "done"
+          %td{style: "display: grid"}
+            = link_to edit_admin_entry_path(entry), class: "truncate" do
+              = entry.title
+          %td.hide-on-med-and-down
+            - if entry.customer.present?
+              = link_to edit_admin_customer_path(entry.customer), class: "customer--name truncate", "tabindex": "-1" do
+                = entry.customer.name
+            - else
+              %span.red-text no customer set
+
+          %td.hide-on-med-and-down= entry.delivery_date.strftime("%d.%m.%Y")
+          %td.no-wrap{:style => "position: relative; padding-right: 60px"}
+            - if !entry.is_offer?
+              = money_helper(get_items_total( entry ))
+            .fixed-action-btn.horizontal{:style => "position: absolute; right: 10px; top: 7.5px"}
+              = link_to edit_admin_entry_path(entry), class: "btn-floating" , "tabindex": "-1" do                
+                %i.material-icons.large more_vert
+              %ul{style: "right: 40px"}
+                %li.mt-0
+                  = link_to admin_entry_path(entry), :method=> :delete, class: "btn btn-floating red ", data: {confirm: "You sure to delete this entry?"} do
+                    %i.material-icons="delete"
+                %li.mt-0
+                  = link_to admin_entry_download_path(entry), target: "_blank", class: "btn btn-floating orange" do
+                    %i.material-icons="open_in_browser"
+
+                %li.mt-0
+                  = link_to admin_entry_download_path(entry, format: "pdf"), target: "_blank", class: "btn btn-floating" do
+                    %i.material-icons="play_for_work"
+                %li.mt-0
+                  = link_to clone_admin_entry_path(entry.id), class: "btn-floating waves-effect waves-light green" do
+                    %i.material-icons.large call_split
+

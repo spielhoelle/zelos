@@ -13,8 +13,11 @@ Rails.application.routes.draw do
       resources :items
       resource :download, only: [:show]
     end
+    # TODO scope routes
     resources :settings
     resources :customers
+    resources :summaries
+    resources :bills
     resources :versions do
       collection do
         get 'remove_all'
