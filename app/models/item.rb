@@ -9,7 +9,13 @@ class Item < ApplicationRecord
   after_initialize :init
 
   def init
-    self.item_date ||= Date.today
+    if self.item_date.nil?
+      if self.entry.present? && self.entry.delivery_date.month != Date.today.month
+        self.item_date = self.entry.delivery_date
+      else
+        self.item_date = Date.today
+      end
+    end
   end
   #getter
   def count_mins
