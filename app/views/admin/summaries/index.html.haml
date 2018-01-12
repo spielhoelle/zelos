@@ -1,7 +1,7 @@
-- if @summaries.any?
+- if @entries.any? && @bills.any?
   .row
     #summaries_tree
-      = render "summaries_tree"
+      = render "tree"
 - else
   %h2.grey-text.text-lighten-1.center-align.mt-5
     %div

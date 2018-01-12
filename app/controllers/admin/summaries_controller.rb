@@ -1,38 +1,10 @@
 module Admin
   class SummariesController < ApplicationController
-    include SummariesHelper
     before_action :authenticate_user!
 
     def index
-
-      ordered_summaries = Summary.order("delivery_date desc")
-      unless params[:search].blank?
-        ordered_summaries = ordered_summaries.where(:title => params[:search])
-      end
-      @summaries = ordered_summaries.group_by { |u| u.delivery_date.beginning_of_year }
-
-      @this_year =  Summary.visible.where("delivery_date >= ?", Time.zone.now.beginning_of_year)
-      @title = "#{@this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)} € this year"
-      @chart_lastyear = @this_year.where("customer_id IS NOT NULL").collect{ |e| [e.customer.company, e.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+)] }.sort {|a,b| a[1] <=> b[1]}.reverse
-      @data = @this_year.where("customer_id IS NOT NULL").order("delivery_date desc").map do |value|
-        {name: value.customer.name, 
-         data: value.items.map do |i| 
-          [value.customer.name, value.items.map{|v| (v.price * v.count/60).to_s.to_f.round(2)}.inject(0, :+)]
-        end
-        }
-      end
-      @data2 = Customer.all.collect do |value|
-        { name: value.name, data: value.summaries.collect{|summary| [value.name, summary.items.collect{|i| (i.price * i.count).to_s.to_f.round(2)}.reduce(0, :+)]  }.sort {|a,b| a[1] <=> b[1]}.reverse}
-      end
-      respond_to do |format|
-        format.html {
-          if ordered_summaries.length == 1 && params[:search].present?
-            redirect_to edit_admin_summary_path(ordered_summaries.first)
-          end
-
-        }
-        format.json {render json: ordered_summaries}
-      end
+      @entries = Entry.visible.group_by { |u| u.delivery_date.beginning_of_year }
+      @bills = Bill.all.group_by { |u| u.bill_date.beginning_of_year }
     end
 
     def new
