@@ -147,6 +147,9 @@ $space-list: .5, 1, 2, 3, 5
   display: flex
 .flex-grow
   flex-grow: 1
+.flex-md-grow
+  @media only screen and (max-width: $screen-md)
+    flex-grow: 1
 
 .ml-auto
   margin-left: auto
@@ -161,3 +164,10 @@ $space-list: .5, 1, 2, 3, 5
   .w-#{$i}
     width: $i * 1em !important
 
+.flex-wrap
+  flex-wrap: wrap
+.flex-md-nowrap
+  @media only screen and (min-width: $screen-md)
+    flex-wrap: nowrap
+.justify-space-between
+  justify-content: space-between

@@ -8,18 +8,18 @@
 
       .section.row
         .col.m6.s12
-          .row.mb-3
-            .col.m4.switch
+          .row.mb-3.d-flex.justify-space-between
+            .col.s4.switch
               %label
                 Paid?
                 = f.check_box(:status, { class: '' }, "paid", "open")
                 %span.lever
-            .col.m4.switch
+            .col.s4.switch
               %label
                 Offer?
                 = f.check_box :is_offer, checked: params[:is_offer] == "true" ||  @entry.is_offer?
                 %span.lever
-            .col.m4.switch
+            .col.s4.switch
               %label
                 Consultant?
                 = f.check_box :is_consultant, checked: params[:is_consultant] == "true" ||  @entry.is_consultant?
@@ -99,13 +99,14 @@
             = f.nested_fields_for :items, @items, wrapper_options: { class: 'm-0 no-border no-padding' } do |ff|
               %span.hiddendiv.nested_index= ff.object.id
 
-              .d-flex.mx-1
-                .input-field.flex-grow
+              .d-flex.mx-1.flex-wrap.flex-md-nowrap
+                .input-field.flex-grow.full-width
                   - if index == 0
                     = ff.label "Activity", class: "active"
                   = ff.text_field :name, :required => true, class: "validate mb-0 mr-1"
-                .input-field
-                  = ff.label :item_date, class: action_name == "edit" ? "active" : ""
+                .input-field.flex-md-grow
+                  - if index == 0
+                    = ff.label :item_date, class: action_name == "edit" ? "active" : ""
                   = ff.date_field :item_date, class: "validate datepicker "
                 .input-field
                   - if index == 0
@@ -122,8 +123,8 @@
                 .text-right
                   .right
                     = ff.remove_nested_fields_link do
-                      .btn-floating.waves-effect.waves-light.red.mt-1
-                        %i.material-icons remove
+                      .btn-floating.waves-effect.waves-light.btn-flat.mt-1
+                        %i.material-icons.red-text remove
 
               - index += 1
           .col.s12
