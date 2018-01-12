@@ -10,12 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171210134532) do
+ActiveRecord::Schema.define(version: 20180112154551) do
 
-  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text     "name",       limit: 65535
-    t.text     "company",    limit: 65535
-    t.string   "address"
+  create_table "bills", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "title",              limit: 65535
+    t.decimal  "price",                            precision: 10, scale: 2
+    t.datetime "bill_date"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+  end
+
+  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.text     "name",       limit: 65535,              collation: "utf8_general_ci"
+    t.text     "company",    limit: 65535,              collation: "utf8_general_ci"
+    t.string   "address",                               collation: "utf8_general_ci"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -45,6 +57,7 @@ ActiveRecord::Schema.define(version: 20171210134532) do
     t.datetime "updated_at",                                                    null: false
     t.integer  "count",                                             default: 0
     t.integer  "sort"
+    t.datetime "item_date"
     t.index ["entry_id"], name: "index_items_on_entry_id", using: :btree
   end
 
@@ -56,6 +69,12 @@ ActiveRecord::Schema.define(version: 20171210134532) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
+  end
+
+  create_table "summaries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

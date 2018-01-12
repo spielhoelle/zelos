@@ -141,6 +141,10 @@ $space-list: .5, 1, 2, 3, 5
   display: flex
 .align-items-center
   align-items: center
+.ml-auto
+  margin-left: auto
+.d-flex
+  display: flex
 .flex-grow
   flex-grow: 1
 
@@ -151,3 +155,9 @@ $space-list: .5, 1, 2, 3, 5
   &:hover,
   &:focus
     transform: scale(1.1)
+
+
+@for $i from 0 through 5
+  .w-#{$i}
+    width: $i * 1em !important
+

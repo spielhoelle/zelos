@@ -95,29 +95,37 @@
         %h4 Items
         .row.mb-5
           .sortable
+            - index = 0
             = f.nested_fields_for :items, @items, wrapper_options: { class: 'm-0 no-border no-padding' } do |ff|
               %span.hiddendiv.nested_index= ff.object.id
 
-              .input-field.col.m7.s12
-                = ff.label "Activity", class: "active"
-                = ff.text_field :name, :required => true, class: "validate mb-0"
-              .col.s5.m2.inline
-                .row
-                  .col.s6.input-field
+              .d-flex.mx-1
+                .input-field.flex-grow
+                  - if index == 0
+                    = ff.label "Activity", class: "active"
+                  = ff.text_field :name, :required => true, class: "validate mb-0 mr-1"
+                .input-field
+                  = ff.label :item_date, class: action_name == "edit" ? "active" : ""
+                  = ff.date_field :item_date, class: "validate datepicker "
+                .input-field
+                  - if index == 0
                     = ff.label "Hour", class: "active" 
-                    = ff.number_field :count_hours, class: "validate mb-0"
-                  .col.s6.input-field
+                  = ff.number_field :count_hours, class: "validate mb-0 w-3 mr-1"
+                .input-field
+                  - if index == 0
                     = ff.label "Min", class: "active" 
-                    = ff.number_field :count_mins, max: 60, min: 0, placeholder: 0, class: "validate mb-0"
-              .input-field.col.s5.m2
-                = ff.label "Price",class: "active" 
-                = ff.number_field :price, step: 0.01, :required => true, class: "validate mb-0"
-              .col.s2.m1.text-right
-                .right
-                  = ff.remove_nested_fields_link do
-                    .btn-floating.waves-effect.waves-light.red.mt-1
-                      %i.material-icons remove
+                  = ff.number_field :count_mins, max: 60, min: 0, placeholder: 0, class: "validate mb-0 w-3 mr-1"
+                .input-field
+                  - if index == 0
+                    = ff.label "Price",class: "active" 
+                  = ff.number_field :price, step: 0.01, :required => true, class: "validate mb-0 w-5 mr-1"
+                .text-right
+                  .right
+                    = ff.remove_nested_fields_link do
+                      .btn-floating.waves-effect.waves-light.red.mt-1
+                        %i.material-icons remove
 
+              - index += 1
           .col.s12
             .row.mb-0
               .col.m7

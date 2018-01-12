@@ -5,24 +5,26 @@ Feature: I change the values of the invoice and see the expected result
       And there is a setting_website
       
       And there is a customer with the name "Customer"
-      And there is a entry with the title "Invoice" and the delivery_date "2013-12-08 08:00:00 +0200" and the customer above
-      And there is a item with the name "Modern IT slavery" the price "150.31" and the count "60" and with the entry above
-      And there is a item with the name "Big afford, less money" the price "170.72" and the count "90" and with the entry above
-      And there is a item with the name "NGO development without result" the price "199.99" and the count "150" and with the entry above
+      And there is a entry with the title "Invoice0" and the delivery_date "2016-06-03 08:00:00 +0200"
+      And there is a item with the name "Modern IT slavery" the price "150.31" and the count "60" and the item_date "2016-01-03 08:00:00 +0200" and with the entry above
+      And there is a item with the name "Big afford, less money" the price "170.72" and the count "90" and the item_date "2016-03-04 08:00:00 +0200" and with the entry above
+      And there is a item with the name "NGO development without result" the price "199.99" and the count "150" and the item_date "2016-05-03 08:00:00 +0200"  and with the entry above
 
     When I go to the edit admin entry page for that entry
 
       Then the "entry[items_attributes][0][name]" field should contain "Modern IT slavery"
       And the "entry[items_attributes][0][count_hours]" field should contain "1"
+      And the "entry[items_attributes][0][item_date]" field should contain "2016-01-03"
       #And the "entry[items_attributes][0][count_mins]" field should contain "0"
     
       Then the "entry[items_attributes][1][name]" field should contain "Big afford, less money"
       And the "entry[items_attributes][1][count_hours]" field should contain "1"
+      And the "entry[items_attributes][1][item_date]" field should contain "2016-03-04"
       #And the "entry[items_attributes][1][count_mins]" field should contain "30"
 
       Then the "entry[items_attributes][2][name]" field should contain "NGO development without result"
       And the "entry[items_attributes][2][count_hours]" field should contain "2"
-      #And the "entry[items_attributes][2][count_mins]" field should contain "30"
+      And the "entry[items_attributes][2][item_date]" field should contain "2016-05-03"
 
 
     Then I should see "5:0 H" in the HTML
