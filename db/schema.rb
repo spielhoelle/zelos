@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20180112154551) do
     t.datetime "updated_at",                                                null: false
   end
 
-  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.text     "name",       limit: 65535,              collation: "utf8_general_ci"
-    t.text     "company",    limit: 65535,              collation: "utf8_general_ci"
-    t.string   "address",                               collation: "utf8_general_ci"
+  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "name",       limit: 65535
+    t.text     "company",    limit: 65535
+    t.string   "address"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end

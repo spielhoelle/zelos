@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   after_initialize :init
 
   def init
-    if self.item_date.nil?
+    if self.has_attribute?(:item_date) && self.item_date.nil?
       if self.entry.present? && self.entry.delivery_date.month != Date.today.month
         self.item_date = self.entry.delivery_date
       else

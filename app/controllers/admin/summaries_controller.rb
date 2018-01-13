@@ -1,10 +1,29 @@
 module Admin
   class SummariesController < ApplicationController
+
+    include ApplicationHelper
+    include ActionView::Helpers::NumberHelper
+    include EntriesHelper
     before_action :authenticate_user!
 
     def index
-      @entries = Entry.visible.group_by { |u| u.delivery_date.beginning_of_year }
+      @year_group = Entry.visible.group_by { |u| u.delivery_date.beginning_of_year }
       @bills = Bill.all.group_by { |u| u.bill_date.beginning_of_year }
+      @total = []
+      @year_group.each_with_index do |year, index|
+        entries = Entry.where(:delivery_date => year[0].beginning_of_year..year[0].end_of_year)
+        @total << {
+          year: year[0].year,
+          entries: entries.collect{ |x|  get_items_total(x)}.inject(0, :+),
+          bills: Bill.where(:bill_date => year[0].beginning_of_year..year[0].end_of_year).sum(:price),
+          taxes: { 
+            consultant: year[1].count - entries.where.not(:is_consultant => 1).count,
+            without_consultant: entries.where.not(:is_consultant => 1).count,
+            taxes: entries.where.not(:is_consultant => 1).collect{ |x|  get_items_total(x)}.inject(0, :+)
+          }
+        }
+      end
+
     end
 
     def new
