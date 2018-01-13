@@ -30,5 +30,10 @@ FactoryGirl.define do
     company { FFaker::Company.name }
     address { FFaker::AddressDE.street_address }  
   end
+  factory :bill do
+    title { FFaker::Name.first_name }
+    bill_date { FFaker::Time.datetime } 
+    price {rand(0..2000)}
+  end
 
 end

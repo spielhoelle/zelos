@@ -4,7 +4,7 @@ module Admin
     before_action :authenticate_user!
 
     def index
-      @bills = Bill.all.group_by { |b| b.bill_date.beginning_of_year }
+      @bills = Bill.all.order("bill_date desc").group_by { |b| b.bill_date.beginning_of_year }
 
     end
 

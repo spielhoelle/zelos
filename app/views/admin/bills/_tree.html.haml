@@ -22,7 +22,7 @@
 
         %tr.bill
           %td{style: "display: grid"}
-            = link_to edit_admin_bill_path(bill), class: "truncate" do
+            = link_to edit_admin_bill_path(bill), class: "truncate bill--title" do
               = bill.title
 
           %td.hide-on-med-and-down= bill.bill_date.strftime("%d.%m.%Y")
