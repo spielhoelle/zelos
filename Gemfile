@@ -53,8 +53,6 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'better_errors'
-  gem 'binding_of_caller'
   gem 'seed_dump'
   gem 'capistrano'
   gem 'capistrano-rails'

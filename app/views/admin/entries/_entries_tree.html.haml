@@ -24,6 +24,7 @@
 
         %tr.entry
           %td
+            %i.material-icons.tooltipped{"data-delay": 10, "data-position":"top", "data-tooltip": entry.is_consultant? ? "consultant" : "freelancer" }= entry.is_consultant? ? "local_library" : "code"
             %i.material-icons{class: entry.status == "paid" ? "green-text" : "red-text"}= entry.is_offer? ? "info_outline" : "done"
           %td{style: "display: grid"}
             = link_to edit_admin_entry_path(entry), class: "truncate" do
