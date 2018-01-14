@@ -33,4 +33,3 @@ Feature: Bills shall be displayed correctly
       #When I click on the bill with the title "Laptop"
       When I hit on the "Laptop" in the ".bill--title"
       Then I should be on the edit admin bill page for the bill with the title "Laptop"
-      Then show me the page

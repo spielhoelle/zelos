@@ -48,7 +48,6 @@ end
 Then /^I must see (one|a|an|the|no|\d+) (?!table with )(.*)$/ do |qty, element_string|
   qty = ["a", "an", "the", "one"].include?(qty) ? 1 : qty.to_i
   skip_element = ! (/#{SMACSSResolver.element_attribute_regex}/ =~ element_string)
-  binding.pry
   xpath = SMACSSResolver.new(element_string, skip_element: skip_element, count: qty).xpath_for_read
 
   patiently do
@@ -58,6 +57,8 @@ Then /^I must see (one|a|an|the|no|\d+) (?!table with )(.*)$/ do |qty, element_s
   end
 end
 When /^I (.*)?click on the (.*)$/ do |click_type, element_string|
+  puts click_type
+  puts element_string
   xray = !!/xray-/.match(click_type)
   metal = !!/metal-/.match(click_type)
   references_attributes = !!element_string.match(/^#{SMACSSResolver.element_regex}#{SMACSSResolver.element_attribute_regex}$/)

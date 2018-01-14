@@ -17,8 +17,8 @@ module Admin
           entries: entries.collect{ |x|  get_items_total(x)}.inject(0, :+),
           bills: Bill.where(:bill_date => year[0].beginning_of_year..year[0].end_of_year).sum(:price),
           taxes: { 
-            consultant: year[1].count - entries.where.not(:is_consultant => 1).count,
-            without_consultant: entries.where.not(:is_consultant => 1).count,
+            consultant: entries.where(:is_consultant => 1).count,
+            without_consultant: year[1].count - entries.where(:is_consultant => 1).count,
             taxes: entries.where.not(:is_consultant => 1).collect{ |x|  get_items_total(x)}.inject(0, :+)
           }
         }

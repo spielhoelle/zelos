@@ -10,9 +10,10 @@
 %table.highlight
   %thead.no-border
     %tr
-      %th.hide-on-med-and-down Title
-      %th.hide-on-med-and-down Bill date
-      %th.hide-on-med-and-down.text-right Total
+      %th.hide-on-med-and-down Image
+      %th Title
+      %th.hide-on-med-and-down.text-right Bill date
+      %th.text-right Total
 
   %tbody
     -@bills.each_with_index do |year, index|
@@ -21,19 +22,21 @@
       - year[1].each_with_index do |bill, index|
 
         %tr.bill
+          %td.hide-on-med-and-down
+            .fixed-ratio
+              = image_tag bill.image, class: "materialboxed fixed-ratio__inner", width: 100
           %td{style: "display: grid"}
             = link_to edit_admin_bill_path(bill), class: "truncate bill--title" do
               = bill.title
 
-          %td.hide-on-med-and-down= bill.bill_date.strftime("%d.%m.%Y")
-          %td.no-wrap.text-right{:style => "position: relative; padding-right: 60px"}
-            = money_helper( bill.price )
+          %td.hide-on-med-and-down.text-right= bill.bill_date.strftime("%d.%m.%Y")
+          %td.no-wrap.text-right{:style => ""}= money_helper( bill.price )
 
           %td.no-wrap.text-right{:style => "position: relative; padding-right: 60px"}
-            .fixed-action-btn.horizontal{:style => "position: absolute; right: 10px; top: 7.5px"}
+            .fixed-action-btn.actions.horizontal.d-flex.align-items-center
               = link_to edit_admin_bill_path(bill), class: "btn-floating" , "tabindex": "-1" do                
                 %i.material-icons.large more_vert
-              %ul{style: "right: 40px"}
+              %ul
                 %li.mt-0
                   = link_to admin_bill_path(bill), :method=> :delete, class: "btn btn-floating red ", data: {confirm: "You sure to delete this bill?"} do
                     %i.material-icons="delete"
