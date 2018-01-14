@@ -7,8 +7,15 @@
     = form_for(@bill, url: path) do |f|
 
       .section.row
-        .col.m6.s12
 
+        .col.m6.s12
+          .form-group
+            - unless action_name == "new"
+              = image_tag(@bill.image, class: "materialboxed w-100")
+            %label{:for => "image"}
+            = f.file_field :image
+        
+        .col.m6.s12
           .row
             .input-field.col.s12
               = f.label :price, class: "active" 
@@ -26,13 +33,6 @@
 
 
 
-        .col.m6.s12
-
-          .form-group
-            - unless action_name == "new"
-              = image_tag(@bill.image, class: "materialboxed w-100")
-            %label{:for => "image"}
-            = f.file_field :image
             
       .fixed-action-btn
         = f.button :submit, class: "pulse tooltipped btn btn-floating btn-large ", "data-delay": 10, "data-position":"left", "data-tooltip": "Save" do

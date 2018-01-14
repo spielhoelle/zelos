@@ -9,6 +9,7 @@ class Bill < ActiveRecord::Base
       medium: '600x1060^',
       original:     '900x1600^'},
       :convert_options => {
+        :all => [ '-sigmoidal-contrast 10,50%','-colorspace Gray' ],
         :thumbnail => "-quality 75 -strip",
         :medium => "-quality 75 -strip",
         :original => "-quality 75 -strip"}
