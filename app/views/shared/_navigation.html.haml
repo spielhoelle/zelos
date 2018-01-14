@@ -82,27 +82,27 @@
     %li
       = link_to root_path, class: "teal-text" do
         Zelos
-    
-
     %li
-      = link_to admin_entries_path, class: (controller_name == "entries") ? "teal" : "" do
+      = link_to admin_entries_path, class: " #{(controller_name == "entries") ? "grey darken-3" : ""}"do
         = "Invoices"
     %li 
-      = link_to admin_customers_path, class: (controller_name == "customers") ? "teal" : "" do
+      = link_to admin_customers_path, class: "customers_link #{(controller_name == "customers") ? "grey darken-3" : "" }" do
         = "Customers"
     %li 
-      = link_to admin_bills_path, class: "bills_link #{(controller_name == "bills") ? "grey darken-4" : "" }" do
+      = link_to admin_bills_path, class: "bills_link #{(controller_name == "bills") ? "grey darken-3" : "" }" do
         = "Bills"
     %li 
-      = link_to admin_summaries_path, class: "summaries_link #{(controller_name == "summaries") ? "grey darken-4" : "" }" do
+      = link_to admin_summaries_path, class: "summaries_link #{(controller_name == "summaries") ? "grey darken-3" : "" }" do
         = "Summaries"
     %li
-      = link_to admin_settings_path, class: (controller_name == "settings") ? "teal" : "" do
+      = link_to admin_settings_path, class: current_page?(admin_settings_path) || current_page?(admin_settings_path) ? "grey darken-3" : "" do
         = "Settings"
-    
     %li
-      = link_to admin_versions_path, class: '', title: "versions" do
+      = link_to admin_versions_path, class: current_page?(admin_versions_path) || current_page?(admin_versions_path) ? "grey darken-3" : "", title: "versions" do
         = "Versions"
+    %li
+      = link_to destroy_user_session_path, :method => :delete, class: 'nav-link', title: t('devise.secondary_nav.sign_out') do
+        = "Logout"
     .divider
       
     %li

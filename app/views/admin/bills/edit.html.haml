@@ -12,9 +12,12 @@
           .form-group
             - unless action_name == "new"
               = image_tag(@bill.image, class: "materialboxed w-100")
-            %label{:for => "image"}
-            = f.file_field :image
-        
+            .file-field.input-field
+              .btn
+                %span File
+                = f.file_field :image
+              .file-path-wrapper
+                %input.file-path.validate{:type => "text"}/
         .col.m6.s12
           .row
             .input-field.col.s12
