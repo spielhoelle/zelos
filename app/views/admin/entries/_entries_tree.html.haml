@@ -23,7 +23,7 @@
       - year[1].each_with_index do |entry, index|
 
         %tr.entry
-          %td.text-right
+          %td.text-right.w-5
             - if !entry.is_offer?
               %i.material-icons.tooltipped{"data-delay": 10, "data-position":"top", "data-tooltip": entry.is_consultant? ? "consultant" : "freelancer" }= entry.is_consultant? ? "local_library" : "code"
             %i.material-icons{class: entry.status == "paid" ? "green-text" : "red-text"}= entry.is_offer? ? "info_outline" : "done"

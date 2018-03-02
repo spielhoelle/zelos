@@ -164,6 +164,12 @@ $space-list: .5, 1, 2, 3, 5
   .w-#{$i}
     width: $i * 1em !important
 
+
+@for $i from 0 through 5
+  @media only screen and (max-width: $screen-md)
+    .order-#{$i}
+      order: $i !important
+
 .flex-wrap
   flex-wrap: wrap
 .flex-md-nowrap
@@ -182,3 +188,6 @@ $space-list: .5, 1, 2, 3, 5
     bottom: 0 !important
     top: 18px !important
     right: 40px !important
+.bg-white-hover
+  &:hover
+    background-color: white

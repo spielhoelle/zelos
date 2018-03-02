@@ -173,7 +173,7 @@ namespace :deploy do
   end
 
   # Only allow a deploy with passing tests to be deployed
-  before :deploy, "deploy:run_tests"
+  #before :deploy, "deploy:run_tests"
 
 end
 
