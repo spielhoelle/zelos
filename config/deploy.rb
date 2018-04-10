@@ -52,7 +52,7 @@ namespace :deploy do
   #after "npm:install", "deploy:build"
 
   #after "deploy:migrate", :seed
-  
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -176,8 +176,3 @@ namespace :deploy do
   #before :deploy, "deploy:run_tests"
 
 end
-
-after 'deploy:symlink:release', 'letsencrypt:register_client'
-after 'letsencrypt:register_client', 'letsencrypt:authorize_domain'
-after 'letsencrypt:authorize_domain', 'letsencrypt:obtain_certificate'
-#after 'letsencrypt:obtain_certificate', 'passenger:restart'
