@@ -1,19 +1,22 @@
 - if @entries.any?
   .row
     #entries_tree
-      - if params[:search].blank?
-        .row.hide-on-med-and-down.mt-2
-          .col.s4
-            %h5 Invoices per month 
-            -#= column_chart Entry.visible.order(:delivery_date).reverse.collect { |x| [x.customer.name, get_items_total(x)] }, colors: ["#27ae60"]
-            = column_chart Entry.visible.group_by_year(:delivery_date).count, colors: ["#27ae60"]
-          .col.s4
-            %h5 Amount recieved per customer
-            = column_chart @chart_lastyear, stacked: true, legend: false
-          .col.s4
-            %h5 Items
-            -#= pie_chart @this_year.collect { |x| [x.customer.company, get_items_total(x)] }, legend: true, donut: true
-            = pie_chart @this_year.collect { |x| [x.customer.company, get_items_total(x)] }, legend: false, donut: true
+      -# - if params[:search].blank?
+      .row.hide-on-med-and-down.mt-2.center
+        .col.s2.offset-s1
+          %h5 Invoices per year
+          = line_chart Entry.visible.group_by_month(:delivery_date, format: "%m").count, colors: ["#27ae60"]
+        .col.s2
+          = column_chart Entry.visible.group_by_year(:delivery_date, format: "%Y").count, colors: ["#27ae60"]
+        .col.s2
+          %h5 Customer this year
+          = column_chart @this_year.visible.order(:delivery_date).reverse.collect { |x| [x.customer.name, get_items_total(x)] }, colors: ["#ffffff"]
+        .col.s2
+          %h5 All customers
+          = column_chart @data2, stacked: true, legend: false
+        .col.s2
+          %h5 Still open
+          = pie_chart @this_year.where.not("is_offer", true).where("status" => "open").collect { |x| [x.customer.company, get_items_total(x)] }, legend: false, donut: true
 
       = render "entries_tree"
 - else

@@ -5,13 +5,14 @@ module Admin
 
     def index
 
-      ordered_entries = Entry.order("delivery_date desc")
+      @ordered_entries = Entry.order("delivery_date desc")
       unless params[:search].blank?
-        ordered_entries = ordered_entries.where(:title => params[:search])
+        search_string = params[:search]
+        @ordered_entries = @ordered_entries.where('title LIKE ?', "%#{search_string}%")
       end
-      @entries = ordered_entries.group_by { |u| u.delivery_date.beginning_of_year }
+      @entries = @ordered_entries.group_by { |u| u.delivery_date.beginning_of_year }
 
-      @this_year =  Entry.visible.where("delivery_date >= ?", Time.zone.now.beginning_of_year)
+      @this_year =  @ordered_entries.where("delivery_date >= ?", Time.zone.now.beginning_of_year)
       @title = "#{@this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)} € this year"
       @chart_lastyear = @this_year.where("customer_id IS NOT NULL").collect{ |e| [e.customer.company, e.items.map{|i| (i.price * i.count/60).to_s.to_f.round(2)}.inject(0, :+)] }.sort {|a,b| a[1] <=> b[1]}.reverse
       @data = @this_year.where("customer_id IS NOT NULL").order("delivery_date desc").map do |value|
@@ -21,17 +22,24 @@ module Admin
         end
         }
       end
-      @data2 = Customer.all.collect do |value|
-        { name: value.name, data: value.entries.collect{|entry| [value.name, entry.items.collect{|i| (i.price * i.count).to_s.to_f.round(2)}.reduce(0, :+)]  }.sort {|a,b| a[1] <=> b[1]}.reverse}
+      @data2 = Customer.all.collect do |customer|
+        {
+          name: customer.name,
+          data: customer.entries.visible.collect do |entry|
+            # FIXME The problem is that just the last entry will be taken instead of stacking them
+            # data structure should be like here https://developers.google.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts
+            [customer.name, entry.items.map{|i| (i.price * i.count/60).to_s}]
+          end
+        .sort {|a,b| a[1] <=> b[1]}}
       end
       respond_to do |format|
         format.html {
-          if ordered_entries.length == 1 && params[:search].present?
-            redirect_to edit_admin_entry_path(ordered_entries.first)
+          if @ordered_entries.length == 1 && params[:search].present?
+            redirect_to edit_admin_entry_path(@ordered_entries.first)
           end
 
         }
-        format.json {render json: ordered_entries}
+        format.json {render json: @ordered_entries}
       end
     end
 

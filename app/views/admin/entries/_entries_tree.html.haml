@@ -42,7 +42,7 @@
             - if !entry.is_offer?
               = money_helper(get_items_total( entry ))
             .fixed-action-btn.actions.horizontal.d-flex.align-items-center
-              = link_to edit_admin_entry_path(entry), class: "btn-floating" , "tabindex": "-1" do                
+              = link_to edit_admin_entry_path(entry), class: "btn-floating" , "tabindex": "-1" do
                 %i.material-icons.large more_vert
               %ul
                 %li.mt-0
@@ -58,4 +58,3 @@
                 %li.mt-0
                   = link_to clone_admin_entry_path(entry.id), class: "btn-floating waves-effect waves-light green" do
                     %i.material-icons.large call_split
-
