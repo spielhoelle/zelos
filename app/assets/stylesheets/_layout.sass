@@ -1,9 +1,9 @@
-body 
+body
   display: flex
   min-height: 100vh
   flex-direction: column
   zoom: 100%
-main 
+main
   flex: 1 0 auto
 
 .no-border
@@ -28,7 +28,7 @@ main
   bottom: 0
   left: 0
   right: 0
-li.user-details 
+li.user-details
   background-size: cover
   margin-bottom: 15px
   padding: 15px 0px 0px 15px
@@ -65,9 +65,9 @@ li.user-details
 
 // Margins and Padding
 // -------------------------
-$space-list: .5, 1, 2, 3, 5
-@each $current-space in $space-list 
-  $i: index($space-list, $current-space)
+$space-list: 0, .5, 1, 2, 3, 5
+@each $current-space in $space-list
+  $i: index($space-list, $current-space) - 1
   .m-#{$i}
     margin: 1rem * $current-space !important
   .mt-#{$i}
@@ -115,7 +115,7 @@ $space-list: .5, 1, 2, 3, 5
   position: relative
 .overflow-visible
   overflow: visible
-.collection 
+.collection
   .collection-item
     border-bottom: 1px solid $black2
 .width-auto

@@ -13,10 +13,10 @@ module Admin
 
       @this_year =  Entry.visible.where("delivery_date >= ?", Time.zone.now.beginning_of_year)
       @title = "#{@this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)} € this year"
-      @chart_lastyear = @this_year.where("customer_id IS NOT NULL").collect{ |e| [e.customer.company, e.items.map{|i| (i.price * i.count).to_s.to_f.round(2)}.inject(0, :+)] }.sort {|a,b| a[1] <=> b[1]}.reverse
+      @chart_lastyear = @this_year.where("customer_id IS NOT NULL").collect{ |e| [e.customer.company, e.items.map{|i| (i.price * i.count/60).to_s.to_f.round(2)}.inject(0, :+)] }.sort {|a,b| a[1] <=> b[1]}.reverse
       @data = @this_year.where("customer_id IS NOT NULL").order("delivery_date desc").map do |value|
-        {name: value.customer.name, 
-         data: value.items.map do |i| 
+        {name: value.customer.name,
+         data: value.items.map do |i|
           [value.customer.name, value.items.map{|v| (v.price * v.count/60).to_s.to_f.round(2)}.inject(0, :+)]
         end
         }

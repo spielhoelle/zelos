@@ -35,7 +35,7 @@
             = builder.hidden_field :id
             .input-field.pb-1
               - if ["new", "clone"].exclude?(action_name)
-                %i.material-icons{class: @entry.customer.present? ? "prefix" : ""} 
+                %i.material-icons{class: @entry.customer.present? ? "prefix" : ""}
                   - if @entry.customer.present?
                     = link_to edit_admin_customer_path(@customer) do
                       account_circle
@@ -51,7 +51,7 @@
 
         .col.m6.s12
           .input-field
-            = f.label :invoice_number, class: "active" 
+            = f.label :invoice_number, class: "active"
             = f.number_field :invoice_number, class: "validate"
           .input-field.row.mt-0.pb-1
             .col.s6.input-field
@@ -89,8 +89,8 @@
               .col.s12
                 = f.label :private_note, class: (action_name == "edit" && @entry.private_note.present?) ? "active" : ""
                 = f.text_area :private_note, class: "materialize-textarea validate", value: ((action_name == "edit" && @entry.private_note.present?) ? @entry.private_note.gsub("\n", '').squeeze(' ') : "")
-        
-        
+
+
       .section
         %h4 Items
         .row.mb-5
@@ -110,15 +110,15 @@
                   = ff.text_field :name, :required => true, class: "validate mb-0"
                 .input-field
                   - if index == 0
-                    = ff.label "Hour", class: "active" 
+                    = ff.label "Hour", class: "active"
                   = ff.number_field :count_hours, class: "validate mb-0 w-3"
                 .input-field
                   - if index == 0
-                    = ff.label "Min", class: "active" 
+                    = ff.label "Min", class: "active"
                   = ff.number_field :count_mins, max: 60, min: 0, placeholder: 0, class: "validate mb-0 w-3 mr-1"
                 .input-field
                   - if index == 0
-                    = ff.label "Price",class: "active" 
+                    = ff.label "Price",class: "active"
                   = ff.number_field :price, step: 0.01, :required => true, class: "validate mb-0 w-5 mr-1"
                 .text-right.order-2.order-md-auto
                   .right
@@ -136,12 +136,12 @@
                 .input-field
                   = f.label "discount",class: action_name == "edit" ? "active" : ""
                   = f.number_field :discount, class: "validate"
-              .col.s6.m3.teal-text
+              .col.mr-4.right.teal-text.text-right
                 Total:
                 %div= @time
                 %div= "#{money_helper(get_items_total( @entry ))}"
-              
-            
+
+
       .fixed-action-btn
         = f.button :submit, class: "pulse tooltipped btn btn-floating btn-large ", "data-delay": 10, "data-position":"left", "data-tooltip": "Save" do
           %i.material-icons done
@@ -155,4 +155,3 @@
             %li
               = link_to admin_entry_download_path(@entry, format: "pdf"), target: "_blank", class: "tooltipped btn btn-floating yellow darken-2", "data-delay": 10, "data-position":"left", "data-tooltip": "Download", "data-value": "Ich bin nach §19 UStG als Kleinunternehmer von der Umsatzsteuer befreit." do
                 %i.material-icons="play_for_work"
-

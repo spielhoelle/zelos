@@ -3,8 +3,14 @@
     .col.s12
       .d-flex
         .flex-grow
-          %h2.mt-0
+          %h2.mt-0.mb-1
             = invoice.is_offer? ? t("offer") : t("invoice")
+          %h5.m-0="#{t("to")} #{invoice.customer.name}"
+          %ul.m-0
+            %li.collection-item.condensed_simple_format
+              = simple_format(invoice.customer.company)
+              = simple_format(invoice.customer.address)
+
         %div
 
           .left.pr-1
@@ -35,21 +41,15 @@
             - if invoice.invoice_date.strftime("%d.%m.%Y") != invoice.delivery_date.strftime("%d.%m.%Y")
               %li.collection-item
                 = "#{t('del_date')} #{invoice.delivery_date.strftime("%d.%m.%Y")}"
-        
-      -#- if @request == 'html'
-        -#= image_tag('logo.png', id: "logo", class: "full-width")
-      -#-else
-        -#%img{src: "file://#{Rails.root}/app/assets/images/logo.png", id: "logo", class: "full-width"}
 
-      .row
-        .col.s5
-          %h5.m-0="#{t("to")} #{invoice.customer.name}"
-          %ul.m-0
-            %li.collection-item.condensed_simple_format
-              = simple_format(invoice.customer.company)
-              = simple_format(invoice.customer.address)
+        -#- if @request == 'html'
+          -#= image_tag('logo.png', id: "logo", class: "full-width")
+        -#-else
+          -#%img{src: "file://#{Rails.root}/app/assets/images/logo.png", id: "logo", class: "full-width"}
 
-        .col.s7
+        -# .col.s5
+        -#
+        -# .col.s7
 
 
       .row
@@ -64,7 +64,7 @@
                   %th= t('item')
                 %th.text-right= t('count')
                 %th.text-right= t('price')
-                %th.text-right= t('sum') 
+                %th.text-right= t('sum')
             %tbody
               - invoice.items.each_with_index do |item, index|
                 -# - if invoice.discount != 0
@@ -75,16 +75,16 @@
                   %td.text-right= item.count == 0 ? "" : '%.02f' % ( item.count / 60 + item.count % 60.00 / 100.00)
 
                   %td.no-wrap.text-right= item.count == 0 ? "" : number_to_currency(item.price, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
-                  %td.text-right= number_to_currency(item.count == 0 ? item.price : ( item.count/60.00 * item.price ), :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")             
+                  %td.text-right= number_to_currency(item.count == 0 ? item.price : ( item.count/60.00 * item.price ), :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
               - if invoice.discount != 0
                 %tr
                   %td.text-right{colspan: 4}
-                    %h5.m-0=t('netto') 
+                    %h5.m-0=t('netto')
                   %td.text-right
                     %h5.m-0.no-wrap= number_to_currency(total, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
                 %tr
                   %td.text-right{colspan: 4}
-                    =t('vat') 
+                    =t('vat')
                     = "#{ invoice.discount } %"
                   %td.text-right= number_to_currency(total.to_i * (invoice.discount / 100.00), :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
 

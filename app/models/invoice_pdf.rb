@@ -14,11 +14,16 @@ class InvoicePdf
     kit = PDFKit.new(as_html,
                      page_size: 'A4',
                      footer_line: false,
-                     :footer_font_name => "Oswald"
-    #footer_html: "<h1>test</h1>"
-    #:footer_left => footer_left
-    #:footer_font_size => 30,
-    #:footer_right => "Danke",
+                      :margin_top => '10',
+                      :margin_left => '10',
+                      :margin_bottom => '10',
+                      :margin_right => '10',
+                      :page_size => 'A4',
+                      :footer_font_name => "Oswald",
+                      #footer_html: "<h1>test</h1>"
+                      #:footer_left => footer_left
+                      #:footer_font_size => 30,
+                      #:footer_right => "Danke",
                     )
     kit.to_file("#{Rails.root}/public/invoice.pdf")
   end
@@ -36,5 +41,6 @@ class InvoicePdf
     qrcode = qrcode.as_svg(offset: 0, color: '000', shape_rendering: 'crispEdges', module_size: 2)
 
     render template: "admin/entries/pdf", layout: "invoice_pdf", locals: { invoice: invoice, total: total, qrcode: qrcode }
+
   end
 end
