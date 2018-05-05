@@ -12,16 +12,27 @@
           .form-group
             - unless action_name == "new"
               = image_tag(@bill.image, class: "materialboxed w-100")
+            %h5.mt-3 Upload file for text recognition
             .file-field.input-field
               .btn
                 %span File
                 = f.file_field :image
               .file-path-wrapper
                 %input.file-path.validate{:type => "text"}/
+          .text-center.w-100
+            #image_loader.preloader-wrapper.big.active.fade-in
+              .spinner-layer.spinner-blue-only
+                .circle-clipper.left
+                  .circle
+                .gap-patch
+                  .circle
+                .circle-clipper.right
+                  .circle
+            #image_result
         .col.m6.s12
           .row
             .input-field.col.s12
-              = f.label :price, class: "active" 
+              = f.label :price, class: "active"
               = f.number_field :price, step: 0.01, :required => true, class: "validate mb-0"
 
           .row
@@ -36,8 +47,7 @@
 
 
 
-            
+
       .fixed-action-btn
         = f.button :submit, class: "pulse tooltipped btn btn-floating btn-large ", "data-delay": 10, "data-position":"left", "data-tooltip": "Save" do
           %i.material-icons done
-

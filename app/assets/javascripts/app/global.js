@@ -11,5 +11,4 @@ import './flashes';
 import './parallax';
 import './chart';
 import './invoice';
-
-
+import './ocr';
