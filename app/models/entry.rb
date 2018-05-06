@@ -10,7 +10,10 @@ class Entry < ActiveRecord::Base
   before_save :default_values
   after_initialize :init
 
-  scope :visible, -> { 
+  scope :open, -> {
+    where.not("is_offer", true).where("status" => "open")
+  }
+  scope :visible, -> {
     where.not("is_offer", true).where("status" => "paid")
   }
   def init

@@ -11,7 +11,11 @@
         .col.m6.s12
           .form-group
             - unless action_name == "new"
-              = image_tag(@bill.image, class: "materialboxed w-100")
+              .position-relative
+                = image_tag(@bill.image, class: "materialboxed w-100")
+            - else
+              %img.materialboxed.w-100
+            #image_result.absolute-cover
             %h5.mt-3 Upload file for text recognition
             .file-field.input-field
               .btn
@@ -20,15 +24,12 @@
               .file-path-wrapper
                 %input.file-path.validate{:type => "text"}/
           .text-center.w-100
-            #image_loader.preloader-wrapper.big.active.fade-in
-              .spinner-layer.spinner-blue-only
-                .circle-clipper.left
-                  .circle
-                .gap-patch
-                  .circle
-                .circle-clipper.right
-                  .circle
-            #image_result
+            %h5#image_text.text-grey Upload image to see preview
+            #image_loader.progress.fade-in
+              .determinate{:style => "width: 0%"}
+
+
+
         .col.m6.s12
           .row
             .input-field.col.s12

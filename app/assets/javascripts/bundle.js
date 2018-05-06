@@ -85,7 +85,7 @@ __webpack_require__(4);
 
 __webpack_require__(5);
 
-__webpack_require__(7);
+__webpack_require__(6);
 
 $(document).on('turbolinks:load', function () {
   Waves.displayEffect(); // Initialize buttons wave effects
@@ -332,6 +332,85 @@ $(document).on('turbolinks:load', function () {
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _tesseract = __webpack_require__(7);
+
+var _tesseract2 = _interopRequireDefault(_tesseract);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var bboxToStyle = function bboxToStyle(bbox_str) {
+  var style = "";
+  var element = bbox_str.firstElementChild !== null ? bbox_str.firstElementChild : bbox_str;
+  console.log(element);
+  element.style = "border: 1px solid white";
+  if (element.innerText.match(/[0-9]/g)) {
+    element.style = "border: 1px solid red";
+    style += "color: red !important; ";
+  }
+  var arr = bbox_str.title.split(" ").map(function (i) {
+    return i.replace(/[^0-9]/g, ' ').replace(" ", '');
+  });
+  var box = document.querySelector(".ocr_page").title.replace(/[^0-9]/g, ' ').split(' ').filter(function (n) {
+    return n != "" && n != 0;
+  });
+  var multiplicator = document.querySelector(".material-placeholder").offsetWidth / box[0];
+  console.log(box);
+  var left_pos = "left:" + arr[1] * multiplicator + "px; ";
+  var top_pos = "top:" + arr[2] * multiplicator + "px; ";
+  var right_pos = "right:" + arr[3] * multiplicator + "px; ";
+  var bottom_pos = "bottom:" + arr[4] * multiplicator + "px; ";
+  return style + left_pos + top_pos + right_pos + bottom_pos + "position: absolute; ";
+};
+if (document.getElementById('bill_image')) {
+  document.getElementById('bill_image').onchange = function (i) {
+
+    if (this.files && this.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = document.createElement('img');
+        img.src = e.target.result;
+        document.querySelector('.materialboxed').src = e.target.result;
+      };
+      reader.readAsDataURL(this.files[0]);
+    }
+
+    document.getElementById("image_text").classList.add("fade-in");
+    document.getElementById('image_loader').classList.remove('fade-in');
+    // if we know our image is of spanish words without the letter 'e':
+    _tesseract2.default.recognize(this.files[0], {
+      lang: 'deu'
+      // tessedit_char_blacklist: 'e'
+    }).progress(function (message) {
+      console.log('progress is: ', message);
+      if (message.status === "recognizing text") {
+        document.getElementById('image_loader').querySelector('.determinate').style.width = message.progress * 100 + "%";
+      }
+    }).then(function (result) {
+      console.log(result);
+      document.getElementById('image_loader').classList.add('fade-in');
+      document.querySelector(".material-placeholder").classList.add("half-transparent");
+      document.getElementById('image_result').innerHTML = result.html;
+      $(".ocrx_word").attr('style', function () {
+        return bboxToStyle(this);
+      });
+    });
+    // Tesseract.recognize(this.files[0])
+    // .then(function(result){
+    //   console.log('result is: ', result)
+    //   document.getElementById('image_loader').classList.add('fade-in')
+    //
+    //   document.getElementById('image_result').innerHTML = result.html
+    // })
+  };
+}
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var require;var require;(function(f){if(true){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Tesseract = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return require(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -1044,29 +1123,6 @@ module.exports = DefaultTesseract;
 
 },{"../package.json":3,"./common/circularize.js":5,"./common/job":6,"./node/index.js":4,"object-assign":1}]},{},[7])(7)
 });
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _tesseract = __webpack_require__(6);
-
-var _tesseract2 = _interopRequireDefault(_tesseract);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-document.getElementById('bill_image').onchange = function (i) {
-  document.getElementById('image_loader').classList.remove('fade-in');
-  _tesseract2.default.recognize(this.files[0]).then(function (result) {
-    console.log('result is: ', result);
-    document.getElementById('image_loader').classList.add('fade-in');
-
-    document.getElementById('image_result').innerHTML = result.html;
-  });
-};
 
 /***/ })
 /******/ ]);

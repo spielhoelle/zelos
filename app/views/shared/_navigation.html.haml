@@ -11,9 +11,11 @@
           %h6.d-flex.align-items-center.truncate.ml-1
             New Invoice
         - if action_name == "index"
-          - this_year_amount = @this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)
-          = "#{this_year_amount}€/y"
-          = "~#{(this_year_amount/Time.now.month).to_s.to_f.round(0)}€/m"
+          - this_year_amount = @this_year.visible.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)
+          = "#{this_year_amount}€ty"
+          - this_year_amount = @this_year.open.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)
+          = "#{this_year_amount}€o"
+          = "~#{(this_year_amount/Time.now.month).to_s.to_f.round(0)}€pm"
 
 
       - elsif controller_name == "customers"
@@ -39,16 +41,16 @@
             %li
               = link_to root_path, class: "teal-text" do
                 Zelos
-          %li.entries_link 
+          %li.entries_link
             = link_to admin_entries_path, class: " #{(controller_name == "entries") ? "grey darken-4" : ""}"do
               = "Invoices"
-          %li 
+          %li
             = link_to admin_customers_path, class: "customers_link #{(controller_name == "customers") ? "grey darken-4" : "" }" do
               = "Customers"
-          %li 
+          %li
             = link_to admin_bills_path, class: "bills_link #{(controller_name == "bills") ? "grey darken-4" : "" }" do
               = "Bills"
-          %li 
+          %li
             = link_to admin_summaries_path, class: "summaries_link #{(controller_name == "summaries") ? "grey darken-4" : "" }" do
               = "Summaries"
           %li
@@ -85,13 +87,13 @@
     %li
       = link_to admin_entries_path, class: " #{(controller_name == "entries") ? "grey darken-3" : ""}"do
         = "Invoices"
-    %li 
+    %li
       = link_to admin_customers_path, class: "customers_link #{(controller_name == "customers") ? "grey darken-3" : "" }" do
         = "Customers"
-    %li 
+    %li
       = link_to admin_bills_path, class: "bills_link #{(controller_name == "bills") ? "grey darken-3" : "" }" do
         = "Bills"
-    %li 
+    %li
       = link_to admin_summaries_path, class: "summaries_link #{(controller_name == "summaries") ? "grey darken-3" : "" }" do
         = "Summaries"
     %li
@@ -104,7 +106,7 @@
       = link_to destroy_user_session_path, :method => :delete, class: 'nav-link', title: t('devise.secondary_nav.sign_out') do
         = "Logout"
     .divider
-      
+
     %li
       = link_to destroy_user_session_path, :method => :delete, class: 'nav-link', title: t('devise.secondary_nav.sign_out') do
         = "Logout"

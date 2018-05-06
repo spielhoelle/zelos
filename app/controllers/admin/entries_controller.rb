@@ -22,15 +22,20 @@ module Admin
         end
         }
       end
-      @data2 = Customer.all.collect do |customer|
-        {
+
+      @data2 = []
+      Customer.all.map do |customer|
+        ctotal = []
+        customer.entries.visible.map do |entry|
+          ctotal << [customer.name, get_items_total(entry)]
+        end
+        # ctotal.unshift(customer.name)
+        entry = {
           name: customer.name,
-          data: customer.entries.visible.collect do |entry|
-            # FIXME The problem is that just the last entry will be taken instead of stacking them
-            # data structure should be like here https://developers.google.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts
-            [customer.name, entry.items.map{|i| (i.price * i.count/60).to_s}]
-          end
-        .sort {|a,b| a[1] <=> b[1]}}
+          data: ctotal
+        }
+        @data2 << entry
+        @data2 = @data2
       end
       respond_to do |format|
         format.html {
