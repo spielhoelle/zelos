@@ -14,7 +14,7 @@ class Entry < ActiveRecord::Base
     where.not("is_offer", true).where("status" => "open")
   }
   scope :visible, -> {
-    where.not("is_offer", true).where("status" => "paid").where.not("cash" => true)
+    where.not("is_offer", true).where.not("cash", true).where("status" => "paid")
   }
   def init
     self.invoice_date ||= Date.today

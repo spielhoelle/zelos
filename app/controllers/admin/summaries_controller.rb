@@ -11,7 +11,7 @@ module Admin
       @bills = Bill.all.group_by { |u| u.bill_date.beginning_of_year }
       @total = []
       @year_group.each_with_index do |year, index|
-        entries = Entry.where(:delivery_date => year[0].beginning_of_year..year[0].end_of_year)
+        entries = Entry.visible.where(:delivery_date => year[0].beginning_of_year..year[0].end_of_year)
         @total << {
           year: year[0].year,
           entries: entries.collect{ |x|  get_items_total(x)}.inject(0, :+),
