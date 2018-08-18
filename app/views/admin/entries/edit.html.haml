@@ -9,17 +9,22 @@
       .section.row
         .col.m6.s12
           .row.mb-3.d-flex.justify-space-between
-            .col.s4.switch
+            .col.s3.switch
               %label
                 Paid?
                 = f.check_box(:status, { class: '' }, "paid", "open")
                 %span.lever
-            .col.s4.switch
+            .col.s3.switch
               %label
                 Offer?
                 = f.check_box :is_offer, checked: params[:is_offer] == "true" ||  @entry.is_offer?
                 %span.lever
-            .col.s4.switch
+            .col.s3.switch
+              %label
+                Cash?
+                = f.check_box :cash, checked: params[:cash] == "true" ||  @entry.cash?
+                %span.lever
+            .col.s3.switch
               %label
                 Consultant?
                 = f.check_box :is_consultant, checked: params[:is_consultant] == "true" ||  @entry.is_consultant?

@@ -8,10 +8,12 @@ Customer.create!([
 puts "Customers created"
 
 Entry.create!([
-  {title: "My first cash this year", status: "paid", notes: "A note that will visible on the PDF", invoice_number: 149000001, invoice_date: ( Time.now - 3.days), delivery_date: (Time.now - 1.day), discount: 0, customer_id: Customer.first.id, private_note: "This note is just internally visible and will not be printed to the Invoice PDF"},
-  {title: "Some stuff I did", status: "paid", notes: "A note that will visible on the PDF", invoice_number: 149000002, invoice_date: ( Time.now - 4.days), delivery_date: (Time.now - 1.months), discount: 0, customer_id: Customer.first.id, private_note: "This note is just internally visible and will not be printed to the Invoice PDF"},
+  {title: "My first cash this year", status: "open", notes: "A note that will visible on the PDF", invoice_number: 149000001, invoice_date: ( Time.now - 3.days), delivery_date: (Time.now - 1.day), discount: 0, customer_id: Customer.first.id, private_note: "This note is just internally visible and will not be printed to the Invoice PDF"},
+  {title: "Some stuff I did", status: "paid", notes: "A note that will visible on the PDF", invoice_number: 149000002, invoice_date: ( Time.now - 4.days), delivery_date: (Time.now - 1.months), discount: 0, customer_id: Customer.first.id, is_offer: true, private_note: "This note is just internally visible and will not be printed to the Invoice PDF"},
   {title: "Example invoice title", status: "paid", notes: "A note that will visible on the PDF", invoice_number: 149000003, invoice_date: ( Time.now - 1.week), delivery_date: (Time.now - 2.months), discount: 0, customer_id: Customer.last.id, private_note: "This note is just internally visible and will not be printed to the Invoice PDF"},
-  {title: "Older stuff", notes: "A note that will visible on the PDF", invoice_number: 149000005, invoice_date: ( Time.now - 2.weeks), delivery_date: (Time.now - 13.months), discount: 0, customer_id: Customer.last.id, private_note: "This note is just internally visible and will not be printed to the Invoice PDF"}
+  {title: "Older stuff", status: "paid", notes: "A note that will visible on the PDF", invoice_number: 149000005, invoice_date: ( Time.now - 2.weeks), delivery_date: (Time.now - 13.months), discount: 0, customer_id: Customer.last.id, private_note: "This note is just internally visible and will not be printed to the Invoice PDF"},
+  {title: "Older stuff", status: "paid", notes: "A note that will visible on the PDF", invoice_number: 149000006, invoice_date: ( Time.now - 14.months), delivery_date: (Time.now - 15.months), discount: 9, customer_id: Customer.last.id, private_note: "This note is just internally visible and will not be printed to the Invoice PDF"},
+  {title: "Older stuff", status: "paid", notes: "A note that will visible on the PDF", invoice_number: 149000007, invoice_date: (Time.now - 25.months), delivery_date: (Time.now - 26.months), discount: 19, customer_id: Customer.last.id, private_note: "This note is just internally visible and will not be printed to the Invoice PDF"}
 ])
 puts "Entries created"
 
@@ -33,18 +35,20 @@ Entry.all.each do |entry|
     Item.create!(entry_id: entry.id, name: activity.sample, price: rand(200..1300))
   end
 end
-Item.create!([
-  {entry_id: Entry.first.id, name: "Website development", price: 500},
-  {entry_id: Entry.first.id, name: "Frontend design", price: 700},
-  {entry_id: Entry.find(1), name: "Plugin development", price: 800},
-  {entry_id: Entry.find(2), name: "Website development", price: 500},
-  {entry_id: Entry.find(2), name: "Frontend design", price: 700},
-  {entry_id: Entry.find(3), name: "Plugin development", price: 800},
-  {entry_id: Entry.find(3), name: "Website development", price: 500},
-  {entry_id: Entry.last.id, name: "Frontend design", price: 700},
-  {entry_id: Entry.last.id, name: "Plugin development", price: 800.21},
-])
-puts "Items created"
+puts "Itrems created"
+
+# Item.create!([
+#   {entry_id: Entry.first.id, name: "Website development", price: 500},
+#   {entry_id: Entry.first.id, name: "Frontend design", price: 700},
+#   {entry_id: Entry.find(1), name: "Plugin development", price: 800},
+#   {entry_id: Entry.find(2), name: "Website development", price: 500},
+#   {entry_id: Entry.find(2), name: "Frontend design", price: 700},
+#   {entry_id: Entry.find(3), name: "Plugin development", price: 800},
+#   {entry_id: Entry.find(3), name: "Website development", price: 500},
+#   {entry_id: Entry.last.id, name: "Frontend design", price: 700},
+#   {entry_id: Entry.last.id, name: "Plugin development", price: 800.21},
+# ])
+# puts "Items created"
 Bill.create!([
   {title: "Buisness lunch with Michael", price: 123.45, bill_date: (Time.now - 1.month), image: open("http://placecage.com/#{rand(200..400)}/#{rand(250..300)}"),},
   {title: "Laptop", price: 1999.99, bill_date: (Time.now - 3.month), image: open("http://placecage.com/#{rand(200..400)}/#{rand(250..300)}"),},

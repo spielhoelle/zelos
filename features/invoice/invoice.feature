@@ -31,6 +31,7 @@ Feature: There should be invoices visible in the admin entries page
 
     When I go to the admin invoice page
 
+    Then show me the page
     Then I should see a table with exactly the following rows
       """
       | Type         | Title                 | Delivery date | Total        |
