@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180818123758) do
+ActiveRecord::Schema.define(version: 20180818123759) do
 
   create_table "bills", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "title",              limit: 65535
@@ -54,11 +54,12 @@ ActiveRecord::Schema.define(version: 20180818123758) do
     t.integer  "entry_id"
     t.text     "name",       limit: 65535
     t.decimal  "price",                    precision: 10, scale: 2
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
     t.integer  "count",                                             default: 0
     t.integer  "sort"
     t.datetime "item_date"
+    t.boolean  "expense",                                           default: false
     t.index ["entry_id"], name: "index_items_on_entry_id", using: :btree
   end
 

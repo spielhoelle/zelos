@@ -125,6 +125,13 @@
                   - if index == 0
                     = ff.label "Price",class: "active"
                   = ff.number_field :price, step: 0.01, :required => true, class: "validate mb-0 w-5 mr-1"
+                .switch
+                  %label
+                    Expense?
+                    = ff.check_box :expense, checked: ff.object.expense?
+
+                    %span.lever
+
                 .text-right.order-2.order-md-auto
                   .right
                     = ff.remove_nested_fields_link do
