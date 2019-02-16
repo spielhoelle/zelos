@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20180818123759) do
 
-  create_table "bills", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "bills", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.text     "title",              limit: 65535
     t.decimal  "price",                            precision: 10, scale: 2
     t.datetime "bill_date"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20180818123759) do
     t.datetime "updated_at",                                                null: false
   end
 
-  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.text     "name",       limit: 65535
     t.text     "company",    limit: 65535
     t.string   "address"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20180818123759) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.text     "notes",          limit: 65535
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20180818123759) do
     t.boolean  "cash",                         default: false
   end
 
-  create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "entry_id"
     t.text     "name",       limit: 65535
     t.decimal  "price",                    precision: 10, scale: 2
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20180818123759) do
     t.index ["entry_id"], name: "index_items_on_entry_id", using: :btree
   end
 
-  create_table "settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "var",                      null: false
     t.text     "value",      limit: 65535
     t.integer  "thing_id"
@@ -73,13 +73,13 @@ ActiveRecord::Schema.define(version: 20180818123759) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
   end
 
-  create_table "summaries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "summaries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.datetime "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
