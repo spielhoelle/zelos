@@ -7,13 +7,14 @@
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js', 'data-turbolinks-track': 'reload'
     = favicon_link_tag 'favicon.ico'
     = csrf_meta_tag
     :css
       :root {
         --mdc-theme-primary: #000000;
       }
-    %meta{:content => "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi", :name => "viewport"}/
+    %meta{:content => "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height", :name => "viewport"}/
   %body{class: class_for_controller, "data-spy" => "scroll", "data-target" => "#collapsingNavbarv"}
 
     %header

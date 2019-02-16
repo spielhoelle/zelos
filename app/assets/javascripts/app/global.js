@@ -1,9 +1,6 @@
 $(document).on('turbolinks:load', function() {
   Waves.displayEffect(); // Initialize buttons wave effects
-  $(".button-collapse").sideNav(); // Initialize collapse button
-  $('select').material_select();
-  $('.materialboxed').materialbox();
-
+  $(".button-collapse").sidenav(); // Initialize collapse button
 });
 
 

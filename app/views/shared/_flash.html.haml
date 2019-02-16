@@ -2,13 +2,16 @@
   = puts name
   - if name == "success"
     :javascript
-      $(function(){Materialize.toast("#{msg}", 2000, 'rounded teal white-text');});
+      $(function(){M.toast({html: "#{msg}", classes: ' teal white-text'});});
   - elsif name == "error"
     :javascript
-      $(function() {Materialize.toast("#{msg}", 2000, 'rounded red white-text');});
+      $(function() {M.toast({html: "#{msg}", classes: ' red white-text'});});
   - elsif name == "alert"
     :javascript
-      $(function() {Materialize.toast("#{msg}", 2000, 'rounded orange white-text');});
+      $(function() {M.toast({html: "#{msg}", classes: ' orange white-text'});});
+  - elsif name == "notice"
+    :javascript
+      $(function() {M.toast({html: "#{msg}", classes: 'teal lighten-4'});});
   - else
     :javascript
-      $(function(){Materialize.toast("#{msg}", 2000, 'rounded');});
+      $(function(){M.toast({html: "#{msg}", classes: ''});});

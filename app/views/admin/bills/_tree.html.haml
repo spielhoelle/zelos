@@ -24,7 +24,7 @@
         %tr.bill
           %td.hide-on-med-and-down
             .fixed-ratio
-              = image_tag bill.image, class: "materialboxed fixed-ratio__inner", width: 100
+              = image_tag bill.image.url, class: "materialboxed fixed-ratio__inner", width: 100
           %td{style: "display: grid"}
             = link_to edit_admin_bill_path(bill), class: "truncate bill--title" do
               = bill.title

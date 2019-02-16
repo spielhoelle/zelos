@@ -89,9 +89,7 @@ __webpack_require__(6);
 
 $(document).on('turbolinks:load', function () {
   Waves.displayEffect(); // Initialize buttons wave effects
-  $(".button-collapse").sideNav(); // Initialize collapse button
-  $('select').material_select();
-  $('.materialboxed').materialbox();
+  $(".button-collapse").sidenav(); // Initialize collapse button
 });
 
 /***/ }),
@@ -138,21 +136,13 @@ if (document.querySelectorAll(".flash-alert").length > 0) {
 $(document).ready(function () {
   $('.parallax').parallax();
 });
-var options = [{ selector: ".scrollfire1", offset: 100, callback: function callback(el) {
-    fadeIn($(el));
-  } }, { selector: ".scrollfire2", offset: 100, callback: function callback(el) {
-    fadeIn($(el));
-  } }, { selector: ".scrollfire3", offset: 300, callback: function callback(el) {
-    fadeIn($(el));
-  } }, { selector: ".scrollfire4", offset: 300, callback: function callback(el) {
-    fadeIn($(el));
-  } }];
-$(function () {
-  Materialize.scrollFire(options);
-});
+
 function fadeIn(el) {
   el.children().addClass('visible');
 }
+$(document).ready(function () {
+  $('.fixed-action-btn').floatingActionButton();
+});
 
 /***/ }),
 /* 4 */

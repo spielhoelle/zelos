@@ -89,7 +89,7 @@ module Admin
       end
 
       if @entry.update_attributes(entry_params)
-        flash[:notice] = 'Entry has been saved successfully!'
+        flash[:success] = 'Entry has been saved successfully!'
       else
         flash[:error] = @entry.errors.full_messages.first.to_s
       end

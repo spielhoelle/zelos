@@ -25,8 +25,8 @@
               = link_to Setting["website"], "http://#{ Setting["website"] }", target: "_blank", class: ""
               = " - "
               = mail_to Setting["mail"], Setting["mail"], subject: "Rückfragen zur Rechnung: #{invoice.invoice_number}", target: "_blank", class: ""
-            -#%li.collection-item
-              -#= "Steuernummer: #{Setting["tax_id"]}"
+            %li.collection-item
+              = "Steuernummer: #{Setting["tax_id"]}"
             %li.collection-item
               -if invoice.is_offer?
                 = "#{t('onr')} #{invoice.invoice_number}"

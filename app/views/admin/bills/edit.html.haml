@@ -12,7 +12,7 @@
           .form-group
             - unless action_name == "new"
               .position-relative
-                = image_tag(@bill.image, class: "materialboxed w-100")
+                = image_tag(@bill.image.url, class: "materialboxed w-100")
             - else
               %img.materialboxed.w-100
             #image_result.absolute-cover
