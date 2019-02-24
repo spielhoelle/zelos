@@ -58,17 +58,22 @@
           .input-field
             = f.label :invoice_number, class: "active"
             = f.number_field :invoice_number, class: "validate"
-          .input-field.row.mt-0.pb-1
-            .col.s6.input-field
+          .row.mt-0.pb-1
+            .col.input-field
               = f.label :invoice_date, class: "active"
               = f.date_field :invoice_date, class: "validate datepicker mb-0"
-            .col.s6.input-field
+            .col.switch
+              %label
+                Sum Time?
+                = f.check_box :sum_time, checked: params[:sum_time] == "true" ||  @entry.sum_time == true, id: "entry_sum_time"
+                %span.lever
+            .col.input-field
               = f.label :delivery_date, class: "active"
-              = f.date_field :delivery_date, class: "validate mb-0"
+              = f.date_field :delivery_date, class: "validate mb-0", disabled:  params[:sum_time] == "false" ||  @entry.sum_time == false
 
-          %ul.box-shadow-0.m-0.collapsible{"data-collapsible" => "expandable"}
-            %li
-              .collapsible-header.hiddendiv{class: @entry.is_offer? || params[:is_offer] ? "active": ""}
+          %ul.box-shadow-0.m-0.collapsible{"data-collapsible" => "expandable", "data-name" => "entry_is_offer"}
+            %li{class: @entry.is_offer? || params[:is_offer] ? "active": ""}
+              .collapsible-header.hiddendiv
               .collapsible-body.pr-0.pl-0.pb-0.no-border.pt-0
                 .input-field
                   = f.label :valid_until, class: action_name == "edit" ? "active" : ""
@@ -108,7 +113,7 @@
                 .input-field.flex-md-grow.mr-1.order-1.order-md-auto
                   - if index == 0
                     = ff.label :item_date, class: action_name == "edit" ? "active" : ""
-                  = ff.date_field :item_date, class: "validate datepicker"
+                  = ff.date_field :item_date, class: "validate datepicker", disabled:  params[:sum_time] == "true" ||  @entry.sum_time == true
                 .input-field.flex-grow.full-width.mr-1
                   - if index == 0
                     = ff.label "Activity", class: "active"

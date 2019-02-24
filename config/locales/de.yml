@@ -52,3 +52,4 @@ de:
   bill_updated: "updated successfully!"
   bill_destroyed: "destroy successfully!"
   valid_until: "Dieses Angebot gilt bis zum %{valid_until}."
+  date: "Datum"

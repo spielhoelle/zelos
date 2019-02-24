@@ -1,21 +1,44 @@
-var sel = document.getElementById('entry_is_offer');
-if(sel){
-  sel.onchange = function() {
-    if (this.checked == true) {
-      $(".collapsible-header").addClass("active");
-      $(".collapsible").collapsible({accordion: false});
-      $('#invoice_type').text("Offer");
-    } else {
-      $(".collapsible-header").removeClass("active");
-      $(".collapsible").collapsible({accordion: true});
-      $('#invoice_type').text("Invoice");
+document.addEventListener('DOMContentLoaded', function () {
+  var elems = document.querySelectorAll('.collapsible');
+  var instances = M.Collapsible.init(elems);
+  console.log('instances', instances);
+
+  var sel = document.getElementById('entry_is_offer');
+  if (sel) {
+    sel.onchange = function () {
+      for (let instance of instances) {
+        if (instance.el.dataset.name == this.id) {
+          if (this.checked == true) {
+            console.log('instance.el.dataset.name == this.id', instance.el.dataset.name, this.id);
+            instance.open();
+          } else {
+            instance.close();
+          }
+        }
+      }
     }
   }
-}
+  var sumTime = document.getElementById('entry_sum_time');
+  if (sumTime) {
+    sumTime.onchange = function () {
+      if (this.checked == true) {
+        document.getElementById('entry_delivery_date').disabled = false;
+        for (let item of document.querySelectorAll("fieldset .d-flex > .input-field:first-child input")){
+          item.disabled = true;
+        }
+      } else {
+        document.getElementById('entry_delivery_date').disabled = true;
+        for (let item of document.querySelectorAll("fieldset .d-flex > .input-field:first-child input")){
+          item.disabled = false;
+        }
+      }
+    }
+  }
+});
+
 $(function() {
   $('.sortable').railsSortable({
     placeholder: "ui-state-highlight",
-
   });
   $('.nested_index').each(function(){
     this.parentElement.id = "Item_" + this.innerText

@@ -62,6 +62,8 @@
                   %th= t('consultation')
                 - else
                   %th= t('item')
+                - unless invoice.sum_time?
+                  %th= t('date')
                 %th.text-right= t('count')
                 %th.text-right= t('price')
                 %th.text-right= t('sum')
@@ -71,7 +73,10 @@
                 -#   - item.price = item.price*(invoice.discount/100.00)
                 %tr
                   %td= index + 1
+                    
                   %td= item.name
+                  - unless invoice.sum_time?
+                    %td= item.item_date.strftime("%d.%m.%Y")
                   %td.text-right= item.count == 0 ? "" : '%.02f' % ( item.count / 60 + item.count % 60.00 / 100.00)
 
                   %td.no-wrap.text-right= item.count == 0 ? "" : number_to_currency(item.price, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
