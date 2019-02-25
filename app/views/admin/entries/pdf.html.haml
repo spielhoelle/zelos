@@ -38,9 +38,10 @@
               -else
                 = "#{t('date')} #{invoice.invoice_date.strftime("%d.%m.%Y")}"
 
-            - if invoice.invoice_date.strftime("%d.%m.%Y") != invoice.delivery_date.strftime("%d.%m.%Y")
-              %li.collection-item
-                = "#{t('del_date')} #{invoice.delivery_date.strftime("%d.%m.%Y")}"
+            - if invoice.sum_time?
+              - if invoice.invoice_date.strftime("%d.%m.%Y") != invoice.delivery_date.strftime("%d.%m.%Y")
+                %li.collection-item
+                  = "#{t('del_date')} #{invoice.delivery_date.strftime("%d.%m.%Y")}"
 
         -#- if @request == 'html'
           -#= image_tag('logo.png', id: "logo", class: "full-width")
