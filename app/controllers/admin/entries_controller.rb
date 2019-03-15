@@ -87,8 +87,11 @@ module Admin
         @customer = Customer.find(entry_params["customer_attributes"]["id"])
         @entry.customer = @customer
       end
-
+      
       if @entry.update_attributes(entry_params)
+        if entry_params["sum_time"] == "0"
+          @entry.update_attribute(:delivery_date, entry_params["invoice_date"])
+        end
         flash[:success] = 'Entry has been saved successfully!'
       else
         flash[:error] = @entry.errors.full_messages.first.to_s

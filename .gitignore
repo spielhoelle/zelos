@@ -64,3 +64,4 @@ config/secrets.yml
 tags
 config/app.yml
 *.sql
+*.sql.gz
