@@ -1,23 +1,23 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :setting do
     factory :setting_name do
-      var "name"
-      value "Tommy"
+      var{ "name"}
+      value{ "Tommy"}
     end
     factory :setting_website do
-      var "website"
-      value "www.example.com"
+      var {"website"}
+      value {"www.example.com"}
     end
   end
 
   factory :entry do
     title { FFaker::Job.title }
     notes { FFaker::CheesyLingo.sentence }
-    invoice_number 149000001 
+    invoice_number {149000001} 
     invoice_date { FFaker::Time.datetime } 
     delivery_date { FFaker::Time.datetime } 
-    discount 0 
-    private_note "This note is just internally visible and will not be printed to the Invoice PDF"
+    discount {0 }
+    private_note {"This note is just internally visible and will not be printed to the Invoice PDF"}
     #customer_id { Customer.first.id } 
   end
 

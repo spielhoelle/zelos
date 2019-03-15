@@ -9,6 +9,6 @@ end
 
 
 When(/^I sign in$/) do
-  @user = FactoryGirl.create(:user)
+  @user = FactoryBot.create(:user)
   login_as(@user, :scope => :user)
 end

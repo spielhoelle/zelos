@@ -58,5 +58,5 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Capybara.default_driver = :selenium
 
-World(FactoryGirl::Syntax::Methods)
+World(FactoryBot::Syntax::Methods)
 require 'spreewald/all_steps'

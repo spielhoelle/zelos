@@ -17,7 +17,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.4'
   gem 'rspec-mocks'
-  gem "factory_girl_rails", "~> 4.0"
+  gem "factory_bot_rails"
   gem 'rspec-collection_matchers'
   gem 'ffaker'  
   gem 'selenium-webdriver'
@@ -25,7 +25,6 @@ group :development, :test do
   gem 'pry-nav'
   gem 'pry-rails'
   gem 'pry-rescue'
-  gem 'pry-remote'
   gem 'pry-stack_explorer'
   gem 'pry-byebug', '~> 1.3'
 end

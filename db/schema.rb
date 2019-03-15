@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_02_24_131108) do
 
-  create_table "bills", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "bills", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "title"
     t.decimal "price", precision: 10, scale: 2
     t.datetime "bill_date"
@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 2019_02_24_131108) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "customers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.text "name", collation: "utf8_general_ci"
-    t.text "company", collation: "utf8_general_ci"
-    t.string "address", collation: "utf8_general_ci"
+  create_table "customers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "name"
+    t.text "company"
+    t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_131108) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
-  create_table "summaries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "summaries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

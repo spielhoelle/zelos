@@ -1,11 +1,11 @@
 
 When(/^I sign in$/) do
-  @user = FactoryGirl.create(:user)
+  @user = FactoryBot.create(:user)
   login_as(@user, :scope => :user)
 end
 
 When(/^I sign in as an admin user$/) do
-  @admin = FactoryGirl.create(:admin_user)
+  @admin = FactoryBot.create(:admin_user)
   login_as(@admin_user, :scope => :admin_user)
 end
 
@@ -39,6 +39,6 @@ def model_and_role_from_string(string)
 end
 
 Given(/^I am signed in$/) do
-  @me = FactoryGirl.create(:user)
+  @me = FactoryBot.create(:user)
   login_as(@me, :scope => :user)
 end
