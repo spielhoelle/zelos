@@ -78,19 +78,6 @@ table.highlight > tbody > tr:hover
   z-index: 1000
 .diff *
   color: inherit
-.scrollfire
-  > *
-    opacity: 0
-    transform: translateY(50px)
-  .visible
-    opacity: 1
-    transform: translateY(0)
-    $time: 0s
-    $i: 0
-    @for $i from 0 through 20
-      &:nth-child(#{$i})
-        transition: opacity .5s ease $time, transform .5s ease $time
-      $time: $time + 0.3
 
 textarea
   -webkit-appearance: none

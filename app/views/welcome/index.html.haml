@@ -84,12 +84,12 @@
 .section.no-pad-bot
   .container
     .row.center.mt-4.mb-4
-      %h3 You are still on the fucking landing page.
+      %h3 You are still on the landing page.
       %h5.light
         This open-source-software is still in beta and under development.
         If you find any bugs or improvements, create and issue on 
         = link_to "Github.", "https://github.com/spielhoelle/zelos", target: "_blank"
-        If you want to help improve - clone the project, create a new branch and give me a pull-request.
+        If you want to help improve - fork the project and give me a pull-request.
     .row.center.mt-4
       - if user_signed_in?
         = link_to admin_entries_path, class: "btn waves-effect waves-light" do
