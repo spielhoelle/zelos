@@ -97,7 +97,7 @@ module Admin
         flash[:error] = @entry.errors.full_messages.first.to_s
       end
 
-      redirect_to edit_admin_entry_path(@entry)
+      redirect_to edit_admin_entry_path(@entry, :updated => "true")
     end
 
     def create

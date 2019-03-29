@@ -196,12 +196,21 @@ $(document).ready(function () {
 "use strict";
 
 
-document.addEventListener('DOMContentLoaded', function () {
-  var elems = document.querySelectorAll('.collapsible');
+document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll(".collapsible");
   var instances = M.Collapsible.init(elems);
-  console.log('instances', instances);
+  console.log("instances");
+  var ca_ching = document.getElementById("ca_ching");
+  if (ca_ching) {
+    ca_ching.play();
+    var uri = window.location.toString();
+    if (uri.indexOf("?") > 0) {
+      var clean_uri = uri.substring(0, uri.indexOf("?"));
+      window.history.replaceState({}, document.title, clean_uri);
+    }
+  }
 
-  var sel = document.getElementById('entry_is_offer');
+  var sel = document.getElementById("entry_is_offer");
   if (sel) {
     sel.onchange = function () {
       var _iteratorNormalCompletion = true;
@@ -214,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
           if (instance.el.dataset.name == this.id) {
             if (this.checked == true) {
-              console.log('instance.el.dataset.name == this.id', instance.el.dataset.name, this.id);
+              console.log("instance.el.dataset.name == this.id", instance.el.dataset.name, this.id);
               instance.open();
             } else {
               instance.close();
@@ -237,11 +246,11 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     };
   }
-  var sumTime = document.getElementById('entry_sum_time');
+  var sumTime = document.getElementById("entry_sum_time");
   if (sumTime) {
     sumTime.onchange = function () {
       if (this.checked == true) {
-        document.getElementById('entry_delivery_date').disabled = false;
+        document.getElementById("entry_delivery_date").disabled = false;
         var _iteratorNormalCompletion2 = true;
         var _didIteratorError2 = false;
         var _iteratorError2 = undefined;
@@ -267,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }
       } else {
-        document.getElementById('entry_delivery_date').disabled = true;
+        document.getElementById("entry_delivery_date").disabled = true;
         var _iteratorNormalCompletion3 = true;
         var _didIteratorError3 = false;
         var _iteratorError3 = undefined;
@@ -298,45 +307,45 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 $(function () {
-  $('.sortable').railsSortable({
+  $(".sortable").railsSortable({
     placeholder: "ui-state-highlight"
   });
-  $('.nested_index').each(function () {
+  $(".nested_index").each(function () {
     this.parentElement.id = "Item_" + this.innerText;
   });
 });
 
-$(document).on('click', '.note-part', function () {
-  $('#entry_notes').val($('#entry_notes').text() + "\n" + this.dataset.value);
-  $('#entry_notes').prev().addClass('active');
+$(document).on("click", ".note-part", function () {
+  $("#entry_notes").val($("#entry_notes").text() + "\n" + this.dataset.value);
+  $("#entry_notes").prev().addClass("active");
 });
 
 $(document).on("fields_added.nested_form_fields", function (event, param) {
-  $('.nested_entry_items').last().find('input:first').focus();
+  $(".nested_entry_items").last().find("input:first").focus();
 });
 
 $(document).on("fields_added.nested_form_fields", function (event, param) {
-  $('.nested_entry_items').last().find('input:first').focus();
+  $(".nested_entry_items").last().find("input:first").focus();
 });
 
 $(document).ready(function () {
   // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-  $('.modal').modal({
+  $(".modal").modal({
     dismissible: true, // Modal can be dismissed by clicking outside of the modal
-    opacity: .5, // Opacity of modal background
+    opacity: 0.5, // Opacity of modal background
     inDuration: 300, // Transition in duration
     outDuration: 200, // Transition out duration
-    startingTop: '4%', // Starting top style attribute
-    endingTop: '10%', // Ending top style attribute
+    startingTop: "4%", // Starting top style attribute
+    endingTop: "10%", // Ending top style attribute
     ready: function ready(modal, trigger) {
       // Callback for Modal open. Modal and trigger parameters available.
-      $('#user_email').focus().click();
+      $("#user_email").focus().click();
     },
     complete: function complete() {} // Callback for Modal close
   });
 });
-$(document).on('turbolinks:load', function () {
-  if ($('body').hasClass('customers') || $('body').hasClass('entries-edit') || $('body').hasClass('entries-new')) {
+$(document).on("turbolinks:load", function () {
+  if ($("body").hasClass("customers") || $("body").hasClass("entries-edit") || $("body").hasClass("entries-new")) {
     $(function () {
       $.ajax({
         dataType: "json",
@@ -349,37 +358,36 @@ $(document).on('turbolinks:load', function () {
             result[e.name] = null;
             address_result[e.name] = [e.address, e.company, e.id];
           });
-          $('.autocomplete').autocomplete({
+          $(".autocomplete").autocomplete({
             data: result,
             limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
             onAutocomplete: function onAutocomplete(val) {
-              if ($('body').hasClass('customers-index')) {
-                $('form#search-form').submit();
+              if ($("body").hasClass("customers-index")) {
+                $("form#search-form").submit();
               }
-              var id = $('#entry_customer_attributes_id');
-              var address = $('#entry_customer_attributes_address');
-              var company = $('#entry_customer_attributes_company');
+              var id = $("#entry_customer_attributes_id");
+              var address = $("#entry_customer_attributes_address");
+              var company = $("#entry_customer_attributes_company");
               id.val(address_result[val][2]);
-              address.val(address_result[val][0]).prop('readonly', true);;
-              company.val(address_result[val][1]).prop('readonly', true);;
-              address.prev().addClass('active');
-              company.prev().addClass('active');
+              address.val(address_result[val][0]).prop("readonly", true);
+              company.val(address_result[val][1]).prop("readonly", true);
+              address.prev().addClass("active");
+              company.prev().addClass("active");
             },
             minLength: 0 // The minimum length of the input for the autocomplete to start. Default: 1.
           });
         }
       });
     });
-    $('.autocomplete').on("change", function (e) {
+    $(".autocomplete").on("change", function (e) {
       var value = $(e.currentTarget).val(); // ...and using it here
       if (value === "") {
-        var text_field = $('#entry_customer_attributes_address, #entry_customer_attributes_company, #entry_customer_attributes_id');
-        text_field.val("").prop('readonly', false);
-        text_field.prev().removeClass('active');
+        var text_field = $("#entry_customer_attributes_address, #entry_customer_attributes_company, #entry_customer_attributes_id");
+        text_field.val("").prop("readonly", false);
+        text_field.prev().removeClass("active");
       }
     });
-  } else if ($('body').hasClass('entries-index')) {
-
+  } else if ($("body").hasClass("entries-index")) {
     $(function () {
       $.ajax({
         dataType: "json",
@@ -392,11 +400,11 @@ $(document).on('turbolinks:load', function () {
             result[e.title] = null;
             address_result[e.title] = [e.title, e.id];
           });
-          $('.autocomplete').autocomplete({
+          $(".autocomplete").autocomplete({
             data: result,
             limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
             onAutocomplete: function onAutocomplete(val) {
-              $('form#search-form').submit();
+              $("form#search-form").submit();
             },
             minLength: 0 // The minimum length of the input for the autocomplete to start. Default: 1.
           });

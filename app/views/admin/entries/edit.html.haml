@@ -2,7 +2,10 @@
   - path = admin_entries_path
 - elsif action_name == "edit"
   - path = admin_entry_path(@entry)
-%section.container.row.full-width.no-max-width
+  
+  %section.container.row.full-width.no-max-width
+  = audio_tag("ca_ching.mp3", :id => 'ca_ching')
+  
   .col.s12
     = form_for(@entry, url: path) do |f|
 
