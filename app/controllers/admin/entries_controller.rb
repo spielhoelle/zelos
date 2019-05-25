@@ -51,6 +51,7 @@ module Admin
     def new
       @entry = Entry.new
       @items = @entry.items.build
+      @title = "#{params[:is_offer] ? "New offer" : "New invoice"} | Zelos"
       @customer = @entry.customer || Customer.new
       render 'edit'
     end
