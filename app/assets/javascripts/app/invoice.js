@@ -1,17 +1,15 @@
-document.addEventListener("DOMContentLoaded", function() {
-  var elems = document.querySelectorAll(".collapsible");
-  var instances = M.Collapsible.init(elems);
-  console.log("instances");
-  const ca_ching = document.getElementById("ca_ching");
-  if (ca_ching) {
+var elems = document.querySelectorAll(".collapsible");
+var instances = M.Collapsible.init(elems);
+const ca_ching = document.getElementById("ca_ching");
+if (ca_ching) {
+  var uri = window.location.toString();
+  if (uri.indexOf("?") > 0) {
     ca_ching.play();
-    var uri = window.location.toString();
-    if (uri.indexOf("?") > 0) {
-      var clean_uri = uri.substring(0, uri.indexOf("?"));
-      window.history.replaceState({}, document.title, clean_uri);
-    }
+    var clean_uri = uri.substring(0, uri.indexOf("?"));
+    window.history.replaceState({}, document.title, clean_uri);
   }
-
+}
+document.addEventListener("DOMContentLoaded", function() {
   var sel = document.getElementById("entry_is_offer");
   if (sel) {
     sel.onchange = function() {

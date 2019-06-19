@@ -13,9 +13,9 @@
 //= require jquery
 //= require turbolinks
 //= require materialize-sprockets
+//= require jquery_ujs
 //= require jquery-ui/widgets/sortable
 //= require rails_sortable
-//= require jquery_ujs
 //= require Chart.bundle
 //= require chartkick
 
