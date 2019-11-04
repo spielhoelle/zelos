@@ -85,9 +85,9 @@
               - if invoice.discount != 0
                 %tr
                   %td.text-right{colspan: 4}
-                    %h5.m-0=t('netto')
+                    =t('netto')
                   %td.text-right
-                    %h5.m-0.no-wrap= number_to_currency(total, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
+                    .no-wrap= number_to_currency(total, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
                 %tr
                   %td.text-right{colspan: 4}
                     =t('vat')
@@ -100,9 +100,9 @@
                   %td
                   %td
                   %td.text-right.pt-3
-                    =t('total')
+                    %h5.m-0=t('total')
                   %td.text-right
-                    .no-wrap= number_to_currency(total + (total.to_i * (invoice.discount / 100.00)), :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
+                    %h5.m-0.no-wrap= number_to_currency(total + (total.to_i * (invoice.discount / 100.00)), :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
 
               - else
                 %tr.total
