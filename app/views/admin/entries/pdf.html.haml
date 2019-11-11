@@ -84,11 +84,13 @@
                   %td.text-right= number_to_currency(item.count == 0 ? item.price : ( item.count/60.00 * item.price ), :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
               - if invoice.discount != 0
                 %tr
+                  %td
                   %td.text-right{colspan: 4}
                     =t('netto')
                   %td.text-right
                     .no-wrap= number_to_currency(total, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
                 %tr
+                  %td
                   %td.text-right{colspan: 4}
                     =t('vat')
                     = "#{ invoice.discount } %"
@@ -96,6 +98,7 @@
 
                 / - if invoice.items.count > 1 || invoice.discount != 0
                 %tr.total
+                  %td
                   %td
                   %td
                   %td
