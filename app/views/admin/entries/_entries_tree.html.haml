@@ -24,6 +24,8 @@
 
         %tr.entry
           %td.text-right.w-5
+            = entry.invoice_number
+          %td.text-right.w-5
             - if !entry.is_offer? && !entry.cash?
               %i.material-icons.tooltipped{"data-delay": 10, "data-position":"top", "data-tooltip": entry.is_consultant? ? "consultant" : "freelancer" }= entry.is_consultant? ? "local_library" : "code"
             %i.material-icons{class: entry.status == "paid" ? "green-text" :  "red-text"}= entry.is_offer? ? "info_outline" : entry.cash? ? "attach_money" : "done"
