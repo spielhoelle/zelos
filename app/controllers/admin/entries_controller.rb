@@ -4,16 +4,25 @@ module Admin
     before_action :authenticate_user!
 
     def index
-
       @ordered_entries = Entry.order("delivery_date desc")
+
       unless params[:search].blank?
-        search_string = params[:search]
-        @ordered_entries = @ordered_entries.where('title LIKE ?', "%#{search_string}%")
+        @ordered_entries = @ordered_entries.where('title LIKE ?', "%#{params[:search]}%")
+      end
+      unless params[:year].blank?
+        @ordered_entries = @ordered_entries.where('extract(year  from delivery_date) = ?', params[:year])
+        @this_year =  @ordered_entries
+      else 
+        @this_year =  @ordered_entries.where("delivery_date >= ?", Time.zone.now.beginning_of_year)
       end
       @entries = @ordered_entries.group_by { |u| u.delivery_date.beginning_of_year }
 
-      @this_year =  @ordered_entries.where("delivery_date >= ?", Time.zone.now.beginning_of_year)
-      @title = "#{@this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)} € this year"
+      if params[:year].blank? && params[:search].blank?
+        @title = "#{@this_year.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)} € this year"
+      else 
+        @title = "#{@ordered_entries.collect { |x| get_items_total(x)}.reduce(0, :+).to_s.to_f.round(0)} €"
+      end
+
       @chart_lastyear = @this_year.where("customer_id IS NOT NULL").collect{ |e| [e.customer.company, e.items.map{|i| (i.price * i.count/60).to_s.to_f.round(2)}.inject(0, :+)] }.sort {|a,b| a[1] <=> b[1]}.reverse
       @data = @this_year.where("customer_id IS NOT NULL").order("delivery_date desc").map do |value|
         {name: value.customer.name,

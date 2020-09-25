@@ -19,7 +19,9 @@
   %tbody
     -@entries.each_with_index do |year, index|
       %tr
-        %th.white-text.center{colspan: 7}= year[0].year
+        %th.white-text.center{colspan: 7}
+          = link_to admin_entries_path(:year => year[0].year) do
+            = year[0].year
       - year[1].each_with_index do |entry, index|
 
         %tr.entry
