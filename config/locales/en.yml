@@ -52,3 +52,4 @@ en:
   bill_destroyed: "destroyed successfully!"
   valid_until: "This offer is valid until %{valid_until}."
   date: "Date"
+  taxnumber: "Taxnumber"
