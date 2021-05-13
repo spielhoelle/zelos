@@ -25,8 +25,9 @@
               = link_to Setting["website"], "http://#{ Setting["website"] }", target: "_blank", class: ""
               = " - "
               = mail_to Setting["mail"], Setting["mail"], subject: "Rückfragen zur Rechnung: #{invoice.invoice_number}", target: "_blank", class: ""
-            %li.collection-item
-              = "#{t('taxnumber')}: #{Setting["tax_id"]}"
+            - if Setting["tax_id"] != ""
+              %li.collection-item
+                = "#{t('taxnumber')}: #{Setting["tax_id"]}"
             %li.collection-item
               -if invoice.is_offer?
                 = "#{t('onr')} #{invoice.invoice_number}"
@@ -78,14 +79,14 @@
                   %td= item.name
                   - unless invoice.sum_time?
                     %td= item.item_date.strftime("%d.%m.%Y")
-                  %td.text-right= item.count == 0 ? "" : '%.02f' % ( item.count / 60 + item.count % 60.00 / 100.00)
+                  %td.text-right= item.count == 0 ? "0 h" : '%.02f' % ( item.count / 60 + item.count % 60.00 / 100.00) + " h"
 
                   %td.no-wrap.text-right= item.count == 0 ? "" : number_to_currency(item.price, :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
-                  %td.text-right= number_to_currency(item.count == 0 ? item.price : ( item.count/60.00 * item.price ), :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
+                  %td.text-right= number_to_currency(item.count == 0 ? "0" : ( item.count/60.00 * item.price ), :unit => "€", :separator => ",", :delimiter => "", :format => "%n %u")
               %tr
                 %td
                 %td.text-right{colspan: 3}
-                  = "#{ invoice.items.collect{|x| x.count}.reduce(0, :+) / 60 }.#{invoice.items.collect{|x| x.count}.reduce(0, :+) % 60}"
+                  = "#{ invoice.items.collect{|x| x.count}.reduce(0, :+) / 60 }.#{invoice.items.collect{|x| x.count}.reduce(0, :+) % 60} h"
                 %td.text-right{colspan: 1}
                   - if invoice.discount != 0
                     =t('netto')

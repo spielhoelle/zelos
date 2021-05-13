@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :entries do
       get 'clone', on: :member
+      get 'import', on: :member
       resources :items
       resource :download, only: [:show]
     end

@@ -105,7 +105,11 @@
 
 
       .section
-        %h4 Items
+        %h4 
+          Items
+          = link_to import_admin_entry_path(), class: "btn waves-effect waves-light" do
+            %span Import from toggleTrack
+
         .row.mb-5
           .sortable
             - index = 0

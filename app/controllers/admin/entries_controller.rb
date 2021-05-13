@@ -1,3 +1,6 @@
+
+require 'net/http'
+require 'JSON'
 module Admin
   class EntriesController < ApplicationController
     include EntriesHelper
@@ -67,6 +70,8 @@ module Admin
 
     def edit
       @entry = Entry.find(params[:id])
+      puts "notes"
+      puts @entry.inspect
       @item = Item.new
       @customer = @entry.customer || Customer.new
       @title = "edit #{@entry.title} | Zelos"
@@ -106,6 +111,23 @@ module Admin
       else
         flash[:error] = @entry.errors.full_messages.first.to_s
       end
+      @entry.items.each do |item, index|
+        orderdindex = 0
+        entry_params["items_attributes"].each do |subitem, subindex|
+          if subindex["id"].to_i == item.id
+            puts "######"
+            puts item.inspect
+            puts  subitem
+            puts  subindex.inspect
+            orderdindex = subitem
+          end
+        end
+        @entry.items[index.to_i].sort = orderdindex
+      end
+      puts @entry.items.inspect
+      puts "######"
+      @entry.save
+      puts @entry.items.inspect
 
       redirect_to edit_admin_entry_path(@entry, :updated => "true")
     end
@@ -139,6 +161,54 @@ module Admin
       redirect_to action: :index
     end
 
+    def import
+      @current_page = 1
+      @entry = Entry.find(params[:id])
+      wsid = Rails.application.secrets.toggle_workspace_id
+      api_token = Rails.application.secrets.toggle_api_token
+
+      uri = URI("https://api.track.toggl.com/reports/api/v2/details?workspace_id=#{wsid}&since=#{@entry.invoice_date.at_beginning_of_month.strftime("%Y-%m-%d")}&until=#{@entry.invoice_date.strftime("%Y-%m-%d")}&user_agent=api_example_test&page=#{@current_page}")
+
+      req = Net::HTTP::Get.new(uri)
+      req.basic_auth api_token, 'api_token'
+
+      http = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true)
+      resp = http.request(req)
+      response = JSON.parse(resp.body)
+      @entry_items = response["data"]
+      if response["per_page"] < response["total_count"] 
+        items_fetched = response["per_page"]
+        while items_fetched < response["total_count"]
+          items_fetched = items_fetched + response["per_page"]
+          @current_page = @current_page + 1
+
+          uri = URI("https://api.track.toggl.com/reports/api/v2/details?workspace_id=#{wsid}&since=#{@entry.invoice_date.at_beginning_of_month.strftime("%Y-%m-%d")}&until=#{@entry.invoice_date.strftime("%Y-%m-%d")}&user_agent=api_example_test&page=#{@current_page}")
+          req = Net::HTTP::Get.new(uri)
+          req.basic_auth api_token, 'api_token'
+          http = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true)
+          resp = http.request(req)
+          response = JSON.parse(resp.body)
+          
+          @entry_items = @entry_items + response["data"]
+        end
+      end
+      entry_items = @entry_items.select { |l| l["client"] == @entry.customer.company && l["dur"] > 0 }.sort { |a,b| a["end"] <=> b["end"] }
+      current_price = @entry.items[0].price
+      @entry.items.destroy_all
+    
+      entry_items.each do |item, index|
+        duration_min = item["dur"] / 1000 / 60
+        if duration_min != 0 
+          @entry.items.create!(
+            count: duration_min, 
+            name: item["description"] != "" ? item["description"] : "No description",
+            price: current_price,
+            item_date: item["end"],
+            sort: index)
+        end
+      end
+      redirect_to edit_admin_entry_path(@entry)
+    end
     private
 
     def entry_params
