@@ -12,11 +12,11 @@ const OUTPUT_FILE = 'bundle.js';
 
 const env = process.env.NODE_ENV || 'development';
 
-const autoprefixer = require('autoprefixer');
+// const autoprefixer = require('autoprefixer');
 
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 
-postcss: [autoprefixer]; // this is inside module.exports object
+// postcss: [autoprefixer]; // this is inside module.exports object
 
 export default {
   context: COMPONENTS_PATH,
@@ -29,7 +29,7 @@ export default {
   },
   devtool: 'source-map',
   module: {
-    loaders: [
+    rules: [
       { 
         test: /\.js?$/,         // Match both .js and .jsx files
         exclude: /node_modules/, 

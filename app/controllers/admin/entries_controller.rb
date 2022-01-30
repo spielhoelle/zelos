@@ -1,4 +1,3 @@
-
 require 'net/http'
 module Admin
   class EntriesController < ApplicationController
@@ -174,8 +173,6 @@ module Admin
       http = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true)
       resp = http.request(req)
       response = JSON.parse(resp.body)
-      print "FUCK"
-      print response
       @entry_items = response["data"]
       if response["per_page"] < response["total_count"] 
         items_fetched = response["per_page"]

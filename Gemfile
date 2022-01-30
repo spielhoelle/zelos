@@ -14,7 +14,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'mysql2', '~> 0.5.2'
 
 group :development, :test do
-  gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.4'
   gem 'rspec-mocks'
   gem "factory_bot_rails"
@@ -26,7 +25,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
-  gem 'pry-byebug', '~> 1.3'
 end
 
 group :test do
@@ -63,14 +61,11 @@ end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'autoprefixer-rails'
+gem 'execjs', '2.7.0'
 gem "haml-rails"
 gem "paperclip", ">= 5.2.0"
 gem 'devise'
 gem 'mail_form'
-
-source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.3.3'
-end
 
 gem 'materialize-sass'
 gem 'rails-settings-cached'
