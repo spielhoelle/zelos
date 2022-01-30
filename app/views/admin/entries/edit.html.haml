@@ -105,11 +105,15 @@
 
 
       .section
-        %h4 
-          Items
+        %h4.d-flex.align-items-center
+          %span.mr-3 Items
           = link_to import_admin_entry_path(), class: "btn waves-effect waves-light" do
             %span Import from toggleTrack
+          -# %small Customer needs to have same name as in toggl. One Item needs to be created here to get prive. Otherwise fails
 
+          .ml-3.input-field.inline.flex-grow
+            = f.label :project, class: action_name == "edit" ? "active" : ""
+            = f.text_field :project, class: "validate m-0"
         .row.mb-5
           .sortable
             - index = 0

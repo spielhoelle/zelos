@@ -68,8 +68,6 @@ module Admin
 
     def edit
       @entry = Entry.find(params[:id])
-      puts "notes"
-      puts @entry.inspect
       @item = Item.new
       @customer = @entry.customer || Customer.new
       @title = "edit #{@entry.title} | Zelos"
@@ -191,6 +189,9 @@ module Admin
         end
       end
       entry_items = @entry_items.select { |l| l["client"] == @entry.customer.company && l["dur"] > 0 }.sort { |a,b| a["end"] <=> b["end"] }
+      if !@entry.project.nil? && @entry.project != ""
+        entry_items = @entry_items.select { |l| l["project"] == @entry.project && l["dur"] > 0 }.sort { |a,b| a["end"] <=> b["end"] }
+      end
       current_price = @entry.items[0].price
       @entry.items.destroy_all
     
@@ -211,7 +212,7 @@ module Admin
 
     def entry_params
       params.require(:entry)
-        .permit(:title, :invoice_number, :invoice_date, :delivery_date, :notes, :private_note, :discount, :company, :is_offer, :cash, :is_consultant, :valid_until, :status, :sum_time, customer_attributes: [:id, :name, :address, :company],  items_attributes: [:name, :price, :count_hours, :count_mins, :_destroy, :id, :item_date, :expense])
+        .permit(:title, :project, :invoice_number, :invoice_date, :delivery_date, :notes, :private_note, :discount, :company, :is_offer, :cash, :is_consultant, :valid_until, :status, :sum_time, customer_attributes: [:id, :name, :address, :company],  items_attributes: [:name, :price, :count_hours, :count_mins, :_destroy, :id, :item_date, :expense])
     end
   end
 end
