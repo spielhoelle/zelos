@@ -96,7 +96,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     crass (1.0.6)
     cucumber (3.2.0)
       builder (>= 2.1.2)
@@ -160,8 +160,8 @@ GEM
     ffaker (2.11.0)
     ffi (1.15.5)
     gherkin (5.1.0)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
+    globalid (1.0.1)
+      activesupport (>= 5.0)
     groupdate (4.1.2)
       activesupport (>= 4.2)
     haml (5.2.2)
@@ -179,7 +179,7 @@ GEM
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
     htmlentities (4.3.4)
-    i18n (1.8.11)
+    i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     interception (0.5)
     jbuilder (2.11.5)
@@ -217,7 +217,7 @@ GEM
       rake
     mini_mime (1.1.2)
     mini_portile2 (2.4.0)
-    minitest (5.15.0)
+    minitest (5.17.0)
     multi_json (1.15.0)
     multi_test (0.1.2)
     multipart-post (2.1.1)
@@ -399,7 +399,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.9)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
@@ -421,6 +421,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   acme-client
