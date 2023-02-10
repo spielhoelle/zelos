@@ -38,7 +38,7 @@
     "fontfaceobserver": "^2.1.0",
     "picturefill": "^3.0.3",
     "smoothscroll": "^0.4.0",
-    "tesseract.js": "^1.0.19"
+    "tesseract.js": "^4.0.2"
   },
   "engines": {
     "node": ">=4.0"
