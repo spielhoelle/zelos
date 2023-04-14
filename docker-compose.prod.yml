@@ -7,12 +7,12 @@ services:
         volumes: 
             - ".:/app"
         ports: 
-            - "3000:3000"
+            - "${app_port}:3000"
         environment:
             # TODO not used in database.yml
-            DB_NAME: zelos
-            DB_USER: root
-            DB_PASSWORD: ZRKFQdDjqJggNDk66DHd
+            DB_NAME: "${DB_NAME}"
+            DB_USER: "${DB_USER}"
+            DB_PASSWORD: "${DB_PASSWORD}"
             DB_HOST: gmysql
         networks:
           - mysqlnet
