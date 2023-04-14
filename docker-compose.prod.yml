@@ -7,7 +7,7 @@ services:
         volumes: 
             - ".:/app"
         ports: 
-            - "${app_port}:3000"
+            - "${APP_PORT}:3000"
         environment:
             # TODO not used in database.yml
             DB_NAME: "${DB_NAME}"
